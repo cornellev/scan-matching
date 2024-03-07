@@ -1,7 +1,7 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
 #include "icp.h"
-#include <iostream>
+// #include <iostream>
 
 namespace icp {
     struct PointToPoint final : public ICP {
