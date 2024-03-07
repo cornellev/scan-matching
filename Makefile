@@ -49,3 +49,4 @@ $(LIB):
 .PHONY: clean
 clean:
 	rm -rf $(OBJ) $(TARGET) $(DEPS) $(shell find . -name "*.dSYM") $(shell find . -name "*.d")
+	cd $(LIBDIR); make clean
