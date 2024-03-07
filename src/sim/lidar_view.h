@@ -6,19 +6,20 @@
 #include <vector>
 #include "gui/view.h"
 #include "util/keyboard.h"
-#include "icp.h"
+#include "icp/icp.h"
 
 class LidarView final : public View {
-    const std::vector<icp::Point> wall;
-    icp::ICP icp;
+    std::vector<icp::Point> source;
+    std::vector<icp::Point> destination;
+    std::vector<icp::Point> wall;
+    std::unique_ptr<icp::ICP> icp;
     Keyboard keyboard;
 
+    void construct_instance();
+
 public:
-    /** Consructs a new lidar view visualizing applying ICP to `source`
-     * targeting `destination`. */
-    LidarView(const std::vector<icp::Point> wall,
-        const std::vector<icp::Point> source,
-        const std::vector<icp::Point> destination);
+    /** Consructs a new lidar view visualizing ICP. */
+    LidarView();
     ~LidarView() noexcept override;
 
     void on_event(const SDL_Event& event) override;

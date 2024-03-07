@@ -2,10 +2,12 @@
 
 #pragma once
 
-#include <functional>
+#include <cmath>
+#include <vector>
+#include <memory>
 
 namespace icp {
-    struct Point {
+    struct Point final {
         double x;
         double y;
 
@@ -13,7 +15,7 @@ namespace icp {
         Point(double x, double y): x(x), y(y) {}
     };
 
-    struct Transform {
+    struct Transform final {
         double dx;
         double dy;
 
@@ -22,20 +24,9 @@ namespace icp {
     };
 
     class ICP {
-        /** The source point cloud. */
-        const std::vector<icp::Point> a;
-
-        /** The destination point cloud. */
-        const std::vector<icp::Point> b;
-
-        /** The learning rate at which optimization is done. */
+    protected:
+        /** The rate at which optimization is done. */
         const double rate;
-
-        /** The pairing of each point in `a` to its closest in `b`. */
-        std::vector<size_t> pair;
-
-        /** The distance from each point in `a` to its closest in `b`. */
-        std::vector<double> dist;
 
         /** The current point cloud transformation that is being optimized. */
         Transform t;
@@ -47,29 +38,36 @@ namespace icp {
         /** The sum-of-squares cost of `dist`. */
         double current_cost = INFINITY;
 
+        /** The pairing of each point in `a` to its closest in `b`. */
+        std::vector<size_t> pair;
+
+        /** The distance metric of each point in `a`. */
+        std::vector<double> dist;
+
+        /** A new ICP instance for `n`-point matching and an optimization rate
+         * of `rate` */
+        ICP(size_t n, double rate);
+
     public:
-        /** Constructs an instance of iterative closest points for `a` and `b`
-         * progressing at `rate`. */
-        ICP(const std::vector<icp::Point>& a, const std::vector<icp::Point>& b,
-            double rate);
+        /** Sets an initial guess for the transform. */
+        void set_initial(Transform t);
 
-        /** Perform one iteration of ICP. */
-        void iterate();
+        /** Perform one iteration of ICP for point clouds `a` and `b`. */
+        virtual void iterate(const std::vector<icp::Point>& a,
+            const std::vector<icp::Point>& b) = 0;
 
-        /** Perform ICP until the cost is below `convergence_threshold` or until
-         * no progress is being made. */
-        void converge(double convergence_threshold);
-
-        /** The source point cloud. */
-        const std::vector<icp::Point>& source() const;
-
-        /** The destination point cloud. */
-        const std::vector<icp::Point>& destination() const;
+        /** Perform ICP for point clouds `b` and `b` until the cost is below
+         * `convergence_threshold` or until no progress is being made. */
+        void converge(const std::vector<icp::Point>& a,
+            const std::vector<icp::Point>& b, double convergence_threshold);
 
         /** The current optimal cost. */
         double cost() const;
 
         /** The current optimal transform. */
         const Transform& transform() const;
+
+        /** Point-to-point ICP. */
+        static std::unique_ptr<ICP> point_to_point(size_t n, double rate);
     };
 }

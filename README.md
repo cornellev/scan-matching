@@ -6,11 +6,16 @@ This repository hosts Ethan's (my) implementation of Iterative Closest Points (I
 It is a first step in my attempt to implement Simultaneous Localization and Mapping (SLAM).
 Eventually, I will factor this out into its own library as a submodule for the SLAM library I will build.
 
+## Dependencies
+
+- [SDL](https://www.libsdl.org)
+- My [SDL wrapper](https://github.com/cornellev/sdl-wrapper)
+- [libcmdapp2](http://ethanuppal.com/libcmdapp2/)
+
 ## Usage
 
-Assuming you have SDL installed (because this repo depends on my [SDL wrapper](https://github.com/cornellev/sdl-wrapper)), you can run
+You can launch the interactive window simply by running
 ```
-make 
+make run 
 ```
-to launch the interactive window.
 Instructions are printed to standard output.
