@@ -1,7 +1,7 @@
 # Copyright (C) 2023 Ethan Uppal. All rights reserved.
 
-SRCDIR		:= ./src
-INCLUDEDIR	:= ./src
+SRCDIR		:= src
+INCLUDEDIR	:= src
 LIBDIR		:= $(SRCDIR)/sdl-wrapper
 LIB			:= $(LIBDIR)/libsdlwrapper.so
 
@@ -29,15 +29,17 @@ SRC			:= main.cpp $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRC
 OBJ			:= $(SRC:.cpp=.o)
 DEPS 		:= $(OBJS:.o=.d) 
 
+-include $(DEPS)
+
 .PHONY: driver
-driver: $(LIB)
+driver: $(LIB) /usr/local/lib/libcmdapp.a
 	make $(TARGET)
-	printf '#!/bin/bash\nDYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$$PWD/$(LIBDIR) ./$(TARGET) "$$@"\n' > $(TARGET2)
-	chmod u+x ./$(TARGET2)
+	@printf '#!/bin/bash\nDYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(shell echo $$PWD)/$(LIBDIR) ./$(TARGET) "$$@"\n' > $(TARGET2)
+	@chmod u+x ./$(TARGET2)
 
 .PHONY: run 
 run: driver 
-	./$(TARGET2)	
+	./$(TARGET2) --gui	
 
 # inv: $(LIB) is built
 $(TARGET): $(OBJ)
@@ -49,8 +51,6 @@ $(LIB):
 %.o: %.cpp $(LIB)
 	@echo 'Compiling $@'
 	$(CC) $(CFLAGS) -MMD -MP $< -c -o $@
-
--include $(DEPS)
 
 .PHONY: clean
 clean:

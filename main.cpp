@@ -1,5 +1,6 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
+#include <cassert>
 #include <iostream>
 extern "C" {
 #include <cmdapp/cmdapp.h>
@@ -37,15 +38,16 @@ int main(int argc, const char** argv) {
 
     ca_synopsis("[-g|-h|-v]");
 
-    bool* use_gui = ca_opt('g', "gui", "<g", NULL,
-        "launch the interactive GUI");
-    ca_opt('h', "help", "<h", NULL, "prints this info");
-    ca_opt('v', "version", "<v", NULL, "prints version info");
+    bool* use_gui;
+    assert(use_gui = ca_opt('g', "gui", "<g", NULL,
+               "launch the interactive GUI"));
+    assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
+    assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
 
     if (argc == 1) {
         ca_print_help();
+        return 1;
     } else if (ca_parse(NULL) != 0) {
-        perror("ca_parse");
         return 1;
     }
 
