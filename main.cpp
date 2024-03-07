@@ -16,7 +16,7 @@ int main() {
     const int n = 40;
 
     // Spacing of points
-    const double scale = 7;
+    const double scale = 10;
 
     // Wall parameters
     const double slope = -1.0;
@@ -28,6 +28,7 @@ int main() {
     const double y_displace = 50;
 
     const double x_unshift = n * scale / 2;
+    const double y_unshift = slope * x_unshift;
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -49,11 +50,11 @@ int main() {
     // Separate the scans to simulate robot movement
     for (icp::Point& point: source) {
         point.x += WINDOW_WIDTH / 2 - x_displace / 2 - x_unshift;
-        point.y += WINDOW_WIDTH / 2 - y_displace / 2;
+        point.y += WINDOW_WIDTH / 2 - y_displace / 2 - y_unshift;
     }
     for (icp::Point& point: destination) {
         point.x += WINDOW_WIDTH / 2 + x_displace / 2 - x_unshift;
-        point.y += WINDOW_WIDTH / 2 + y_displace / 2;
+        point.y += WINDOW_WIDTH / 2 + y_displace / 2 - y_unshift;
     }
     for (icp::Point& point:
         wall) {  // todo: fix this and LidarView to be better code. essentially
@@ -61,7 +62,7 @@ int main() {
                  // underneath the destination so you see how close you are to
                  // where you should be. if it works it works but should clean
         point.x += WINDOW_WIDTH / 2 + x_displace / 2 - x_unshift;
-        point.y += WINDOW_WIDTH / 2 + y_displace / 2;
+        point.y += WINDOW_WIDTH / 2 + y_displace / 2 - y_unshift;
     }
 
     LidarView* view = new LidarView(wall, source, destination);
