@@ -73,7 +73,7 @@ namespace icp {
         }
     };
 
-    bool static_initialization = []() {
+    static bool static_initialization = []() {
         ICP::register_method("point_to_point",
             [](size_t n, double rate) -> std::unique_ptr<ICP> {
                 return std::make_unique<PointToLine>(n, rate);
