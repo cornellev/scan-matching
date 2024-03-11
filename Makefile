@@ -11,7 +11,7 @@ CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
 CRELEASE	:= -O2 -DRELEASE_BUILD
 TARGET		:= main.out
-TARGET2		:= main
+TARGETSH	:= main
 
 LDFLAGS		:= -L $(LIBDIR) -lsdlwrapper -I $(LIBDIR)/src -L /usr/local/lib/ -lcmdapp
 CFLAGS		+= -I /usr/local/include
@@ -34,12 +34,12 @@ DEPS 		:= $(OBJS:.o=.d)
 .PHONY: driver
 driver: $(LIB) /usr/local/lib/libcmdapp.a
 	make $(TARGET)
-	@printf '#!/bin/bash\nDYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(shell echo $$PWD)/$(LIBDIR) ./$(TARGET) "$$@"\n' > $(TARGET2)
-	@chmod u+x ./$(TARGET2)
+	@printf '#!/bin/bash\nDYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(shell echo $$PWD)/$(LIBDIR) ./$(TARGET) "$$@"\n' > $(TARGETSH)
+	@chmod u+x ./$(TARGETSH)
 
 .PHONY: run 
 run: driver 
-	./$(TARGET2) --gui	
+	./$(TARGETSH) --gui	
 
 # inv: $(LIB) is built
 $(TARGET): $(OBJ)

@@ -10,7 +10,7 @@
 #include "sim_config.h"
 
 LidarView::LidarView(): wall(sim_config::n), source(sim_config::n) {
-    icp = icp::ICP::point_to_point(sim_config::n * 3 / 4, 0.1);
+    icp = icp::ICP::from_method("point_to_point", sim_config::n * 3 / 4, 0.1);
     construct_instance();
 }
 

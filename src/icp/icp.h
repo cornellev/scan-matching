@@ -5,25 +5,35 @@
 #include <cmath>
 #include <vector>
 #include <memory>
+#include <string>
+#include <functional>
 
 namespace icp {
     struct Point final {
         double x;
         double y;
 
-        Point(): x(0), y(0) {}
+        Point() {}
         Point(double x, double y): x(x), y(y) {}
     };
 
     struct Transform final {
         double dx;
         double dy;
+        double theta;  ///< currently only around CoM, need to make more
+                       ///< complicated later
 
-        Transform(): dx(0), dy(0) {}
-        Transform(double dx, double dy): dx(dx), dy(dy) {}
+        Transform() {}
+        Transform(double dx, double dy, double theta)
+            : dx(dx), dy(dy), theta(theta) {}
     };
 
     class ICP {
+        static std::vector<std::string> registered_method_names;
+        static std::unordered_map<std::string,
+            std::function<std::unique_ptr<ICP>(size_t n, double rate)>>*
+            registered_method_constructors;
+
     protected:
         /** The rate at which optimization is done. */
         const double rate;
@@ -67,7 +77,19 @@ namespace icp {
         /** The current optimal transform. */
         const Transform& transform() const;
 
-        /** Point-to-point ICP. */
-        static std::unique_ptr<ICP> point_to_point(size_t n, double rate);
+        /** Registers a new ICP method that can be created with `constructor`,
+         * returning `false` if `name` has already been registered. */
+        static bool register_method(std::string name,
+            std::function<std::unique_ptr<ICP>(size_t n, double rate)>
+                constructor);
+
+        /** Returns a current list of the names of currently registered ICP
+         * methods. */
+        static const std::vector<std::string>& registered_methods();
+
+        /** Factory constructor for the ICP method `name`. @pre `name` is a
+         * valid registered method. */
+        static std::unique_ptr<ICP> from_method(std::string name, size_t n,
+            double rate);
     };
 }

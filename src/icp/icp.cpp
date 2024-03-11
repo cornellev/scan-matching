@@ -1,9 +1,13 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
-#include <cmath>
 #include "icp.h"
-
+#include <iostream>
 namespace icp {
+    std::vector<std::string> ICP::registered_method_names;
+    std::unordered_map<std::string,
+        std::function<std::unique_ptr<ICP>(size_t, double)>>*
+        ICP::registered_method_constructors;
+
     ICP::ICP(size_t n, double rate): rate(rate), pair(n), dist(n) {}
 
     void ICP::set_initial(Transform t) {
@@ -24,5 +28,31 @@ namespace icp {
 
     const Transform& ICP::transform() const {
         return t;
+    }
+
+    bool ICP::register_method(std::string name,
+        std::function<std::unique_ptr<ICP>(size_t, double)> constructor) {
+        static std::unordered_map<std::string,
+            std::function<std::unique_ptr<ICP>(size_t, double)>>
+            local_registered_method_constructors;
+        if (!registered_method_constructors) {
+            registered_method_constructors =
+                &local_registered_method_constructors;
+        }
+        if (registered_method_constructors->count(name)) {
+            return false;
+        }
+        (*registered_method_constructors)[name] = constructor;
+        registered_method_names.push_back(name);
+        return true;
+    }
+
+    const std::vector<std::string>& ICP::registered_methods() {
+        return registered_method_names;
+    }
+
+    std::unique_ptr<ICP> ICP::from_method(std::string name, size_t n,
+        double rate) {
+        return (*registered_method_constructors)[name](n, rate);
     }
 }
