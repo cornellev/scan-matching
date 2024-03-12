@@ -41,6 +41,10 @@ driver: $(LIB) /usr/local/lib/libcmdapp.a
 run: driver 
 	./$(TARGETSH) --gui	
 
+.PHONY: gui_debug
+gui_debug:
+	echo "run" | lldb $(TARGET) -- -g
+
 # inv: $(LIB) is built
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@

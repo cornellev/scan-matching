@@ -10,7 +10,7 @@
 #include "sim_config.h"
 
 LidarView::LidarView(): wall(sim_config::n), source(sim_config::n) {
-    icp = icp::ICP::from_method("point_to_point", sim_config::n * 3 / 4, 0.1);
+    icp = icp::ICP::from_method("point_to_point", sim_config::n * 3 / 4, 0.01);
     construct_instance();
 }
 
@@ -88,7 +88,9 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 100);
     for (const icp::Point& point: source) {
-        SDL_DrawCircle(renderer, point.x + icp->transform().dx,
-            point.y + icp->transform().dy, 5);
+        SDL_DrawCircle(renderer, icp->transform().transform_x(point.x, point.y),
+            icp->transform().transform_y(point.x, point.y), 5);
     }
+
+    icp->iterate(source, destination);
 }

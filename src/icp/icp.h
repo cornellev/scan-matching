@@ -21,11 +21,23 @@ namespace icp {
         double dx;
         double dy;
         double theta;  ///< currently only around CoM, need to make more
-                       ///< complicated later
+        ///< complicated later
+        double cx;
+        double cy;
 
+    public:
         Transform() {}
         Transform(double dx, double dy, double theta)
             : dx(dx), dy(dy), theta(theta) {}
+
+        double transform_x(double x, double y) const {
+            return std::cos(theta) * (x - cx) - std::sin(theta) * (y - cy) + cx
+                   + dx;
+        }
+        double transform_y(double x, double y) const {
+            return std::sin(theta) * (x - cx) + std::cos(theta) * (y - cy) + cy
+                   + dy;
+        }
     };
 
     class ICP {
