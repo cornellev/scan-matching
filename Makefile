@@ -42,7 +42,7 @@ run: driver
 	./$(TARGETSH) --gui	
 
 .PHONY: gui_debug
-gui_debug:
+gui_debug: driver
 	echo "run" | lldb $(TARGET) -- -g
 
 # inv: $(LIB) is built

@@ -68,9 +68,10 @@ namespace icp {
             }
             t.dx -= dx_effect * rate;
             t.dy -= dy_effect * rate;
-            // t.theta -= theta_effect * rate;
-            std::cout << dx_effect << ',' << dy_effect << ',' << theta_effect
-                      << '\n';
+            t.theta -= theta_effect * rate;
+            //            std::cout << dx_effect << ',' << dy_effect << ',' <<
+            //            theta_effect
+            // << '\n';
             // compute new cost
             previous_cost = current_cost;
             current_cost = 0;

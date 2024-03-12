@@ -41,6 +41,7 @@ void LidarView::construct_instance() {
                    - sim_config::y_unshift;
     }
     for (icp::Point& point: destination) {
+        point.x *= 0.5;
         point.x += WINDOW_WIDTH / 2 + sim_config::x_displace / 2
                    - sim_config::x_unshift;
         point.y += WINDOW_WIDTH / 2 + sim_config::y_displace / 2
@@ -91,6 +92,4 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         SDL_DrawCircle(renderer, icp->transform().transform_x(point.x, point.y),
             icp->transform().transform_y(point.x, point.y), 5);
     }
-
-    icp->iterate(source, destination);
 }
