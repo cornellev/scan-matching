@@ -17,20 +17,25 @@ void launch_gui() {
 
     std::cout << "SCAN MATCHING : ITERATIVE CLOSEST POINT\n";
     std::cout << "=======================================\n";
-    std::cout << "- The points are generated randomly\n";
-    std::cout << "- Press <SPACE> to advance one iteration\n";
-    std::cout << "- Press the red <X> on the window to exit\n";
+    std::cout << "* The points are generated randomly\n";
+    std::cout << "* Press <SPACE> to advance one iteration\n";
+    std::cout << "* Press the red <X> on the window to exit\n";
 
     window.present();
 }
 
 void run_benchmark(const char* method) {
-    // if (std::find(icp::ICP::registered_methods().begin(),
-    //         icp::ICP::registered_methods().end(), method)
-    //     == icp::ICP::registered_methods().end()) {
-    //     std::cerr << "error: unknown ICP method '" << method << "'\n";
-    //     std::exit(1);
-    // }
+    if (std::find(icp::ICP::registered_methods().begin(),
+            icp::ICP::registered_methods().end(), method)
+        == icp::ICP::registered_methods().end()) {
+        std::cerr << "error: unknown ICP method '" << method
+                  << "'. expected one of:\n";
+        for (const std::string& registered_method:
+            icp::ICP::registered_methods()) {
+            std::cerr << "* " << registered_method << '\n';
+        }
+        std::exit(1);
+    }
 
     // very scuffed
     LidarView* view = new LidarView();

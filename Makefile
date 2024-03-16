@@ -27,16 +27,20 @@ DEPS 		:= $(OBJS:.o=.d)
 
 -include $(DEPS)
 
-.PHONY: driver
-driver:
-	make $(TARGET)
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
 
-.PHONY: run 
-run: driver 
+.PHONY: bench
+bench: $(TARGET) 
+	./$(TARGET) --bench point_to_poit
+
+.PHONY: gui 
+gui: $(TARGET) 
 	./$(TARGET) --gui	
 
 .PHONY: gui_debug
-gui_debug: driver
+gui_debug: $(TARGET)
 	echo "run" | lldb $(TARGET) -- --gui
 
 $(TARGET): $(OBJ)

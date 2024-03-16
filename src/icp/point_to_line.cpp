@@ -1,5 +1,6 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
+#include <cassert>
 #include "icp.h"
 
 namespace icp {
@@ -49,10 +50,10 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        ICP::register_method("point_to_line",
+        assert(ICP::register_method("point_to_line",
             [](size_t n, double rate) -> std::unique_ptr<ICP> {
                 return std::make_unique<PointToLine>(n, rate);
-            });
+            }));
         return true;
     }();
 }

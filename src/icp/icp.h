@@ -41,11 +41,6 @@ namespace icp {
     };
 
     class ICP {
-        static std::vector<std::string> registered_method_names;
-        static std::unordered_map<std::string,
-            std::function<std::unique_ptr<ICP>(size_t n, double rate)>>*
-            registered_method_constructors;
-
     protected:
         /** The rate at which optimization is done. */
         const double rate;
@@ -105,5 +100,11 @@ namespace icp {
          * valid registered method. */
         static std::unique_ptr<ICP> from_method(std::string name, size_t n,
             double rate);
+    };
+
+    struct Methods {
+        std::vector<std::string> registered_method_names;
+        std::vector<std::function<std::unique_ptr<ICP>(size_t n, double rate)>>
+            registered_method_constructors;
     };
 }

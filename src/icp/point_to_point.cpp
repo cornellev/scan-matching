@@ -1,12 +1,14 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
+#include <cassert>
+#include <cstdlib>
 #include "icp.h"
 #include "util/logger.h"
-#include <cstdlib>
+
 namespace icp {
-    struct PointToLine final : public ICP {
-        PointToLine(size_t n, double rate): ICP(n, rate) {}
-        ~PointToLine() {}
+    struct PointToPoint final : public ICP {
+        PointToPoint(size_t n, double rate): ICP(n, rate) {}
+        ~PointToPoint() {}
 
         void iterate(const std::vector<icp::Point>& a,
             const std::vector<icp::Point>& b) override {
@@ -53,10 +55,10 @@ namespace icp {
                 double b_y = b[pair[i]].y;
                 dx_effect += (a_rot_x + t.dx - b_x) * 2 / n;
                 dy_effect += (a_rot_y + t.dy - b_y) * 2 / n;
-                if (dx_effect > 10000) {
-                    Log << a_rot_x << ' ' << t.dx << ' ' << b_x << '\n';
-                    std::exit(1);
-                }
+                // if (dx_effect > 10000) {
+                //     Log << a_rot_x << ' ' << t.dx << ' ' << b_x << '\n';
+                //     std::exit(1);
+                // }
                 theta_effect += (b_x * o_x * std::sin(t.theta)
                                     + b_x * o_y * std::cos(t.theta)
                                     - b_y * o_x * std::cos(t.theta)
@@ -96,10 +98,10 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        ICP::register_method("point_to_point",
+        assert(ICP::register_method("point_to_point",
             [](size_t n, double rate) -> std::unique_ptr<ICP> {
-                return std::make_unique<PointToLine>(n, rate);
-            });
+                return std::make_unique<PointToPoint>(n, rate);
+            }));
         return true;
     }();
 }

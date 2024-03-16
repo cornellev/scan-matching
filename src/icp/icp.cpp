@@ -4,10 +4,12 @@
 #include "util/logger.h"
 
 namespace icp {
-    std::vector<std::string> ICP::registered_method_names;
-    std::unordered_map<std::string,
-        std::function<std::unique_ptr<ICP>(size_t, double)>>*
-        ICP::registered_method_constructors;
+    Methods global;
+
+    // ICP::Methods& ICP::global {
+    //     ICP::Methods instance;
+    //     return instance;
+    // }
 
     ICP::ICP(size_t n, double rate): rate(rate), pair(n), dist(n) {
         set_initial(Transform());
@@ -38,27 +40,21 @@ namespace icp {
 
     bool ICP::register_method(std::string name,
         std::function<std::unique_ptr<ICP>(size_t, double)> constructor) {
-        static std::unordered_map<std::string,
-            std::function<std::unique_ptr<ICP>(size_t, double)>>
-            local_registered_method_constructors;
-        if (!registered_method_constructors) {
-            registered_method_constructors =
-                &local_registered_method_constructors;
-        }
-        if (registered_method_constructors->count(name)) {
-            return false;
-        }
-        (*registered_method_constructors)[name] = constructor;
-        registered_method_names.push_back(name);
+        Log << "ICP: registering method '" << name << "'\n";
+        global.registered_method_constructors.push_back(constructor);
+        global.registered_method_names.push_back(name);
         return true;
     }
 
     const std::vector<std::string>& ICP::registered_methods() {
-        return registered_method_names;
+        return global.registered_method_names;
     }
 
     std::unique_ptr<ICP> ICP::from_method(std::string name, size_t n,
         double rate) {
-        return (*registered_method_constructors)[name](n, rate);
+        size_t index = std::find(global.registered_method_names.begin(),
+                           global.registered_method_names.end(), name)
+                       - global.registered_method_names.begin();
+        return global.registered_method_constructors[index](n, rate);
     }
 }
