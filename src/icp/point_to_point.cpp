@@ -41,7 +41,6 @@ namespace icp {
             double dy_effect = 0;
             double theta_effect = 0;
             for (size_t i = 0; i < n; i++) {
-                // replace with gradient of L
                 double o_x = (a[i].x - a_cm_x);
                 double o_y = (a[i].y - a_cm_y);
                 double a_rot_x = std::cos(t.theta) * o_x
@@ -68,15 +67,12 @@ namespace icp {
             }
             t.dx -= dx_effect * rate;
             t.dy -= dy_effect * rate;
-            t.theta -= theta_effect * rate;
-            //            std::cout << dx_effect << ',' << dy_effect << ',' <<
-            //            theta_effect
-            // << '\n';
-            // compute new cost
+            t.theta -= theta_effect * (rate / 1000.0);  // this makes it work
+
+            //  compute new cost
             previous_cost = current_cost;
             current_cost = 0;
             for (size_t i = 0; i < n; i++) {
-                // replace with your L
                 double o_x = (a[i].x - a_cm_x);
                 double o_y = (a[i].y - a_cm_y);
                 double a_rot_x = std::cos(t.theta) * o_x

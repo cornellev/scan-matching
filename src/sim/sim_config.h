@@ -18,8 +18,11 @@ namespace sim_config {
 
     // Make wall slightly shaky
     constexpr double perturbation_range = 10.0;
+
+    // Simulate having moved/turned
     constexpr double x_displace = 100;
     constexpr double y_displace = 50;
+    constexpr double angle_displace = M_PI_4;
 
     // Centering
     constexpr double x_unshift = n * scale / 2;

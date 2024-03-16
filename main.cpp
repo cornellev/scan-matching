@@ -36,13 +36,18 @@ int main(int argc, const char** argv) {
     ca_version(0, 0, 0);
     ca_versioning_info("All rights reserved.");
 
-    ca_synopsis("[-g|-h|-v]");
+    ca_synopsis("[-h|-v]");
+    ca_synopsis("[-g|-b METHOD]");
 
     bool* use_gui;
+    bool* do_bench;
+    const char* bench_method;
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
                "launch the interactive GUI"));
     assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
     assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
+    assert(do_bench = ca_opt('b', "bench", ".METHOD", &bench_method,
+               "benchmarks a given icp method"));
 
     if (argc == 1) {
         ca_print_help();

@@ -40,22 +40,39 @@ void LidarView::construct_instance() {
         point.y += WINDOW_WIDTH / 2 - sim_config::y_displace / 2
                    - sim_config::y_unshift;
     }
-    for (icp::Point& point: destination) {
-        point.x *= 0.5;
-        point.x += WINDOW_WIDTH / 2 + sim_config::x_displace / 2
-                   - sim_config::x_unshift;
-        point.y += WINDOW_WIDTH / 2 + sim_config::y_displace / 2
-                   - sim_config::y_unshift;
+
+    // TODO: make less scuffed way to do this
+    icp->iterate(source, source);
+    double cx = icp->transform().cx;
+    double cy = icp->transform().cy;
+    icp->set_initial(icp::Transform());
+    icp::Transform com_rot(0, 0, sim_config::angle_displace);
+    com_rot.cx = cx;
+    com_rot.cy = cy;
+    for (icp::Point& point: source) {
+        double new_x = com_rot.transform_x(point.x, point.y);
+        double new_y = com_rot.transform_y(point.x, point.y);
+        point.x = new_x;
+        point.y = new_y;
     }
+
+    double dest_move_x = WINDOW_WIDTH / 2 + sim_config::x_displace / 2
+                         - sim_config::x_unshift;
+    double dest_move_y = WINDOW_WIDTH / 2 + sim_config::y_displace / 2
+                         - sim_config::y_unshift;
+
+    for (icp::Point& point: destination) {
+        point.x += dest_move_x;
+        point.y += dest_move_y;
+    }
+
     for (icp::Point& point:
         wall) {  // todo: fix this and LidarView to be better code. essentially
-                 // you are also shifting the wall to act as gray dots
-                 // underneath the destination so you see how close you are to
-                 // where you should be. if it works it works but should clean
-        point.x += WINDOW_WIDTH / 2 + sim_config::x_displace / 2
-                   - sim_config::x_unshift;
-        point.y += WINDOW_WIDTH / 2 + sim_config::y_displace / 2
-                   - sim_config::y_unshift;
+        // you are also shifting the wall to act as gray dots
+        // underneath the destination so you see how close you are to
+        // where you should be. if it works it works but should clean
+        point.x += dest_move_x;
+        point.y += dest_move_y;
     }
 }
 
@@ -64,6 +81,11 @@ void LidarView::on_event(const SDL_Event& event) {
 
     if (keyboard.query(SDLK_SPACE)) {
         icp->iterate(source, destination);
+        // icp->iterate(source, source);
+        // icp::Transform t(0, 0, M_PI_4);
+        // t.cx = icp->transform().cx;
+        // t.cy = icp->transform().cy;
+        // icp->set_initial(t);
     }
 }
 
