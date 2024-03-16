@@ -1,3 +1,0 @@
-[submodule "src/sdl-wrapper"]
-	path = src/sdl-wrapper
-	url = https://github.com/cornellev/sdl-wrapper

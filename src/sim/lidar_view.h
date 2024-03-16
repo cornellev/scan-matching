@@ -14,6 +14,7 @@ class LidarView final : public View {
     std::vector<icp::Point> wall;
     std::unique_ptr<icp::ICP> icp;
     Keyboard keyboard;
+    bool is_iterating;
 
     void construct_instance();
 
@@ -25,4 +26,6 @@ public:
     void on_event(const SDL_Event& event) override;
     void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         double dtime) override;
+
+    friend void run_benchmark(const char* method);
 };

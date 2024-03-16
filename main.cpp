@@ -24,6 +24,24 @@ void launch_gui() {
     window.present();
 }
 
+void run_benchmark(const char* method) {
+    // if (std::find(icp::ICP::registered_methods().begin(),
+    //         icp::ICP::registered_methods().end(), method)
+    //     == icp::ICP::registered_methods().end()) {
+    //     std::cerr << "error: unknown ICP method '" << method << "'\n";
+    //     std::exit(1);
+    // }
+
+    // very scuffed
+    LidarView* view = new LidarView();
+    std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method, 1000, 0.01);
+    icp->set_initial(icp::Transform());
+    std::cout << "initial cost: " << icp->cost() << '\n';
+    icp->converge(view->source, view->destination, 10);
+    std::cout << "final cost: " << icp->cost() << '\n';
+    delete view;
+}
+
 int main(int argc, const char** argv) {
     if (ca_init(argc, argv) != 0) {
         perror("ca_init");
@@ -41,13 +59,13 @@ int main(int argc, const char** argv) {
 
     bool* use_gui;
     bool* do_bench;
-    const char* bench_method;
+    const char* bench_method = "point_to_point";
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
                "launch the interactive GUI"));
     assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
     assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
-    assert(do_bench = ca_opt('b', "bench", ".METHOD", &bench_method,
-               "benchmarks a given icp method"));
+    assert(do_bench = ca_opt('b', "bench", ".METHOD !@g", &bench_method,
+               "benchmarks a given icp method"));  // for now disabled with -g
 
     if (argc == 1) {
         ca_print_help();
@@ -58,5 +76,7 @@ int main(int argc, const char** argv) {
 
     if (*use_gui) {
         launch_gui();
+    } else if (*do_bench) {
+        run_benchmark(bench_method);
     }
 }

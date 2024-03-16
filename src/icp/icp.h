@@ -26,7 +26,7 @@ namespace icp {
         double cy;
 
     public:
-        Transform() {}
+        Transform(): dx(0), dy(0), theta(0), cx(0), cy(0) {}
         Transform(double dx, double dy, double theta)
             : dx(dx), dy(dy), theta(theta) {}
 
@@ -55,10 +55,10 @@ namespace icp {
 
         /** Keeps track of the previous cost to ensure that progress is being
          * made. @see ICP::current_cost. */
-        double previous_cost = INFINITY;
+        double previous_cost;
 
         /** The sum-of-squares cost of `dist`. */
-        double current_cost = INFINITY;
+        double current_cost;
 
         /** The pairing of each point in `a` to its closest in `b`. */
         std::vector<size_t> pair;
@@ -71,6 +71,8 @@ namespace icp {
         ICP(size_t n, double rate);
 
     public:
+        ~ICP() = default;
+
         /** Sets an initial guess for the transform. */
         void set_initial(Transform t);
 

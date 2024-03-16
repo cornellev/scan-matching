@@ -12,6 +12,8 @@ Eventually, I will factor this out into its own library as a submodule for the S
 - My [SDL wrapper](https://github.com/cornellev/sdl-wrapper)
 - [libcmdapp2](http://ethanuppal.com/libcmdapp2/)
 
+Please `sudo make install` both `sdl-wrapper` and `libcmdapp2`.
+
 ## Usage
 
 You can launch the interactive window simply by running

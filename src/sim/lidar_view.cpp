@@ -9,12 +9,16 @@
 #include "geo/midpoint.h"
 #include "sim_config.h"
 
-LidarView::LidarView(): wall(sim_config::n), source(sim_config::n) {
+LidarView::LidarView()
+    : source(sim_config::n), wall(sim_config::n), keyboard(false) {
     icp = icp::ICP::from_method("point_to_point", sim_config::n * 3 / 4, 0.01);
     construct_instance();
+    // icp->converge(source, destination, 1);
 }
 
-LidarView::~LidarView() {}
+LidarView::~LidarView() noexcept {
+    icp.release();
+}
 
 void LidarView::construct_instance() {
     std::random_device rd;
@@ -77,15 +81,12 @@ void LidarView::construct_instance() {
 }
 
 void LidarView::on_event(const SDL_Event& event) {
+    bool before = keyboard.query(SDLK_SPACE);
     keyboard.update(event);
+    bool after = keyboard.query(SDLK_SPACE);
 
-    if (keyboard.query(SDLK_SPACE)) {
-        icp->iterate(source, destination);
-        // icp->iterate(source, source);
-        // icp::Transform t(0, 0, M_PI_4);
-        // t.cx = icp->transform().cx;
-        // t.cy = icp->transform().cy;
-        // icp->set_initial(t);
+    if (before && !after) {
+        is_iterating = !is_iterating;
     }
 }
 
@@ -113,5 +114,9 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
     for (const icp::Point& point: source) {
         SDL_DrawCircle(renderer, icp->transform().transform_x(point.x, point.y),
             icp->transform().transform_y(point.x, point.y), 5);
+    }
+
+    if (is_iterating) {
+        icp->iterate(source, destination);
     }
 }

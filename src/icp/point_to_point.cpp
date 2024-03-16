@@ -1,10 +1,12 @@
 // Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
 #include "icp.h"
-#include <iostream>
+#include "util/logger.h"
+#include <cstdlib>
 namespace icp {
     struct PointToLine final : public ICP {
         PointToLine(size_t n, double rate): ICP(n, rate) {}
+        ~PointToLine() {}
 
         void iterate(const std::vector<icp::Point>& a,
             const std::vector<icp::Point>& b) override {
@@ -51,6 +53,10 @@ namespace icp {
                 double b_y = b[pair[i]].y;
                 dx_effect += (a_rot_x + t.dx - b_x) * 2 / n;
                 dy_effect += (a_rot_y + t.dy - b_y) * 2 / n;
+                if (dx_effect > 10000) {
+                    Log << a_rot_x << ' ' << t.dx << ' ' << b_x << '\n';
+                    std::exit(1);
+                }
                 theta_effect += (b_x * o_x * std::sin(t.theta)
                                     + b_x * o_y * std::cos(t.theta)
                                     - b_y * o_x * std::cos(t.theta)
@@ -65,12 +71,15 @@ namespace icp {
                                     - o_y * t.dy * std::sin(t.theta))
                                 * 2 / n;
             }
+            // Log << "dx_effect * rate = " << (dx_effect * rate) << '\n';
+            // Log << "dy_effect * rate = " << (dy_effect * rate) << '\n';
+            // Log << "dt_effect * rate = " << (theta_effect * rate) << '\n';
+            // std::exit(1);
             t.dx -= dx_effect * rate;
             t.dy -= dy_effect * rate;
             t.theta -= theta_effect * (rate / 1000.0);  // this makes it work
 
             //  compute new cost
-            previous_cost = current_cost;
             current_cost = 0;
             for (size_t i = 0; i < n; i++) {
                 double o_x = (a[i].x - a_cm_x);
