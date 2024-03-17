@@ -2,31 +2,27 @@
 
 #pragma once
 
-#include <cmath>
-
-#define WINDOW_WIDTH 700
-#define WINDOW_HEIGHT 700
-
 namespace sim_config {
+    extern int window_width;
+    extern int window_height;
+
     // Number of points
-    constexpr int n = 100;
+    extern int n;
 
     // Spacing of points
-    constexpr double scale = 5;
+    extern double scale;
 
     // Wall parameters
-    constexpr double slope = -1.0;
-    constexpr double intercept = 0.0;
+    extern double slope;
+    extern double intercept;
 
     // Make wall slightly shaky
-    constexpr double perturbation_range = 10.0;
+    extern double perturbation_range;
 
     // Simulate having moved/turned
-    constexpr double x_displace = 100;
-    constexpr double y_displace = 50;
-    constexpr double angle_displace = M_PI_4;
+    extern double x_displace;
+    extern double y_displace;
+    extern double angle_displace;
 
-    // Centering
-    constexpr double x_unshift = n * scale / 2;
-    constexpr double y_unshift = slope * x_unshift;
+    extern double x_delta;
 }

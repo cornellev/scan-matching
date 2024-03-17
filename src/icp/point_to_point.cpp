@@ -79,7 +79,8 @@ namespace icp {
             // std::exit(1);
             t.dx -= dx_effect * rate;
             t.dy -= dy_effect * rate;
-            t.theta -= theta_effect * (rate / 1000.0);  // this makes it work
+            t.theta -= theta_effect
+                       * (rate / (100.0 * n));  // this makes it work
 
             //  compute new cost
             current_cost = 0;

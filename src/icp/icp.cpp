@@ -42,7 +42,7 @@ namespace icp {
     bool ICP::register_method(std::string name,
         std::function<std::unique_ptr<ICP>(size_t, double)> constructor) {
         ensure_methods_exists();
-        Log << "<ICP> register_method '" << name << "'\n";
+        // Log << "<ICP> register_method '" << name << "'\n";
         global->registered_method_constructors.push_back(constructor);
         global->registered_method_names.push_back(name);
         return true;

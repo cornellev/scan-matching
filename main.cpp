@@ -4,14 +4,57 @@
 #include <iostream>
 extern "C" {
 #include <cmdapp/cmdapp.h>
+#include <config/config.h>
 }
 #include <chrono>
 #include "gui/window.h"
 #include "sim/sim_config.h"
 #include "sim/lidar_view.h"
 
+void set_config_param(const char* var, const char* data, void* user_data) {
+    if (strcmp(var, "n") == 0) {
+        sim_config::n = std::stoi(data);
+    } else if (strcmp(var, "scale") == 0) {
+        sim_config::scale = std::stod(data);
+    } else if (strcmp(var, "slope") == 0) {
+        sim_config::slope = std::stod(data);
+    } else if (strcmp(var, "intercept") == 0) {
+        sim_config::intercept = std::stod(data);
+    } else if (strcmp(var, "perturbation_range") == 0) {
+        sim_config::perturbation_range = std::stod(data);
+    } else if (strcmp(var, "x_displace") == 0) {
+        sim_config::x_displace = std::stod(data);
+    } else if (strcmp(var, "y_displace") == 0) {
+        sim_config::y_displace = std::stod(data);
+    } else if (strcmp(var, "angle_displace") == 0) {
+        sim_config::angle_displace = std::stod(data);
+    } else if (strcmp(var, "window_width") == 0) {
+        sim_config::window_width = std::stoi(data);
+    } else if (strcmp(var, "window_height") == 0) {
+        sim_config::window_height = std::stoi(data);
+    } else if (strcmp(var, "x_delta") == 0) {
+        sim_config::x_delta = std::stoi(data);
+    }
+}
+
+void read_config() {
+    FILE* file = fopen("sim.conf", "r");
+    if (!file) {
+        perror("read_config: fopen");
+        std::exit(1);
+    }
+
+    if (conf_parse_file(file, set_config_param, NULL) != 0) {
+        perror("read_config: conf_parse_file");
+        std::exit(1);
+    }
+
+    fclose(file);
+}
+
 void launch_gui() {
-    Window window("Scan Matching", WINDOW_WIDTH, WINDOW_HEIGHT);
+    Window window("Scan Matching", sim_config::window_width,
+        sim_config::window_height);
 
     LidarView* view = new LidarView();
     window.attach_view(view);
@@ -115,6 +158,8 @@ int main(int argc, const char** argv) {
     }
 
     Log.is_enabled = *enable_log;
+
+    read_config();
 
     if (*do_bench) {
         run_benchmark(bench_method, *use_gui);
