@@ -2,15 +2,17 @@
 
 #pragma once
 
+#include <cmath>
+
 #define WINDOW_WIDTH 700
 #define WINDOW_HEIGHT 700
 
 namespace sim_config {
     // Number of points
-    constexpr int n = 40;
+    constexpr int n = 100;
 
     // Spacing of points
-    constexpr double scale = 10;
+    constexpr double scale = 5;
 
     // Wall parameters
     constexpr double slope = -1.0;

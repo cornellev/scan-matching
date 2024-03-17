@@ -120,3 +120,10 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         icp->iterate(source, destination);
     }
 }
+
+const std::vector<icp::Point>& LidarView::get_source() const {
+    return source;
+}
+const std::vector<icp::Point>& LidarView::get_dest() const {
+    return destination;
+}

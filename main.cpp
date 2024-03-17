@@ -5,6 +5,7 @@
 extern "C" {
 #include <cmdapp/cmdapp.h>
 }
+#include <chrono>
 #include "gui/window.h"
 #include "sim/sim_config.h"
 #include "sim/lidar_view.h"
@@ -24,7 +25,7 @@ void launch_gui() {
     window.present();
 }
 
-void run_benchmark(const char* method) {
+void run_benchmark(const char* method, bool with_gui) {
     if (std::find(icp::ICP::registered_methods().begin(),
             icp::ICP::registered_methods().end(), method)
         == icp::ICP::registered_methods().end()) {
@@ -37,13 +38,44 @@ void run_benchmark(const char* method) {
         std::exit(1);
     }
 
+    std::cout << "ICP ALGORITHM BENCHMARKING\n";
+    std::cout << "=======================================\n";
+
     // very scuffed
     LidarView* view = new LidarView();
     std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method, 1000, 0.01);
-    icp->set_initial(icp::Transform());
-    std::cout << "initial cost: " << icp->cost() << '\n';
-    icp->converge(view->source, view->destination, 10);
-    std::cout << "final cost: " << icp->cost() << '\n';
+
+    std::cout << "running...\r";
+    std::cout.flush();
+    int invocation_count = 100;
+    std::vector<double> final_costs;
+    using Clock = std::chrono::high_resolution_clock;
+    std::chrono::nanoseconds elapsed_ns = std::chrono::nanoseconds::zero();
+    for (int i = 0; i < invocation_count; i++) {
+        view->construct_instance();
+        icp->set_initial(icp::Transform());
+
+        auto start = Clock::now();
+        icp->converge(view->get_source(), view->get_dest(), 10);
+        final_costs.push_back(icp->cost());
+        auto end = Clock::now();
+
+        elapsed_ns +=
+            std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    }
+    double elapsed = (double)elapsed_ns.count() / 1000000000.0;
+    std::cout << "* Using method '" << method << "'\n";
+    std::cout << "* Matching two clouds of n = " << (sim_config::n * 3 / 4)
+              << " points\n";
+    std::cout << "* " << invocation_count << " invocations, " << elapsed
+              << "s in total, " << (elapsed / invocation_count)
+              << " per invocation\n";
+    std::cout << "* Greatest final cost was "
+              << (*std::max_element(final_costs.begin(), final_costs.end()))
+              << '\n';
+    std::cout << "* Least final cost was "
+              << (*std::min_element(final_costs.begin(), final_costs.end()))
+              << '\n';
     delete view;
 }
 
@@ -60,10 +92,12 @@ int main(int argc, const char** argv) {
     ca_versioning_info("All rights reserved.");
 
     ca_synopsis("[-h|-v]");
-    ca_synopsis("[-g|-b METHOD]");
+    ca_synopsis("[-g|-b METHOD] [-l]");
 
     bool* use_gui;
     bool* do_bench;
+    bool* enable_log;
+
     const char* bench_method = "point_to_point";
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
                "launch the interactive GUI"));
@@ -71,6 +105,7 @@ int main(int argc, const char** argv) {
     assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
     assert(do_bench = ca_opt('b', "bench", ".METHOD !@g", &bench_method,
                "benchmarks a given icp method"));  // for now disabled with -g
+    assert(enable_log = ca_opt('l', "log", "", NULL, "enables debug logging"));
 
     if (argc == 1) {
         ca_print_help();
@@ -79,9 +114,11 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
-    if (*use_gui) {
+    Log.is_enabled = *enable_log;
+
+    if (*do_bench) {
+        run_benchmark(bench_method, *use_gui);
+    } else if (*use_gui) {
         launch_gui();
-    } else if (*do_bench) {
-        run_benchmark(bench_method);
     }
 }

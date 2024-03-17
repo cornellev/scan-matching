@@ -66,7 +66,7 @@ namespace icp {
         ICP(size_t n, double rate);
 
     public:
-        ~ICP() = default;
+        virtual ~ICP() = default;
 
         /** Sets an initial guess for the transform. */
         void set_initial(Transform t);

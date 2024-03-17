@@ -27,13 +27,16 @@ DEPS 		:= $(OBJS:.o=.d)
 
 -include $(DEPS)
 
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $@
+	
 .PHONY: run
 run: $(TARGET)
 	./$(TARGET)
 
 .PHONY: bench
 bench: $(TARGET) 
-	./$(TARGET) --bench point_to_poit
+	./$(TARGET) --bench point_to_point
 
 .PHONY: gui 
 gui: $(TARGET) 
@@ -42,9 +45,6 @@ gui: $(TARGET)
 .PHONY: gui_debug
 gui_debug: $(TARGET)
 	echo "run" | lldb $(TARGET) -- --gui
-
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.cpp
 	@echo 'Compiling $@'

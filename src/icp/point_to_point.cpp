@@ -8,7 +8,7 @@
 namespace icp {
     struct PointToPoint final : public ICP {
         PointToPoint(size_t n, double rate): ICP(n, rate) {}
-        ~PointToPoint() {}
+        ~PointToPoint() override {}
 
         void iterate(const std::vector<icp::Point>& a,
             const std::vector<icp::Point>& b) override {
@@ -30,7 +30,7 @@ namespace icp {
 
             // point-to-point matching O(n^2)
             for (size_t i = 0; i < n; i++) {
-                dist[i] = INFINITY;
+                dist[i] = std::numeric_limits<double>::infinity();
                 for (size_t j = 0; j < m; j++) {
                     double alt = std::hypot(a[i].x - b[j].x, a[i].y - b[j].y);
                     if (alt < dist[i]) {

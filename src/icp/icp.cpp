@@ -4,12 +4,7 @@
 #include "util/logger.h"
 
 namespace icp {
-    Methods global;
-
-    // ICP::Methods& ICP::global {
-    //     ICP::Methods instance;
-    //     return instance;
-    // }
+    static Methods* global;
 
     ICP::ICP(size_t n, double rate): rate(rate), pair(n), dist(n) {
         set_initial(Transform());
@@ -38,23 +33,32 @@ namespace icp {
         return t;
     }
 
+    static void ensure_methods_exists() {
+        if (!global) {
+            global = new Methods();
+        }
+    }
+
     bool ICP::register_method(std::string name,
         std::function<std::unique_ptr<ICP>(size_t, double)> constructor) {
-        Log << "ICP: registering method '" << name << "'\n";
-        global.registered_method_constructors.push_back(constructor);
-        global.registered_method_names.push_back(name);
+        ensure_methods_exists();
+        Log << "<ICP> register_method '" << name << "'\n";
+        global->registered_method_constructors.push_back(constructor);
+        global->registered_method_names.push_back(name);
         return true;
     }
 
     const std::vector<std::string>& ICP::registered_methods() {
-        return global.registered_method_names;
+        ensure_methods_exists();
+        return global->registered_method_names;
     }
 
     std::unique_ptr<ICP> ICP::from_method(std::string name, size_t n,
         double rate) {
-        size_t index = std::find(global.registered_method_names.begin(),
-                           global.registered_method_names.end(), name)
-                       - global.registered_method_names.begin();
-        return global.registered_method_constructors[index](n, rate);
+        ensure_methods_exists();
+        size_t index = std::find(global->registered_method_names.begin(),
+                           global->registered_method_names.end(), name)
+                       - global->registered_method_names.begin();
+        return global->registered_method_constructors[index](n, rate);
     }
 }
