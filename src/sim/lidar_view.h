@@ -14,8 +14,9 @@ class LidarView final : public View {
     std::vector<icp::Point> wall;
     std::unique_ptr<icp::ICP> icp;
     Keyboard keyboard;
+    bool is_iterating;
 
-    void construct_instance();
+    // void construct_instance();
 
 public:
     /** Consructs a new lidar view visualizing ICP. */
@@ -25,4 +26,9 @@ public:
     void on_event(const SDL_Event& event) override;
     void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         double dtime) override;
+
+    // TODO: move to `instance.h` etc.
+    void construct_instance();
+    const std::vector<icp::Point>& get_source() const;
+    const std::vector<icp::Point>& get_dest() const;
 };

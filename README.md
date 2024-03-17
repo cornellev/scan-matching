@@ -6,24 +6,49 @@ This repository hosts Ethan's (my) implementation of Iterative Closest Points (I
 It is a first step in my attempt to implement Simultaneous Localization and Mapping (SLAM).
 Eventually, I will factor this out into its own library as a submodule for the SLAM library I will build.
 
-## Dependencies
+## Usage
+
+> [!NOTE]
+> This section is for Unix-like systems. 
+> I have not yet tested installation on Windows.
+> Notably, the `make install` scripts rely on `/usr/local/lib`.
+
+First, download and install the dependencies.
 
 - [SDL](https://www.libsdl.org)
 - My [SDL wrapper](https://github.com/cornellev/sdl-wrapper)
-- [libcmdapp2](http://ethanuppal.com/libcmdapp2/)
+- [libcmdapp2](https://ethanuppal.com/libcmdapp2/)
+- [libconfig](https://github.com/ethanuppal/config)
 
-## Usage
+It is likely that you already have SDL installed.
+If not, follow the instructions at the link provided (which goes to the SDL website).
+Then, to download and install the remaining dependencies, run
 
-You can launch the interactive window simply by running
-```bash
-make run 
+```shell
+# install libcmdapp
+git clone https://github.com/ethanuppal/libcmdapp2.git
+cd libcmdapp2
+sudo make install
+cd ..
+
+# install libconfig
+git clone https://github.com/ethanuppal/config.git
+cd config
+sudo make install
+cd ..
+```
+
+Now, run
+```shell
+git clone https://github.com/cornellev/scan-matching.git
+cd scan-matching
+make
+./main --gui
 ```
 Instructions are printed to standard output.
 
 The program itself can be built with
-```bash
+```shell
 make
 ```
-which will create an executable named `./main.out` and a script `./main` which handles dynamic library dependencies.
-For now, this solution is suboptimal becaues `./main` can only be run from the project root directly.
-Use `./main --help` to see usage information.
+which will create an executable named `main` in the working directory.

@@ -2,19 +2,18 @@
 
 SRCDIR		:= src
 INCLUDEDIR	:= src
-LIBDIR		:= $(SRCDIR)/sdl-wrapper
-LIB			:= $(LIBDIR)/libsdlwrapper.so
 
-CC			:= $(shell which g++-13 || \
-					   which g++ || which clang)
+CC			:= $(shell which g++ || which clang)
 CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
 CRELEASE	:= -O2 -DRELEASE_BUILD
-TARGET		:= main.out
-TARGET2		:= main
+TARGET		:= main
 
-LDFLAGS		:= -L $(LIBDIR) -lsdlwrapper -I $(LIBDIR)/src -L /usr/local/lib/ -lcmdapp
-CFLAGS		+= -I /usr/local/include
+# follow instructions in README to install in /usr/local
+LDFLAGS		:= /usr/local/lib/libcmdapp.a \
+			   /usr/local/lib/libsdlwrapper.a \
+			   /usr/local/lib/libconfig.a
+CFLAGS		+= -I/usr/local/include -I/usr/local/include/sdlwrapper
 
 # CFLAGS 		+= $(CRELEASE)
 CFLAGS 		+= $(CDEBUG)
@@ -31,28 +30,29 @@ DEPS 		:= $(OBJS:.o=.d)
 
 -include $(DEPS)
 
-.PHONY: driver
-driver: $(LIB) /usr/local/lib/libcmdapp.a
-	make $(TARGET)
-	@printf '#!/bin/bash\nDYLD_LIBRARY_PATH=$$DYLD_LIBRARY_PATH:$(shell echo $$PWD)/$(LIBDIR) ./$(TARGET) "$$@"\n' > $(TARGET2)
-	@chmod u+x ./$(TARGET2)
-
-.PHONY: run 
-run: driver 
-	./$(TARGET2) --gui	
-
-# inv: $(LIB) is built
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(LIB):
-	cd $(LIBDIR); make libsdlwrapper.so
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
 
-%.o: %.cpp $(LIB)
+.PHONY: bench
+bench: $(TARGET) 
+	./$(TARGET) --bench point_to_point
+
+.PHONY: gui 
+gui: $(TARGET) 
+	./$(TARGET) --gui	
+
+.PHONY: gui_debug
+gui_debug: $(TARGET)
+	echo "run" | lldb $(TARGET) -- --gui
+
+%.o: %.cpp
 	@echo 'Compiling $@'
 	$(CC) $(CFLAGS) -MMD -MP $< -c -o $@
 
 .PHONY: clean
 clean:
-	rm -rf $(OBJ) $(TARGET) $(TARGET2) $(DEPS) $(shell find . -name "*.dSYM") $(shell find . -name "*.d")
-	cd $(LIBDIR); make clean
+	rm -rf $(OBJ) $(TARGET) $(TARGET) $(DEPS) $(shell find . -name "*.dSYM") $(shell find . -name "*.d")

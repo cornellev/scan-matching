@@ -5,22 +5,39 @@
 #include <cmath>
 #include <vector>
 #include <memory>
+#include <string>
+#include <functional>
 
 namespace icp {
     struct Point final {
         double x;
         double y;
 
-        Point(): x(0), y(0) {}
+        Point() {}
         Point(double x, double y): x(x), y(y) {}
     };
 
     struct Transform final {
         double dx;
         double dy;
+        double theta;  ///< currently only around CoM, need to make more
+        ///< complicated later
+        double cx;
+        double cy;
 
-        Transform(): dx(0), dy(0) {}
-        Transform(double dx, double dy): dx(dx), dy(dy) {}
+    public:
+        Transform(): dx(0), dy(0), theta(0), cx(0), cy(0) {}
+        Transform(double dx, double dy, double theta)
+            : dx(dx), dy(dy), theta(theta) {}
+
+        double transform_x(double x, double y) const {
+            return std::cos(theta) * (x - cx) - std::sin(theta) * (y - cy) + cx
+                   + dx;
+        }
+        double transform_y(double x, double y) const {
+            return std::sin(theta) * (x - cx) + std::cos(theta) * (y - cy) + cy
+                   + dy;
+        }
     };
 
     class ICP {
@@ -33,10 +50,10 @@ namespace icp {
 
         /** Keeps track of the previous cost to ensure that progress is being
          * made. @see ICP::current_cost. */
-        double previous_cost = INFINITY;
+        double previous_cost;
 
         /** The sum-of-squares cost of `dist`. */
-        double current_cost = INFINITY;
+        double current_cost;
 
         /** The pairing of each point in `a` to its closest in `b`. */
         std::vector<size_t> pair;
@@ -49,6 +66,8 @@ namespace icp {
         ICP(size_t n, double rate);
 
     public:
+        virtual ~ICP() = default;
+
         /** Sets an initial guess for the transform. */
         void set_initial(Transform t);
 
@@ -67,7 +86,25 @@ namespace icp {
         /** The current optimal transform. */
         const Transform& transform() const;
 
-        /** Point-to-point ICP. */
-        static std::unique_ptr<ICP> point_to_point(size_t n, double rate);
+        /** Registers a new ICP method that can be created with `constructor`,
+         * returning `false` if `name` has already been registered. */
+        static bool register_method(std::string name,
+            std::function<std::unique_ptr<ICP>(size_t n, double rate)>
+                constructor);
+
+        /** Returns a current list of the names of currently registered ICP
+         * methods. */
+        static const std::vector<std::string>& registered_methods();
+
+        /** Factory constructor for the ICP method `name`. @pre `name` is a
+         * valid registered method. */
+        static std::unique_ptr<ICP> from_method(std::string name, size_t n,
+            double rate);
+    };
+
+    struct Methods {
+        std::vector<std::string> registered_method_names;
+        std::vector<std::function<std::unique_ptr<ICP>(size_t n, double rate)>>
+            registered_method_constructors;
     };
 }
