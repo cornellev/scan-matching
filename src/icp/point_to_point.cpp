@@ -14,6 +14,8 @@ namespace icp {
             const std::vector<icp::Point>& b) override {
             size_t n = a.size();
             size_t m = b.size();
+            pair.resize(n);
+            dist.resize(n);
 
             // compute center of mass of a
             double a_cm_x = 0;

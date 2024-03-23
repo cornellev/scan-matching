@@ -62,8 +62,8 @@ namespace icp {
         std::vector<double> dist;
 
         /** A new ICP instance for `n`-point matching and an optimization rate
-         * of `rate` */
-        ICP(size_t n, double rate);
+         * of `rate`. @deprecated `n` is ignored. */
+        ICP(size_t n = 0, double rate = 0.01);
 
     public:
         virtual ~ICP() = default;
@@ -96,10 +96,14 @@ namespace icp {
          * methods. */
         static const std::vector<std::string>& registered_methods();
 
-        /** Factory constructor for the ICP method `name`. @pre `name` is a
-         * valid registered method. */
-        static std::unique_ptr<ICP> from_method(std::string name, size_t n,
-            double rate);
+        /**
+         * Factory constructor for the ICP method `name`. @pre `name` is a
+         * valid registered method.
+         *
+         * @deprecated `n` is ignored.
+         */
+        static std::unique_ptr<ICP> from_method(std::string name, size_t n = 0,
+            double rate = 0.01);
     };
 
     struct Methods {

@@ -34,7 +34,8 @@ void LidarView::construct_instance() {
     // Create a line of points for the wall
     for (int i = 0; i < sim_config::n; ++i) {
         double x = i * sim_config::scale;
-        double y = sim_config::slope * x + sim_config::intercept + dis(gen);
+        double y = ((std::sin(i / 10.0) + 1) * sim_config::scale * 100)
+                   + sim_config::intercept + dis(gen);  // now this is ugly fix
         wall[i] = {x, y};
     }
 
@@ -42,6 +43,7 @@ void LidarView::construct_instance() {
     source.assign(wall.begin(), wall.begin() + sim_config::n * 3 / 4);
     destination.assign(wall.begin() + sim_config::n - (sim_config::n * 3 / 4),
         wall.end());
+    double shift_because_scans_same_start = destination[0].x - source[0].x;
 
     // Separate the scans to simulate robot movement
     for (icp::Point& point: source) {
@@ -50,6 +52,11 @@ void LidarView::construct_instance() {
         point.y += sim_config::window_height / 2 - sim_config::y_displace / 2
                    - y_unshift;
     }
+
+    double dest_move_x = sim_config::window_width / 2
+                         + sim_config::x_displace / 2 - x_unshift;
+    double dest_move_y = sim_config::window_height / 2
+                         + sim_config::y_displace / 2 - y_unshift;
 
     // TODO: make less scuffed way to do this
     icp->iterate(source, source);
@@ -62,14 +69,9 @@ void LidarView::construct_instance() {
     for (icp::Point& point: source) {
         double new_x = com_rot.transform_x(point.x, point.y);
         double new_y = com_rot.transform_y(point.x, point.y);
-        point.x = new_x + sim_config::x_delta;
+        point.x = new_x + sim_config::x_delta + shift_because_scans_same_start;
         point.y = new_y;
     }
-
-    double dest_move_x = sim_config::window_width / 2
-                         + sim_config::x_displace / 2 - x_unshift;
-    double dest_move_y = sim_config::window_height / 2
-                         + sim_config::y_displace / 2 - y_unshift;
 
     for (icp::Point& point: destination) {
         point.x += dest_move_x + sim_config::x_delta;
@@ -83,6 +85,7 @@ void LidarView::construct_instance() {
         // where you should be. if it works it works but should clean
         point.x += dest_move_x + sim_config::x_delta;
         point.y += dest_move_y;
+        std::cout << point.x << ',' << point.y << '\n';
     }
 }
 
@@ -101,22 +104,22 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-    for (const icp::Point& point: source) {
-        SDL_DrawCircle(renderer, point.x, point.y, CIRCLE_RADIUS);
-    }
+    // SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
+    // for (const icp::Point& point: source) {
+    //     SDL_DrawCircle(renderer, point.x, point.y, CIRCLE_RADIUS);
+    // }
 
-    SDL_SetRenderDrawColor(renderer, 128, 128, 128, SDL_ALPHA_OPAQUE);
-    for (const icp::Point& point: wall) {
-        SDL_DrawCircle(renderer, point.x, point.y, CIRCLE_RADIUS);
-    }
+    // SDL_SetRenderDrawColor(renderer, 128, 128, 128, SDL_ALPHA_OPAQUE);
+    // for (const icp::Point& point: wall) {
+    //     SDL_DrawCircle(renderer, point.x, point.y, CIRCLE_RADIUS);
+    // }
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
     for (const icp::Point& point: destination) {
         SDL_DrawCircle(renderer, point.x, point.y, CIRCLE_RADIUS);
     }
 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 100);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 100);
     for (const icp::Point& point: source) {
         SDL_DrawCircle(renderer, icp->transform().transform_x(point.x, point.y),
             icp->transform().transform_y(point.x, point.y), CIRCLE_RADIUS);
