@@ -78,6 +78,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="overview_sec"></a>
 Overview</h1>
+<p>Scan-matching is a method for localization that uses high-frequency LiDAR data. This project is <a href="https://ethanuppal.com">Ethan</a>'s implementation of algorithms for scan-matching.</p>
 <table class="doxtable">
 <tr>
 <th style="text-align:left; vertical-align:top">Item </th><th style="text-align:left; vertical-align:top">Location  </th></tr>
@@ -93,10 +94,43 @@ Overview</h1>
 </table>
 <h1><a class="anchor" id="feature_sec"></a>
 Features</h1>
+<ul>
+<li>Interactive (graphical) visualization on point clouds.<ul>
+<li>You can supply custom point clouds in a config file using fields from <a href="http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html"><code>sensor_msgs::LaserScan</code></a>.</li>
+</ul>
+</li>
+<li>ICP library for external usage.</li>
+</ul>
 <h1><a class="anchor" id="install_sec"></a>
 Usage</h1>
 <h2><a class="anchor" id="install_unix_subsec"></a>
 Unix-like (MacOS, Linux)</h2>
+<p>First, download and install the dependencies.</p>
+<ul>
+<li><a href="https://www.libsdl.org">SDL</a></li>
+<li>My <a href="https://github.com/cornellev/sdl-wrapper">SDL wrapper</a></li>
+<li><a href="https://ethanuppal.com/libcmdapp2/">libcmdapp2</a></li>
+<li><a href="https://github.com/ethanuppal/config">libconfig</a></li>
+</ul>
+<p>It is likely that you already have SDL installed. If not, follow the instructions at the link provided (which goes to the SDL website). Then, to download and install the remaining dependencies, run</p>
+<div class="fragment"><div class="line"># install libcmdapp</div>
+<div class="line">git clone https://github.com/ethanuppal/libcmdapp2.git</div>
+<div class="line">cd libcmdapp2</div>
+<div class="line">sudo make install</div>
+<div class="line">cd ..</div>
+<div class="line"> </div>
+<div class="line"># install libconfig</div>
+<div class="line">git clone https://github.com/ethanuppal/config.git</div>
+<div class="line">cd config</div>
+<div class="line">sudo make install</div>
+<div class="line">cd ..</div>
+</div><!-- fragment --><p>Now, run </p><div class="fragment"><div class="line">git clone https://github.com/cornellev/scan-matching.git</div>
+<div class="line">cd scan-matching</div>
+<div class="line">make</div>
+<div class="line">./main --gui</div>
+</div><!-- fragment --><p> Instructions are printed to standard output.</p>
+<p>The program itself can be built with </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p> which will create an executable named <code>main</code> in the working directory.</p>
 <h2><a class="anchor" id="install_windows_subsec"></a>
 Windows</h2>
 <h1><a class="anchor" id="example_sec"></a>
