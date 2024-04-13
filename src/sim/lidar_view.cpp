@@ -18,6 +18,12 @@ LidarView::LidarView()
     // icp->converge(source, destination, 1);
 }
 
+LidarView::LidarView(std::vector<icp::Point> source,
+    std::vector<icp::Point> destination)
+    : source(source), destination(destination), keyboard(false) {
+    icp = icp::ICP::from_method("point_to_point", source.size(), 0.01);
+}
+
 LidarView::~LidarView() noexcept {
     icp.release();
 }
@@ -85,7 +91,6 @@ void LidarView::construct_instance() {
         // where you should be. if it works it works but should clean
         point.x += dest_move_x + sim_config::x_delta;
         point.y += dest_move_y;
-        std::cout << point.x << ',' << point.y << '\n';
     }
 }
 

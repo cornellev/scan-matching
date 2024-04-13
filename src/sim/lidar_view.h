@@ -19,8 +19,14 @@ class LidarView final : public View {
     // void construct_instance();
 
 public:
-    /** Consructs a new lidar view visualizing ICP. */
+    /** Consructs a new lidar view visualizing ICP on a random instance. */
     LidarView();
+
+    /** Constructs a new lidar view visualizing ICP on the given instance
+     * (`source` and `destination`). */
+    LidarView(std::vector<icp::Point> source,
+        std::vector<icp::Point> destination);
+
     ~LidarView() noexcept override;
 
     void on_event(const SDL_Event& event) override;

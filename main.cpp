@@ -11,6 +11,17 @@ extern "C" {
 #include "sim/sim_config.h"
 #include "sim/lidar_view.h"
 
+struct LidarScan {
+    double range_max;
+    double range_min;
+    double angle_min;
+    double angle_max;
+    double angle_increment;
+
+    /** Units: centimeters */
+    std::vector<icp::Point> points;
+};
+
 void set_config_param(const char* var, const char* data, void* user_data) {
     if (strcmp(var, "n") == 0) {
         sim_config::n = std::stoi(data);
@@ -37,32 +48,54 @@ void set_config_param(const char* var, const char* data, void* user_data) {
     }
 }
 
-void read_config() {
-    FILE* file = fopen("sim.conf", "r");
+void parse_lidar_scan(const char* var, const char* data, void* user_data) {
+    LidarScan* scan = static_cast<LidarScan*>(user_data);
+    if (strcmp(var, "range_min") == 0) {
+        scan->range_min = strtod(data, NULL);
+    } else if (strcmp(var, "range_max") == 0) {
+        scan->range_max = strtod(data, NULL);
+    } else if (strcmp(var, "angle_min") == 0) {
+        scan->angle_min = strtod(data, NULL);
+    } else if (strcmp(var, "angle_max") == 0) {
+        scan->angle_max = strtod(data, NULL);
+    } else if (strcmp(var, "angle_increment") == 0) {
+        scan->angle_increment = strtod(data, NULL);
+    } else if (isnumber(var[0])) {
+        long index = strtol(var, NULL, 10);
+        double angle = scan->angle_min + index * scan->angle_increment;
+        double range = strtod(data, NULL);
+        if (range >= scan->range_min && range <= scan->range_max) {
+            scan->points.push_back(icp::Point(100 * range * std::cos(angle),
+                100 * range * std::sin(angle)));
+        }
+    }
+}
+
+void parse_config(const char* path, conf_parse_handler_t handler,
+    void* user_data) {
+    FILE* file = fopen(path, "r");
     if (!file) {
-        perror("read_config: fopen");
+        perror("parse_config: fopen");
         std::exit(1);
     }
 
-    if (conf_parse_file(file, set_config_param, NULL) != 0) {
-        perror("read_config: conf_parse_file");
+    if (conf_parse_file(file, handler, user_data) != 0) {
+        perror("parse_config: conf_parse_file");
         std::exit(1);
     }
 
     fclose(file);
 }
 
-void launch_gui() {
+void launch_gui(LidarView* view, std::string visualized = "LiDAR scans") {
     Window window("Scan Matching", sim_config::window_width,
         sim_config::window_height);
 
-    LidarView* view = new LidarView();
     window.attach_view(view);
 
     std::cout << "SCAN MATCHING : ITERATIVE CLOSEST POINT\n";
     std::cout << "=======================================\n";
-    std::cout << "* The points are generated randomly\n";
-    std::cout << "* Press <SPACE> to advance one iteration\n";
+    std::cout << "* Visualizing: " << visualized << '\n';
     std::cout << "* Press the red <X> on the window to exit\n";
 
     window.present();
@@ -135,20 +168,28 @@ int main(int argc, const char** argv) {
     ca_versioning_info("All rights reserved.");
 
     ca_synopsis("[-h|-v]");
+    ca_synopsis("-S FILE -D FILE [-l]");
     ca_synopsis("[-g|-b METHOD] [-l]");
 
     bool* use_gui;
     bool* do_bench;
     bool* enable_log;
+    bool* read_scan_files;
+    const char* f_src;
+    const char* f_dst;
 
     const char* bench_method = "point_to_point";
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
                "launch the interactive GUI"));
-    assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
-    assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
     assert(do_bench = ca_opt('b', "bench", ".METHOD !@g", &bench_method,
                "benchmarks a given icp method"));  // for now disabled with -g
+    assert(read_scan_files = ca_opt('S', "src", ".FILE&D", &f_src,
+               "source scan (pass with -D)"));
+    assert(ca_opt('D', "dst", ".FILE&S", &f_dst,
+        "destination scan (pass with -S)"));
     assert(enable_log = ca_opt('l', "log", "", NULL, "enables debug logging"));
+    assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
+    assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
 
     if (argc == 1) {
         ca_print_help();
@@ -159,11 +200,20 @@ int main(int argc, const char** argv) {
 
     Log.is_enabled = *enable_log;
 
-    read_config();
-
-    if (*do_bench) {
-        run_benchmark(bench_method, *use_gui);
-    } else if (*use_gui) {
-        launch_gui();
+    if (*read_scan_files) {
+        LidarScan source, destination;
+        parse_config(f_src, parse_lidar_scan, &source);
+        parse_config(f_dst, parse_lidar_scan, &destination);
+        LidarView* view = new LidarView(source.points, destination.points);
+        launch_gui(view,
+            std::string(f_src) + std::string(" and ") + std::string(f_dst));
+    } else {
+        parse_config("sim.conf", set_config_param, NULL);
+        if (*do_bench) {
+            run_benchmark(bench_method, *use_gui);
+        } else if (*use_gui) {
+            LidarView* view = new LidarView();
+            launch_gui(view, "randomly generated point clouds");
+        }
     }
 }

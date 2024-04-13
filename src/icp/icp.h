@@ -21,7 +21,7 @@ namespace icp {
         double dx;
         double dy;
         double theta;  ///< currently only around CoM, need to make more
-        ///< complicated later
+                       ///< complicated later
         double cx;
         double cy;
 

@@ -1,5 +1,7 @@
 # scan-matching
 
+[cornellev.github.io/scan-matching/](https://cornellev.github.io/scan-matching/).
+
 ## Introduction
 
 This repository hosts Ethan's (my) implementation of Iterative Closest Points (ICP) as applied to scan matching.

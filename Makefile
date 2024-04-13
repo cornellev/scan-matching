@@ -55,4 +55,8 @@ gui_debug: $(TARGET)
 
 .PHONY: clean
 clean:
-	rm -rf $(OBJ) $(TARGET) $(TARGET) $(DEPS) $(shell find . -name "*.dSYM") $(shell find . -name "*.d")
+	rm -rf $(OBJ) $(TARGET) $(TARGET) $(DEPS) $(shell find . -name "*.dSYM") $(shell find . -name "*.d") docs
+
+.PHONY: docs 
+docs:
+	doxygen
