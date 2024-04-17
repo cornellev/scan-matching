@@ -54,10 +54,12 @@ void parse_lidar_scan(const char* var, const char* data, void* user_data) {
         scan->range_min = strtod(data, NULL);
     } else if (strcmp(var, "range_max") == 0) {
         scan->range_max = strtod(data, NULL);
-    } else if (strcmp(var, "angle_min") == 0) {
-        scan->angle_min = strtod(data, NULL);
     } else if (strcmp(var, "angle_max") == 0) {
         scan->angle_max = strtod(data, NULL);
+        Log << "scan->angle_max = " << scan->angle_max << '\n';
+    } else if (strcmp(var, "angle_min") == 0) {
+        scan->angle_min = strtod(data, NULL);
+        Log << "scan->angle_min = " << scan->angle_min << '\n';
     } else if (strcmp(var, "angle_increment") == 0) {
         scan->angle_increment = strtod(data, NULL);
     } else if (isnumber(var[0])) {
@@ -65,8 +67,9 @@ void parse_lidar_scan(const char* var, const char* data, void* user_data) {
         double angle = scan->angle_min + index * scan->angle_increment;
         double range = strtod(data, NULL);
         if (range >= scan->range_min && range <= scan->range_max) {
-            scan->points.push_back(icp::Point(100 * range * std::cos(angle),
-                100 * range * std::sin(angle)));
+            scan->points.push_back(icp::Point(
+                100 * range * std::cos(angle) + sim_config::window_width / 2,
+                100 * range * std::sin(angle) + sim_config::window_height / 2));
         }
     }
 }
@@ -177,6 +180,7 @@ int main(int argc, const char** argv) {
     bool* read_scan_files;
     const char* f_src;
     const char* f_dst;
+    const char* config_file = "sim.conf";
 
     const char* bench_method = "point_to_point";
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
@@ -187,6 +191,8 @@ int main(int argc, const char** argv) {
                "source scan (pass with -D)"));
     assert(ca_opt('D', "dst", ".FILE&S", &f_dst,
         "destination scan (pass with -S)"));
+    assert(ca_opt('c', "config", ".FILE", &config_file,
+        "selects a configuration file"));
     assert(enable_log = ca_opt('l', "log", "", NULL, "enables debug logging"));
     assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
     assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
@@ -199,6 +205,7 @@ int main(int argc, const char** argv) {
     }
 
     Log.is_enabled = *enable_log;
+    parse_config(config_file, set_config_param, NULL);
 
     if (*read_scan_files) {
         LidarScan source, destination;
@@ -208,7 +215,6 @@ int main(int argc, const char** argv) {
         launch_gui(view,
             std::string(f_src) + std::string(" and ") + std::string(f_dst));
     } else {
-        parse_config("sim.conf", set_config_param, NULL);
         if (*do_bench) {
             run_benchmark(bench_method, *use_gui);
         } else if (*use_gui) {

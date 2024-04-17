@@ -7,6 +7,13 @@
 
 namespace icp {
     struct PointToPoint final : public ICP {
+        int time{};
+        double last_dx_effect{};
+        double last_dy_effect{};
+        double last_theta_effect{};
+        double momentum_alpha = 0.02;
+        double eta_decay = 1;
+
         PointToPoint(size_t n, double rate): ICP(n, rate) {}
         ~PointToPoint() override {}
 
@@ -42,11 +49,13 @@ namespace icp {
                 }
             }
 
-            // gradient descent
+            // modified gradient descent
             double dx_effect = 0;
             double dy_effect = 0;
             double theta_effect = 0;
             for (size_t i = 0; i < n; i++) {
+                double index_dist = ((double)i - pair[i]) / 200;
+                double weight = 1 + 20 * std::exp(-index_dist + index_dist);
                 double o_x = (a[i].x - a_cm_x);
                 double o_y = (a[i].y - a_cm_y);
                 double a_rot_x = std::cos(t.theta) * o_x
@@ -55,8 +64,8 @@ namespace icp {
                                  + std::cos(t.theta) * o_y + a_cm_y;
                 double b_x = b[pair[i]].x;
                 double b_y = b[pair[i]].y;
-                dx_effect += (a_rot_x + t.dx - b_x) * 2 / n;
-                dy_effect += (a_rot_y + t.dy - b_y) * 2 / n;
+                dx_effect += (a_rot_x + t.dx - b_x) * 2 / n * weight;
+                dy_effect += (a_rot_y + t.dy - b_y) * 2 / n * weight;
                 // if (dx_effect > 10000) {
                 //     Log << a_rot_x << ' ' << t.dx << ' ' << b_x << '\n';
                 //     std::exit(1);
@@ -73,16 +82,20 @@ namespace icp {
                                     + o_x * t.dy * std::cos(t.theta)
                                     - o_y * t.dx * std::cos(t.theta)
                                     - o_y * t.dy * std::sin(t.theta))
-                                * 2 / n;
+                                * 2 / n * weight;
             }
             // Log << "dx_effect * rate = " << (dx_effect * rate) << '\n';
             // Log << "dy_effect * rate = " << (dy_effect * rate) << '\n';
             // Log << "dt_effect * rate = " << (theta_effect * rate) << '\n';
             // std::exit(1);
-            t.dx -= dx_effect * rate;
-            t.dy -= dy_effect * rate;
-            t.theta -= theta_effect
-                       * (rate / (100.0 * n));  // this makes it work
+            t.dx -= dx_effect * rate + momentum_alpha * last_dx_effect;
+            t.dy -= dy_effect * rate + momentum_alpha * last_dy_effect;
+            t.theta -= (theta_effect * (rate * std::exp(-eta_decay * time))
+                           + last_theta_effect * momentum_alpha)
+                       / (100.0 * n);  // this makes it work idk
+            last_dx_effect = dx_effect;
+            last_dy_effect = dy_effect;
+            last_theta_effect = theta_effect;
 
             //  compute new cost
             current_cost = 0;
@@ -97,6 +110,8 @@ namespace icp {
                 double cy = a_rot_y + t.dy - b[pair[i]].y;
                 current_cost += (cx * cx + cy * cy) / n;
             }
+
+            time++;
         }
     };
 
