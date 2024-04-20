@@ -24,6 +24,8 @@ First, download and install the dependencies.
 - [libconfig](https://github.com/ethanuppal/config)
 - [eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 
+There is also a dependency on [simple-test](https://github.com/ethanuppal/simple-test) if you want to run the tests (`make test`).
+
 It is likely that you already have SDL installed.
 If not, follow the instructions at the link provided (which goes to the SDL website).
 Then, to download and install the remaining dependencies, run

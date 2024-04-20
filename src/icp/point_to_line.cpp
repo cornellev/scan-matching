@@ -1,6 +1,8 @@
 /*
  * @author Ethan Uppal
  * @copyright Copyright (C) 2024 Ethan Uppal. All rights reserved.
+ *
+ * This code is based on https://ieeexplore.ieee.org/document/4543181
  */
 
 #include <cassert>
@@ -11,11 +13,11 @@
 #include <Eigen/SVD>
 
 namespace icp {
-    struct Vanilla final : public ICP {
+    struct PointToLine final : public ICP {
         std::vector<Vector> rotated_a;
 
-        Vanilla(double rate): ICP(rate) {}
-        ~Vanilla() override {}
+        PointToLine(double rate): ICP(rate) {}
+        ~PointToLine() override {}
 
         void iterate() override {
             const size_t n = a.size();
@@ -23,17 +25,18 @@ namespace icp {
 
             /* Matching Step: match closest points.
 
+               A point-to-line metric is used.
+
                Sources:
                https://arxiv.org/pdf/2206.06435.pdf
                https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf
                https://en.wikipedia.org/wiki/Iterative_closest_point
                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf
-               -> use k-d tree
              */
             for (size_t i = 0; i < n; i++) {
                 dist[i] = std::numeric_limits<double>::infinity();
                 for (size_t j = 0; j < m; j++) {
-                    // Point-to-point matching
+                    // Point-to-plane matching
                     double dist_ij = std::hypot(b[i][0] - a[i][0],
                         b[i][1] - a[i][1]);
 
@@ -68,9 +71,9 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        assert(ICP::register_method("vanilla",
+        assert(ICP::register_method("point_to_line",
             [](size_t n __unused, double rate) -> std::unique_ptr<ICP> {
-                return std::make_unique<Vanilla>(rate);
+                return std::make_unique<PointToLine>(rate);
             }));
         return true;
     }();

@@ -1,4 +1,7 @@
-// Copyright (C) 2024 Ethan Uppal. All rights reserved.
+/*
+ * @author Ethan Uppal
+ * @copyright Copyright (C) 2024 Ethan Uppal. All rights reserved.
+ */
 
 #include <cassert>
 #include <cstdlib>
@@ -22,6 +25,12 @@ LidarView::LidarView()
 LidarView::LidarView(std::vector<icp::Vector> source,
     std::vector<icp::Vector> destination, const std::string method)
     : source(source), destination(destination), keyboard(false) {
+    if (std::find(icp::ICP::registered_methods().begin(),
+            icp::ICP::registered_methods().end(), method)
+        == icp::ICP::registered_methods().end()) {
+        std::cerr << "Unknown ICP method: " << method << '\n';
+        std::exit(1);
+    }
     icp = icp::ICP::from_method(method, source.size(), 0.01);
     icp->begin(source, destination, icp::RBTransform());
 }

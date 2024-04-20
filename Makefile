@@ -17,36 +17,46 @@ LDFLAGS		:= $(shell sdl2-config --libs) \
 CFLAGS		+= $(shell sdl2-config --cflags) \
 			   -I/usr/local/include \
 			   -I/usr/local/include/sdlwrapper \
-			   -I /usr/local/include/eigen3
+			   -I/usr/local/include/eigen3
 
 # CFLAGS 		+= $(CRELEASE)
 CFLAGS 		+= $(CDEBUG)
 
-SRC			:= main.cpp \
-			   $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRCDIR)/sdl-wrapper/*" -not -path "$(SRCDIR)/icp/old/*")
+SRC			:= $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRCDIR)/sdl-wrapper/*" -not -path "$(SRCDIR)/icp/old/*")
 OBJ			:= $(SRC:.cpp=.o)
 DEPS 		:= $(OBJS:.o=.d) 
 
 -include $(DEPS)
 
-$(TARGET): $(OBJ)
+$(TARGET): main.cpp $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
-.PHONY: run
-run: $(TARGET)
-	./$(TARGET)
+# .PHONY: run
+# run: $(TARGET)
+# 	./$(TARGET)
 
-.PHONY: bench
-bench: $(TARGET) 
-	./$(TARGET) --bench point_to_point
+.PHONY: test
+test: test.cpp $(OBJ)
+	@$(CC) $(CFLAGS) $(LDFLAGS) -DTEST -o _temp $^
+	@echo 'Running tests...'
+	@./_temp
+	@rm -f ./_temp
 
-.PHONY: gui 
-gui: $(TARGET) 
-	./$(TARGET) --gui	
+.PHONY: view
+view: $(TARGET)
+	./$(TARGET) -S ex_data/scan$(N)/first.conf -D ex_data/scan$(N)/second.conf
 
-.PHONY: gui_debug
-gui_debug: $(TARGET)
-	echo "run" | lldb $(TARGET) -- --gui
+# .PHONY: bench
+# bench: $(TARGET) 
+# 	./$(TARGET) --bench point_to_point
+
+# .PHONY: gui 
+# gui: $(TARGET) 
+# 	./$(TARGET) --gui	
+
+# .PHONY: gui_debug
+# gui_debug: $(TARGET)
+# 	echo "run" | lldb $(TARGET) -- --gui
 
 %.o: %.cpp
 	@echo 'Compiling $@'
