@@ -25,4 +25,6 @@ namespace sim_config {
     extern double angle_displace;
 
     extern double x_delta;
+
+    extern bool use_light_background;
 }

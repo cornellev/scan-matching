@@ -9,9 +9,9 @@
 #include "icp/icp.h"
 
 class LidarView final : public View {
-    std::vector<icp::Point> source;
-    std::vector<icp::Point> destination;
-    std::vector<icp::Point> wall;
+    std::vector<icp::Vector> source;
+    std::vector<icp::Vector> destination;
+    std::vector<icp::Vector> wall;
     std::unique_ptr<icp::ICP> icp;
     Keyboard keyboard;
     bool is_iterating;
@@ -24,8 +24,8 @@ public:
 
     /** Constructs a new lidar view visualizing ICP (by method `method`) on the
      * given instance (`source` and `destination`). */
-    LidarView(std::vector<icp::Point> source,
-        std::vector<icp::Point> destination, const std::string method);
+    LidarView(std::vector<icp::Vector> source,
+        std::vector<icp::Vector> destination, const std::string method);
 
     ~LidarView() noexcept override;
 
@@ -35,6 +35,6 @@ public:
 
     // TODO: move to `instance.h` etc.
     void construct_instance();
-    const std::vector<icp::Point>& get_source() const;
-    const std::vector<icp::Point>& get_dest() const;
+    const std::vector<icp::Vector>& get_source() const;
+    const std::vector<icp::Vector>& get_dest() const;
 };

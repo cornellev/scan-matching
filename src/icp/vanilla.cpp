@@ -4,37 +4,20 @@
 #include <cstdlib>
 #include "icp.h"
 #include "util/logger.h"
+#include <Eigen/Core>
 #include <Eigen/SVD>
 
 namespace icp {
     struct Vanilla final : public ICP {
+        std::vector<Vector> rotated_a;
+
         Vanilla(double rate): ICP(rate) {}
         ~Vanilla() override {}
 
-        void setup(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b) override {
-            // ensure that the `pair` and `dist` arrays are large enough to
-            // handle the input point clouds.
-            size_t n = a.size();
-            size_t m = b.size();
-            pair.reserve(n);
-            dist.reserve(n);
+        void iterate() override {
+            const size_t n = a.size();
+            const size_t m = b.size();
 
-            /* Align center of mass.
-
-               Sources:
-               https://arxiv.org/pdf/2206.06435.pdf
-               https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf
-             */
-            Point a_cm = get_center_of_mass(a);
-            Point b_cm = get_center_of_mass(b);
-            t.cm = a_cm;
-            t.dx = a_cm.x - a_cm.x;
-            t.dy = b_cm.y - a_cm.y;
-        }
-
-        void iterate(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b) override {
             /* Matching Step: match closest points.
 
                Sources:
@@ -48,8 +31,8 @@ namespace icp {
                 dist[i] = std::numeric_limits<double>::infinity();
                 for (size_t j = 0; j < m; j++) {
                     // Point-to-point matching
-                    double dist_ij = std::hypot(b[i].x - a[i].x,
-                        b[i].y - a[i].y);
+                    double dist_ij = std::hypot(b[i][0] - a[i][0],
+                        b[i][1] - a[i][1]);
 
                     if (dist_ij < dist[i]) {
                         dist[i] = dist_ij;
@@ -58,7 +41,26 @@ namespace icp {
                 }
             }
 
-            /* Transformation Step: */
+            /* Transformation Step: determine optimal transformation.
+
+               The translation vector is determined by the displacement between
+               the centroids of both point clouds. The rotation matrix is
+               calculated via singular value decomposition.
+
+               Sources:
+               https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf
+             */
+            transform.translation = b_cm - transform.rotation * a_cm;
+
+            Matrix N{};
+            for (size_t i = 0; i < n; i++) {
+                N += a[i] * b[i].transpose();
+            }
+            auto svd = N.jacobiSvd(Eigen::ComputeFullU | Eigen::ComputeFullV);
+            assert(svd.computeU());
+            const Matrix U = svd.matrixU();
+            const Matrix V = svd.matrixV();
+            transform.rotation = V * U.transpose();
         }
     };
 

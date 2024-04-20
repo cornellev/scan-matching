@@ -19,7 +19,7 @@ struct LidarScan {
     double angle_increment;
 
     /** Units: centimeters */
-    std::vector<icp::Point> points;
+    std::vector<icp::Vector> points;
 };
 
 void set_config_param(const char* var, const char* data, void* user_data) {
@@ -67,7 +67,7 @@ void parse_lidar_scan(const char* var, const char* data, void* user_data) {
         double angle = scan->angle_min + index * scan->angle_increment;
         double range = strtod(data, NULL);
         if (range >= scan->range_min && range <= scan->range_max) {
-            scan->points.push_back(icp::Point(
+            scan->points.push_back(icp::Vector(
                 100 * range * std::cos(angle) + sim_config::window_width / 2,
                 100 * range * std::sin(angle) + sim_config::window_height / 2));
         }
@@ -116,46 +116,50 @@ void run_benchmark(const char* method, bool with_gui) {
         }
         std::exit(1);
     }
+    std::cerr << "Not implemented anymore -- will fix\n";
+    std::exit(1);
 
-    std::cout << "ICP ALGORITHM BENCHMARKING\n";
-    std::cout << "=======================================\n";
+    // std::cout << "ICP ALGORITHM BENCHMARKING\n";
+    // std::cout << "=======================================\n";
 
-    // very scuffed
-    LidarView* view = new LidarView();
-    std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method, 1000, 0.01);
+    // // very scuffed
+    // LidarView* view = new LidarView();
+    // std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method, 1000,
+    // 0.01);
 
-    std::cout << "running...\r";
-    std::cout.flush();
-    int invocation_count = 100;
-    std::vector<double> final_costs;
-    using Clock = std::chrono::high_resolution_clock;
-    std::chrono::nanoseconds elapsed_ns = std::chrono::nanoseconds::zero();
-    for (int i = 0; i < invocation_count; i++) {
-        view->construct_instance();
-        icp->begin(view->get_source(), view->get_dest(), icp::Transform());
+    // std::cout << "running...\r";
+    // std::cout.flush();
+    // int invocation_count = 100;
+    // std::vector<double> final_costs;
+    // using Clock = std::chrono::high_resolution_clock;
+    // std::chrono::nanoseconds elapsed_ns = std::chrono::nanoseconds::zero();
+    // for (int i = 0; i < invocation_count; i++) {
+    //     view->construct_instance();
+    //     icp->begin(view->get_source(), view->get_dest(), icp::RBTransform());
 
-        auto start = Clock::now();
-        icp->converge(view->get_source(), view->get_dest(), 10);
-        final_costs.push_back(icp->cost());
-        auto end = Clock::now();
+    //     auto start = Clock::now();
+    //     icp->converge(view->get_source(), view->get_dest(), 10);
+    //     final_costs.push_back(icp->cost());
+    //     auto end = Clock::now();
 
-        elapsed_ns +=
-            std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    }
-    double elapsed = (double)elapsed_ns.count() / 1000000000.0;
-    std::cout << "* Using method '" << method << "'\n";
-    std::cout << "* Matching two clouds of n = " << (sim_config::n * 3 / 4)
-              << " points\n";
-    std::cout << "* " << invocation_count << " invocations, " << elapsed
-              << "s in total, " << (elapsed / invocation_count)
-              << " per invocation\n";
-    std::cout << "* Greatest final cost was "
-              << (*std::max_element(final_costs.begin(), final_costs.end()))
-              << '\n';
-    std::cout << "* Least final cost was "
-              << (*std::min_element(final_costs.begin(), final_costs.end()))
-              << '\n';
-    delete view;
+    //     elapsed_ns +=
+    //         std::chrono::duration_cast<std::chrono::nanoseconds>(end -
+    //         start);
+    // }
+    // double elapsed = (double)elapsed_ns.count() / 1000000000.0;
+    // std::cout << "* Using method '" << method << "'\n";
+    // std::cout << "* Matching two clouds of n = " << (sim_config::n * 3 / 4)
+    //           << " points\n";
+    // std::cout << "* " << invocation_count << " invocations, " << elapsed
+    //           << "s in total, " << (elapsed / invocation_count)
+    //           << " per invocation\n";
+    // std::cout << "* Greatest final cost was "
+    //           << (*std::max_element(final_costs.begin(), final_costs.end()))
+    //           << '\n';
+    // std::cout << "* Least final cost was "
+    //           << (*std::min_element(final_costs.begin(), final_costs.end()))
+    //           << '\n';
+    // delete view;
 }
 
 int main(int argc, const char** argv) {
@@ -181,6 +185,7 @@ int main(int argc, const char** argv) {
     const char* f_src;
     const char* f_dst;
     const char* config_file = "sim.conf";
+    bool* basic_mode;  // for gbody people
 
     const char* bench_method = "point_to_point";
     assert(use_gui = ca_opt('g', "gui", "<g", NULL,
@@ -193,6 +198,8 @@ int main(int argc, const char** argv) {
         "destination scan (pass with -S)"));
     assert(ca_opt('c', "config", ".FILE", &config_file,
         "selects a configuration file"));
+    assert(basic_mode = ca_long_opt("basic-mode", "", NULL,
+               "uses a ligher gui background"));
     assert(enable_log = ca_opt('l', "log", "", NULL, "enables debug logging"));
     assert(ca_opt('h', "help", "<h", NULL, "prints this info"));
     assert(ca_opt('v', "version", "<v", NULL, "prints version info"));
@@ -206,6 +213,9 @@ int main(int argc, const char** argv) {
 
     Log.is_enabled = *enable_log;
     parse_config(config_file, set_config_param, NULL);
+    if (*basic_mode) {
+        sim_config::use_light_background = true;
+    }
 
     if (*read_scan_files) {
         LidarScan source, destination;

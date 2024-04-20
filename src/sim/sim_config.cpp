@@ -21,4 +21,6 @@ namespace sim_config {
     double angle_displace = M_PI_4;
 
     double x_delta = 0;
+
+    bool use_light_background = false;
 }

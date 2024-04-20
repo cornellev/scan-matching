@@ -10,23 +10,45 @@ namespace icp {
 
     ICP::ICP(double rate): rate(rate) {}
 
-    void ICP::setup(const std::vector<icp::Point>& a,
-        const std::vector<icp::Point>& b) {}
+    void ICP::setup() {}
 
-    void ICP::begin(const std::vector<icp::Point>& a,
-        const std::vector<icp::Point>& b, Transform t) {
-        this->t = t;
+    void ICP::begin(const std::vector<Vector>& a, const std::vector<Vector>& b,
+        RBTransform t) {
+        // Initial transform guess
+        this->transform = t;
+
+        // Copy in point clouds
+        this->a = a;
+        this->b = b;
+
+        // Set relative to centroid
+        a_cm = get_centroid(a);
+        b_cm = get_centroid(b);
+        for (Vector& point: this->a) {
+            point -= a_cm;
+        }
+        for (Vector& point: this->b) {
+            point -= b_cm;
+        }
+
+        // Cost is infinite
         previous_cost = std::numeric_limits<double>::infinity();
         current_cost = std::numeric_limits<double>::infinity();
-        setup(a, b);
+
+        // Ensure arrays are the right size
+        const size_t n = a.size();
+        pair.reserve(n);
+        dist.reserve(n);
+
+        // Per-instance customization routine
+        setup();
     }
 
-    void ICP::converge(const std::vector<icp::Point>& a,
-        const std::vector<icp::Point>& b, double convergence_threshold) {
+    void ICP::converge(double convergence_threshold) {
         while (current_cost > convergence_threshold
                && (current_cost < previous_cost || current_cost == INFINITY)) {
             previous_cost = current_cost;
-            iterate(a, b);
+            iterate();
         }
     }
 
@@ -34,8 +56,8 @@ namespace icp {
         return current_cost;
     }
 
-    const Transform& ICP::transform() const {
-        return t;
+    const RBTransform& ICP::current_transform() const {
+        return transform;
     }
 
     static void ensure_methods_exists() {

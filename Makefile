@@ -10,30 +10,27 @@ CRELEASE	:= -O2 -DRELEASE_BUILD
 TARGET		:= main
 
 # follow instructions in README to install in /usr/local
-LDFLAGS		:= /usr/local/lib/libcmdapp.a \
+LDFLAGS		:= $(shell sdl2-config --libs) \
+			   /usr/local/lib/libcmdapp.a \
 			   /usr/local/lib/libsdlwrapper.a \
 			   /usr/local/lib/libconfig.a
-CFLAGS		+= -I/usr/local/include \
+CFLAGS		+= $(shell sdl2-config --cflags) \
+			   -I/usr/local/include \
 			   -I/usr/local/include/sdlwrapper \
 			   -I /usr/local/include/eigen3
 
 # CFLAGS 		+= $(CRELEASE)
 CFLAGS 		+= $(CDEBUG)
 
-# use SDL
-CFLAGS		+= $(shell sdl2-config --cflags --libs)
-
-# use sdlwrapper and cmdapp2
-CFLAGS		+=  $(LDFLAGS)
-
-SRC			:= main.cpp $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRCDIR)/sdl-wrapper/*")
+SRC			:= main.cpp \
+			   $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRCDIR)/sdl-wrapper/*" -not -path "$(SRCDIR)/icp/old/*")
 OBJ			:= $(SRC:.cpp=.o)
 DEPS 		:= $(OBJS:.o=.d) 
 
 -include $(DEPS)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 .PHONY: run
 run: $(TARGET)

@@ -21,13 +21,13 @@ namespace icp {
      * @endcode
      *
      * \par Usage
-     * Let `a` and `b` be two point clouds of type `std::vector<icp::Point>`.
+     * Let `a` and `b` be two point clouds of type `std::vector<Vector>`.
      * Then, given an ICP instance `icp` of type `std::unique_ptr<icp::ICP>`,
      * perform the following steps.
      *
      * 1. Call `icp->begin(a, b, initial_guess)`.
-     * 2. Call either `icp->converge(a, b, convergence_threshold)` or repeatedly
-     * `icp->iterate(a, b)`.
+     * 2. Call either `icp->converge(convergence_threshold)` or repeatedly
+     * `icp->iterate()`.
      *
      * If these steps are not followed as described here, the behavior is
      * undefined.
@@ -41,7 +41,19 @@ namespace icp {
         const double rate;
 
         /** The current point cloud transformation that is being optimized. */
-        Transform t;
+        RBTransform transform;
+
+        /** The centroid of the source point cloud. */
+        Vector a_cm;
+
+        /** The centroid of the destination point cloud. */
+        Vector b_cm;
+
+        /** The source point cloud relative to its centroid. */
+        std::vector<Vector> a;
+
+        /** The destination point cloud relative to its centroid. */
+        std::vector<Vector> b;
 
         /** Keeps track of the previous cost to ensure that progress is being
          * made. @see ICP::current_cost. */
@@ -62,31 +74,30 @@ namespace icp {
 
         ICP(double rate = 0.01);
 
-        virtual void setup(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b);
+        virtual void setup();
 
     public:
         virtual ~ICP() = default;
 
         /** Begins the ICP process for point clouds `a` and `b` with an initial
          * guess for the transform `t`. */
-        void begin(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b, Transform t);
+        void begin(const std::vector<Vector>& a, const std::vector<Vector>& b,
+            RBTransform t);
 
-        /** Perform one iteration of ICP for point clouds `a` and `b`. */
-        virtual void iterate(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b) = 0;
+        /** Perform one iteration of ICP for the point clouds `a` and `b`
+         * provided with ICP::begin. */
+        virtual void iterate() = 0;
 
-        /** Perform ICP for point clouds `a` and `b` until the cost is below
-         * `convergence_threshold` or until no progress is being made. */
-        void converge(const std::vector<icp::Point>& a,
-            const std::vector<icp::Point>& b, double convergence_threshold);
+        /** Perform ICP for point clouds `a` and `b` provided with ICP::begin
+         * until the cost is below `convergence_threshold` or until no progress
+         * is being made. */
+        void converge(double convergence_threshold);
 
         /** The current cost. */
         double cost() const;
 
         /** The current transform. */
-        const Transform& transform() const;
+        const RBTransform& current_transform() const;
 
         /** Registers a new ICP method that can be created with `constructor`,
          * returning `false` if `name` has already been registered. */

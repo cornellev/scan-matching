@@ -3,14 +3,14 @@
 #include "geo.h"
 
 namespace icp {
-    Point get_center_of_mass(const std::vector<Point>& points) {
-        Point center_of_mass{};
-        for (const Point& point: points) {
-            center_of_mass.x += point.x;
-            center_of_mass.y += point.y;
+    Vector get_centroid(const std::vector<Vector>& points) {
+        Vector center_of_mass{};
+        for (const Vector& point: points) {
+            center_of_mass[0] += point[0];
+            center_of_mass[1] += point[1];
         }
-        center_of_mass.x /= points.size();
-        center_of_mass.y /= points.size();
+        center_of_mass[0] /= points.size();
+        center_of_mass[1] /= points.size();
         return center_of_mass;
     }
 }

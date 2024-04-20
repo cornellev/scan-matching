@@ -103,6 +103,7 @@
         "functional": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "svd": "cpp"
     }
 }
