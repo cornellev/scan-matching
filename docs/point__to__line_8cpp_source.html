@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>scan matching: src/icp/point_to_line.cpp Source File</title>
+<title>scan matching: src/icp/old/point_to_line.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(function() { codefold.init(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_156e6a4e01c93213f20015fc7847b1f4.html">icp</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_156e6a4e01c93213f20015fc7847b1f4.html">icp</a></li><li class="navelem"><a class="el" href="dir_e86b0e4603fcde4bd095119c32ac8e36.html">old</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -88,14 +88,14 @@ $(function() { codefold.init(0); });
 <a href="point__to__line_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright (C) 2024 Ethan Uppal. All rights reserved.</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="icp_8h.html">icp.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="icp_8h.html">../icp.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceicp.html">icp</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keyword">struct </span>PointToLine final : <span class="keyword">public</span> ICP {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        PointToLine(<span class="keywordtype">size_t</span> n, <span class="keywordtype">double</span> <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a913cc5ba423b625e5383c408af6b0467">rate</a>): <a class="code hl_function" href="classicp_1_1_i_c_p.html#ab922f9b107994c6e258bf93b874e51be">ICP</a>(<a class="code hl_variable" href="namespacesim__config.html#a70304b8d79516586108719943cfe2eed">n</a>, <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a913cc5ba423b625e5383c408af6b0467">rate</a>) {}</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keyword">struct </span>PointToLine_old final : <span class="keyword">public</span> ICP {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        PointToLine_old(<span class="keywordtype">size_t</span> n, <span class="keywordtype">double</span> <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a913cc5ba423b625e5383c408af6b0467">rate</a>): <a class="code hl_function" href="classicp_1_1_i_c_p.html#ab922f9b107994c6e258bf93b874e51be">ICP</a>(<a class="code hl_variable" href="namespacesim__config.html#a70304b8d79516586108719943cfe2eed">n</a>, <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a913cc5ba423b625e5383c408af6b0467">rate</a>) {}</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        <span class="keywordtype">void</span> iterate(<span class="keyword">const</span> std::vector&lt;icp::Point&gt;&amp; a,</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>            <span class="keyword">const</span> std::vector&lt;icp::Point&gt;&amp; b)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classicp_1_1_i_c_p.html#acd7dcd1dc9f2ff7de6751d62d1e792ac">iterate</a>(<span class="keyword">const</span> std::vector&lt;icp::Vector&gt;&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>            <span class="keyword">const</span> std::vector&lt;icp::Vector&gt;&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            <span class="comment">// Use https://ieeexplore.ieee.org/document/4543181/authors</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>            <span class="comment">// size_t n = a.size();</span></div>
@@ -105,8 +105,8 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="comment">// for (size_t i = 0; i &lt; n; i++) {</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="comment">//     dist[i] = INFINITY;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="comment">//     for (size_t j = 0; j &lt; m; j++) {</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="comment">//         double alt = std::hypot(a[i].x - b[j].x, a[i].y -</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="comment">//         b[j].y); if (alt &lt; dist[i]) {</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="comment">//         double alt = std::hypot(a[i][0] - b[j][0], a[i][1] -</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="comment">//         b[j][1]); if (alt &lt; dist[i]) {</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <span class="comment">//             pair[i] = j;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="comment">//             dist[i] = alt;</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="comment">//         }</span></div>
@@ -118,8 +118,8 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="comment">// double dy_effect = 0;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="comment">// for (size_t i = 0; i &lt; n; i++) {</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <span class="comment">//     // replace with gradient of L</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="comment">//     dx_effect += (a[i].x + t.dx - b[pair[i]].x) * 2 / n;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="comment">//     dy_effect += (a[i].y + t.dy - b[pair[i]].y) * 2 / n;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="comment">//     dx_effect += (a[i][0] + t.dx - b[pair[i]][0]) * 2 / n;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="comment">//     dy_effect += (a[i][1] + t.dy - b[pair[i]][1]) * 2 / n;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="comment">// }</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="comment">// t.dx -= dx_effect * rate;</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="comment">// t.dy -= dy_effect * rate;</span></div>
@@ -129,24 +129,27 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <span class="comment">// current_cost = 0;</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="comment">// for (size_t i = 0; i &lt; n; i++) {</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="comment">//     // replace with your L</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="comment">//     double cx = a[i].x + t.dx - b[pair[i]].x;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="comment">//     double cy = a[i].y + t.dy - b[pair[i]].y;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="comment">//     double cx = a[i][0] + t.dx - b[pair[i]][0];</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="comment">//     double cy = a[i][1] + t.dy - b[pair[i]][1];</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="comment">//     current_cost += (cx * cx + cy * cy) / n;</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="comment">// }</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    };</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        assert(<a class="code hl_function" href="classicp_1_1_i_c_p.html#a8d76d8c5517c1fdd2f52c96b4eba3dc8">ICP::register_method</a>(<span class="stringliteral">&quot;point_to_line&quot;</span>,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        assert(<a class="code hl_function" href="classicp_1_1_i_c_p.html#a8d76d8c5517c1fdd2f52c96b4eba3dc8">ICP::register_method</a>(<span class="stringliteral">&quot;point_to_line_old&quot;</span>,</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            [](<span class="keywordtype">size_t</span> n, <span class="keywordtype">double</span> rate) -&gt; std::unique_ptr&lt;ICP&gt; {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <span class="keywordflow">return</span> std::make_unique&lt;PointToLine&gt;(n, rate);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <span class="keywordflow">return</span> std::make_unique&lt;PointToLine_old&gt;(n, rate);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            }));</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }();</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
-<div class="ttc" id="aclassicp_1_1_i_c_p_html_a8d76d8c5517c1fdd2f52c96b4eba3dc8"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a8d76d8c5517c1fdd2f52c96b4eba3dc8">icp::ICP::register_method</a></div><div class="ttdeci">static bool register_method(std::string name, std::function&lt; std::unique_ptr&lt; ICP &gt;(size_t n, double rate)&gt; constructor)</div><div class="ttdoc">Registers a new ICP method that can be created with constructor, returning false if name has already ...</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00047">icp.cpp:47</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_a8d76d8c5517c1fdd2f52c96b4eba3dc8"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a8d76d8c5517c1fdd2f52c96b4eba3dc8">icp::ICP::register_method</a></div><div class="ttdeci">static bool register_method(std::string name, std::function&lt; std::unique_ptr&lt; ICP &gt;(size_t n, double rate)&gt; constructor)</div><div class="ttdoc">Registers a new ICP method that can be created with constructor, returning false if name has already ...</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00069">icp.cpp:69</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_a8fa6d4d0a46ee621097c821afe7e5985"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">icp::ICP::a</a></div><div class="ttdeci">std::vector&lt; Vector &gt; a</div><div class="ttdoc">The source point cloud relative to its centroid.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00053">icp.h:53</a></div></div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_a913cc5ba423b625e5383c408af6b0467"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a913cc5ba423b625e5383c408af6b0467">icp::ICP::rate</a></div><div class="ttdeci">const double rate</div><div class="ttdoc">The rate at which optimization is done.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00041">icp.h:41</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_aa2742888e6e4f43752c1ec834a39d06e"><div class="ttname"><a href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">icp::ICP::b</a></div><div class="ttdeci">std::vector&lt; Vector &gt; b</div><div class="ttdoc">The destination point cloud relative to its centroid.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00056">icp.h:56</a></div></div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_ab922f9b107994c6e258bf93b874e51be"><div class="ttname"><a href="classicp_1_1_i_c_p.html#ab922f9b107994c6e258bf93b874e51be">icp::ICP::ICP</a></div><div class="ttdeci">ICP(size_t n=0, double rate=0.01)</div><div class="ttdoc">A new ICP instance for n-point matching and an optimization rate of rate.</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00009">icp.cpp:9</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_acd7dcd1dc9f2ff7de6751d62d1e792ac"><div class="ttname"><a href="classicp_1_1_i_c_p.html#acd7dcd1dc9f2ff7de6751d62d1e792ac">icp::ICP::iterate</a></div><div class="ttdeci">virtual void iterate()=0</div><div class="ttdoc">Perform one iteration of ICP for the point clouds a and b provided with ICP::begin.</div></div>
 <div class="ttc" id="aicp_8h_html"><div class="ttname"><a href="icp_8h.html">icp.h</a></div></div>
 <div class="ttc" id="anamespaceicp_html"><div class="ttname"><a href="namespaceicp.html">icp</a></div><div class="ttdef"><b>Definition</b> <a href="geo_8cpp_source.html#l00005">geo.cpp:5</a></div></div>
 <div class="ttc" id="anamespacesim__config_html_a70304b8d79516586108719943cfe2eed"><div class="ttname"><a href="namespacesim__config.html#a70304b8d79516586108719943cfe2eed">sim_config::n</a></div><div class="ttdeci">int n</div><div class="ttdef"><b>Definition</b> <a href="sim__config_8cpp_source.html#l00010">sim_config.cpp:10</a></div></div>

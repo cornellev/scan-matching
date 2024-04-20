@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['cm_0',['cm',['../structicp_1_1_transform.html#a158a733d7e095b8a6637624bf7cfa1c2',1,'icp::Transform']]],
-  ['current_5fcost_1',['current_cost',['../classicp_1_1_i_c_p.html#a8187f14a280850840917e85240d5e222',1,'icp::ICP']]]
+  ['b_0',['b',['../classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e',1,'icp::ICP']]],
+  ['b_5fcm_1',['b_cm',['../classicp_1_1_i_c_p.html#a679d20d77b2c458c4d4620f143fc72a7',1,'icp::ICP']]]
 ];

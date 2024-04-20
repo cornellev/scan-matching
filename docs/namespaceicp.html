@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">icp Namespace Reference</div></div>
 </div><!--header-->
@@ -87,27 +88,66 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_methods.html">Methods</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_point.html">Point</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_r_b_transform.html">RBTransform</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rigid-body transformation.  <a href="structicp_1_1_r_b_transform.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_transform.html">Transform</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aba583ee22f8131f5494d90fb3a611bd5" id="r_aba583ee22f8131f5494d90fb3a611bd5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">Vector</a> = Eigen::Vector2d</td></tr>
+<tr class="separator:aba583ee22f8131f5494d90fb3a611bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64f80c712843c58fb2ab305a2cd1d4a" id="r_ad64f80c712843c58fb2ab305a2cd1d4a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> = Eigen::Matrix2d</td></tr>
+<tr class="separator:ad64f80c712843c58fb2ab305a2cd1d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae00102335ae7d578767d641dfa860555" id="r_ae00102335ae7d578767d641dfa860555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structicp_1_1_point.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae00102335ae7d578767d641dfa860555">get_center_of_mass</a> (const std::vector&lt; <a class="el" href="structicp_1_1_point.html">Point</a> &gt; &amp;points)</td></tr>
-<tr class="separator:ae00102335ae7d578767d641dfa860555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0c99b29d9d6fa5275e5a04d7d36f4c" id="r_acc0c99b29d9d6fa5275e5a04d7d36f4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc0c99b29d9d6fa5275e5a04d7d36f4c">get_centroid</a> (const std::vector&lt; <a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">Vector</a> &gt; &amp;points)</td></tr>
+<tr class="separator:acc0c99b29d9d6fa5275e5a04d7d36f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae00102335ae7d578767d641dfa860555" name="ae00102335ae7d578767d641dfa860555"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae00102335ae7d578767d641dfa860555">&#9670;&#160;</a></span>get_center_of_mass()</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad64f80c712843c58fb2ab305a2cd1d4a" name="ad64f80c712843c58fb2ab305a2cd1d4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64f80c712843c58fb2ab305a2cd1d4a">&#9670;&#160;</a></span>Matrix</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structicp_1_1_point.html">Point</a> icp::get_center_of_mass </td>
+          <td class="memname">using <a class="el" href="#ad64f80c712843c58fb2ab305a2cd1d4a">icp::Matrix</a> = Eigen::Matrix2d</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="geo_8h_source.html#l00011">11</a> of file <a class="el" href="geo_8h_source.html">geo.h</a>.</p>
+
+</div>
+</div>
+<a id="aba583ee22f8131f5494d90fb3a611bd5" name="aba583ee22f8131f5494d90fb3a611bd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba583ee22f8131f5494d90fb3a611bd5">&#9670;&#160;</a></span>Vector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> = Eigen::Vector2d</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="geo_8h_source.html#l00010">10</a> of file <a class="el" href="geo_8h_source.html">geo.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="acc0c99b29d9d6fa5275e5a04d7d36f4c" name="acc0c99b29d9d6fa5275e5a04d7d36f4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc0c99b29d9d6fa5275e5a04d7d36f4c">&#9670;&#160;</a></span>get_centroid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">Vector</a> icp::get_centroid </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="structicp_1_1_point.html">Point</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>points</em></span></td><td>)</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="#aba583ee22f8131f5494d90fb3a611bd5">Vector</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>points</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
