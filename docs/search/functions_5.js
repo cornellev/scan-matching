@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lidarview_0',['LidarView',['../class_lidar_view.html#abfada6e9607893414f149398aa46fc13',1,'LidarView::LidarView()'],['../class_lidar_view.html#a9fa3d0403a0953aef96e2e604df8bbbd',1,'LidarView::LidarView(std::vector&lt; icp::Point &gt; source, std::vector&lt; icp::Point &gt; destination)']]]
+  ['icp_0',['ICP',['../classicp_1_1_i_c_p.html#ab922f9b107994c6e258bf93b874e51be',1,'icp::ICP::ICP(size_t n=0, double rate=0.01)'],['../classicp_1_1_i_c_p.html#adc21f8f2ba019dede5408ec477d8f6ed',1,'icp::ICP::ICP(double rate=0.01)']]],
+  ['iterate_1',['iterate',['../classicp_1_1_i_c_p.html#aeef96cd0c9a6b182f571cbe71fcdffb5',1,'icp::ICP']]]
 ];

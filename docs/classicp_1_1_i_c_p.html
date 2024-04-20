@@ -81,52 +81,60 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classicp_1_1_i_c_p-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">icp::ICP Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
+<p>Interface for iterative closest points; please read the Detailed Description for usage information.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="icp_8h_source.html">icp.h</a>&gt;</code></p>
 
-<p>Inherited by icp::PointToLine, and icp::PointToPoint.</p>
+<p>Inherited by icp::PointToLine, icp::PointToPoint, and icp::Vanilla.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a98484780f08694a2bc37fcc3fd86bd4f" id="r_a98484780f08694a2bc37fcc3fd86bd4f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98484780f08694a2bc37fcc3fd86bd4f">~ICP</a> ()=default</td></tr>
 <tr class="separator:a98484780f08694a2bc37fcc3fd86bd4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dbd349c3de95529ff6a0d393f785290" id="r_a6dbd349c3de95529ff6a0d393f785290"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dbd349c3de95529ff6a0d393f785290">set_initial</a> (<a class="el" href="structicp_1_1_transform.html">Transform</a> <a class="el" href="#abc6c1d91c3c933dec38937296aa9d21a">t</a>)</td></tr>
-<tr class="memdesc:a6dbd349c3de95529ff6a0d393f785290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets an initial guess for the transform.  <br /></td></tr>
-<tr class="separator:a6dbd349c3de95529ff6a0d393f785290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8058de85eac44e126885852703714486" id="r_a8058de85eac44e126885852703714486"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8058de85eac44e126885852703714486">begin</a> (const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;a, const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;b, <a class="el" href="structicp_1_1_transform.html">Transform</a> <a class="el" href="#abc6c1d91c3c933dec38937296aa9d21a">t</a>)</td></tr>
+<tr class="memdesc:a8058de85eac44e126885852703714486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> process for point clouds <code>a</code> and <code>b</code> with an initial guess for the transform <code>t</code>.  <br /></td></tr>
+<tr class="separator:a8058de85eac44e126885852703714486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeef96cd0c9a6b182f571cbe71fcdffb5" id="r_aeef96cd0c9a6b182f571cbe71fcdffb5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeef96cd0c9a6b182f571cbe71fcdffb5">iterate</a> (const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;a, const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;b)=0</td></tr>
-<tr class="memdesc:aeef96cd0c9a6b182f571cbe71fcdffb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform one iteration of <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> for point clouds <code>a</code> and <code>b</code>.  <br /></td></tr>
+<tr class="memdesc:aeef96cd0c9a6b182f571cbe71fcdffb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform one iteration of <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> for point clouds <code>a</code> and <code>b</code>.  <br /></td></tr>
 <tr class="separator:aeef96cd0c9a6b182f571cbe71fcdffb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46f6b2f96c96a434984759de4ad16614" id="r_a46f6b2f96c96a434984759de4ad16614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46f6b2f96c96a434984759de4ad16614">converge</a> (const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;a, const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;b, double convergence_threshold)</td></tr>
-<tr class="memdesc:a46f6b2f96c96a434984759de4ad16614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> for point clouds <code>b</code> and <code>b</code> until the cost is below <code>convergence_threshold</code> or until no progress is being made.  <br /></td></tr>
+<tr class="memdesc:a46f6b2f96c96a434984759de4ad16614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> for point clouds <code>a</code> and <code>b</code> until the cost is below <code>convergence_threshold</code> or until no progress is being made.  <br /></td></tr>
 <tr class="separator:a46f6b2f96c96a434984759de4ad16614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1335de1228a86e2118b26624c0e7fc2e" id="r_a1335de1228a86e2118b26624c0e7fc2e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1335de1228a86e2118b26624c0e7fc2e">cost</a> () const</td></tr>
-<tr class="memdesc:a1335de1228a86e2118b26624c0e7fc2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current optimal cost.  <br /></td></tr>
+<tr class="memdesc:a1335de1228a86e2118b26624c0e7fc2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current cost.  <br /></td></tr>
 <tr class="separator:a1335de1228a86e2118b26624c0e7fc2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d2e267126b89054e37a337a28d8b8cb" id="r_a7d2e267126b89054e37a337a28d8b8cb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structicp_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d2e267126b89054e37a337a28d8b8cb">transform</a> () const</td></tr>
-<tr class="memdesc:a7d2e267126b89054e37a337a28d8b8cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current optimal transform.  <br /></td></tr>
+<tr class="memdesc:a7d2e267126b89054e37a337a28d8b8cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current transform.  <br /></td></tr>
 <tr class="separator:a7d2e267126b89054e37a337a28d8b8cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8d76d8c5517c1fdd2f52c96b4eba3dc8" id="r_a8d76d8c5517c1fdd2f52c96b4eba3dc8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d76d8c5517c1fdd2f52c96b4eba3dc8">register_method</a> (std::string name, std::function&lt; std::unique_ptr&lt; <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> &gt;(size_t n, double <a class="el" href="#a913cc5ba423b625e5383c408af6b0467">rate</a>)&gt; constructor)</td></tr>
-<tr class="memdesc:a8d76d8c5517c1fdd2f52c96b4eba3dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> method that can be created with <code>constructor</code>, returning <code>false</code> if <code>name</code> has already been registered.  <br /></td></tr>
+<tr class="memdesc:a8d76d8c5517c1fdd2f52c96b4eba3dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method that can be created with <code>constructor</code>, returning <code>false</code> if <code>name</code> has already been registered.  <br /></td></tr>
 <tr class="separator:a8d76d8c5517c1fdd2f52c96b4eba3dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9933256313a70fedacd7d3d7c8fa63c3" id="r_a9933256313a70fedacd7d3d7c8fa63c3"><td class="memItemLeft" align="right" valign="top">static const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9933256313a70fedacd7d3d7c8fa63c3">registered_methods</a> ()</td></tr>
-<tr class="memdesc:a9933256313a70fedacd7d3d7c8fa63c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a current list of the names of currently registered <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> methods.  <br /></td></tr>
+<tr class="memdesc:a9933256313a70fedacd7d3d7c8fa63c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a current list of the names of currently registered <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> methods.  <br /></td></tr>
 <tr class="separator:a9933256313a70fedacd7d3d7c8fa63c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a227f34dc2ff1975bde9c604804af8905" id="r_a227f34dc2ff1975bde9c604804af8905"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a227f34dc2ff1975bde9c604804af8905">from_method</a> (std::string name, size_t n=0, double <a class="el" href="#a913cc5ba423b625e5383c408af6b0467">rate</a>=0.01)</td></tr>
-<tr class="memdesc:a227f34dc2ff1975bde9c604804af8905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory constructor for the <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> method <code>name</code>.  <br /></td></tr>
+<tr class="memdesc:a227f34dc2ff1975bde9c604804af8905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory constructor for the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method <code>name</code>.  <br /></td></tr>
 <tr class="separator:a227f34dc2ff1975bde9c604804af8905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab922f9b107994c6e258bf93b874e51be" id="r_ab922f9b107994c6e258bf93b874e51be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab922f9b107994c6e258bf93b874e51be">ICP</a> (size_t n=0, double <a class="el" href="#a913cc5ba423b625e5383c408af6b0467">rate</a>=0.01)</td></tr>
-<tr class="memdesc:ab922f9b107994c6e258bf93b874e51be"><td class="mdescLeft">&#160;</td><td class="mdescRight">A new <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> instance for <code>n</code>-point matching and an optimization rate of <code>rate</code>.  <br /></td></tr>
+<tr class="memdesc:ab922f9b107994c6e258bf93b874e51be"><td class="mdescLeft">&#160;</td><td class="mdescRight">A new <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> instance for <code>n</code>-point matching and an optimization rate of <code>rate</code>.  <br /></td></tr>
 <tr class="separator:ab922f9b107994c6e258bf93b874e51be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc21f8f2ba019dede5408ec477d8f6ed" id="r_adc21f8f2ba019dede5408ec477d8f6ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc21f8f2ba019dede5408ec477d8f6ed">ICP</a> (double <a class="el" href="#a913cc5ba423b625e5383c408af6b0467">rate</a>=0.01)</td></tr>
+<tr class="separator:adc21f8f2ba019dede5408ec477d8f6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d2580a07542e078fdcc3b8d017a2b37" id="r_a1d2580a07542e078fdcc3b8d017a2b37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d2580a07542e078fdcc3b8d017a2b37">setup</a> (const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;a, const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;b)</td></tr>
+<tr class="separator:a1d2580a07542e078fdcc3b8d017a2b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -150,11 +158,24 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8f23e15bf17704f88a0a258a0addc2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00043">43</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<div class="textblock"><p>Interface for iterative closest points; please read the Detailed Description for usage information. </p>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Construct a new vanilla ICP instance.</span></div>
+<div class="line">std::unique_ptr&lt;icp::ICP&gt; <a class="code hl_namespace" href="namespaceicp.html">icp</a> = <a class="code hl_function" href="#a227f34dc2ff1975bde9c604804af8905">icp::ICP::from_method</a>(<span class="stringliteral">&quot;vanilla&quot;</span>);</div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_a227f34dc2ff1975bde9c604804af8905"><div class="ttname"><a href="#a227f34dc2ff1975bde9c604804af8905">icp::ICP::from_method</a></div><div class="ttdeci">static std::unique_ptr&lt; ICP &gt; from_method(std::string name, size_t n=0, double rate=0.01)</div><div class="ttdoc">Factory constructor for the ICP method name.</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00060">icp.cpp:60</a></div></div>
+<div class="ttc" id="anamespaceicp_html"><div class="ttname"><a href="namespaceicp.html">icp</a></div><div class="ttdef"><b>Definition</b> <a href="geo_8cpp_source.html#l00005">geo.cpp:5</a></div></div>
+</div><!-- fragment --></dd></dl>
+<dl class="section user"><dt>Usage</dt><dd>Let <code>a</code> and <code>b</code> be two point clouds of type <code>std::vector&lt;<a class="el" href="structicp_1_1_point.html">icp::Point</a>&gt;</code>. Then, given an <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> instance <code>icp</code> of type <code>std::unique_ptr&lt;<a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a>&gt;</code>, perform the following steps.</dd></dl>
+<ol type="1">
+<li>Call <code>icp-&gt;begin(a, b, initial_guess)</code>.</li>
+<li>Call either <code>icp-&gt;converge(a, b, convergence_threshold)</code> or repeatedly <code>icp-&gt;iterate(a, b)</code>.</li>
+</ol>
+<p>If these steps are not followed as described here, the behavior is undefined.</p>
+<p>At any point in the process, you may query <code>icp-&gt;<a class="el" href="#a1335de1228a86e2118b26624c0e7fc2e" title="The current cost.">cost()</a></code> and <code>icp-&gt;<a class="el" href="#a7d2e267126b89054e37a337a28d8b8cb" title="The current transform.">transform()</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00038">38</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab922f9b107994c6e258bf93b874e51be" name="ab922f9b107994c6e258bf93b874e51be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab922f9b107994c6e258bf93b874e51be">&#9670;&#160;</a></span>ICP()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab922f9b107994c6e258bf93b874e51be">&#9670;&#160;</a></span>ICP() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,10 +201,37 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>A new <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> instance for <code>n</code>-point matching and an optimization rate of <code>rate</code>. </p>
+<p>A new <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> instance for <code>n</code>-point matching and an optimization rate of <code>rate</code>. </p>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated</a></b></dt><dd><code>n</code> is ignored. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00009">9</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adc21f8f2ba019dede5408ec477d8f6ed" name="adc21f8f2ba019dede5408ec477d8f6ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc21f8f2ba019dede5408ec477d8f6ed">&#9670;&#160;</a></span>ICP() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">icp::ICP::ICP </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>rate</em><span class="paramdefsep"> = </span><span class="paramdefval">0.01</span></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00011">11</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -213,6 +261,36 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8058de85eac44e126885852703714486" name="a8058de85eac44e126885852703714486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8058de85eac44e126885852703714486">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void icp::ICP::begin </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structicp_1_1_transform.html">Transform</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Begins the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> process for point clouds <code>a</code> and <code>b</code> with an initial guess for the transform <code>t</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00016">16</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a46f6b2f96c96a434984759de4ad16614" name="a46f6b2f96c96a434984759de4ad16614"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46f6b2f96c96a434984759de4ad16614">&#9670;&#160;</a></span>converge()</h2>
 
@@ -237,9 +315,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Perform <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> for point clouds <code>b</code> and <code>b</code> until the cost is below <code>convergence_threshold</code> or until no progress is being made. </p>
+<p>Perform <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> for point clouds <code>a</code> and <code>b</code> until the cost is below <code>convergence_threshold</code> or until no progress is being made. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00019">19</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00024">24</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -258,9 +336,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The current optimal cost. </p>
+<p>The current cost. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00028">28</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00033">33</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,11 +374,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Factory constructor for the <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> method <code>name</code>. </p>
+<p>Factory constructor for the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method <code>name</code>. </p>
 <dl class="section pre"><dt>Precondition</dt><dd><code>name</code> is a valid registered method.</dd></dl>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated</a></b></dt><dd><code>n</code> is ignored. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00056">56</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00060">60</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +409,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Perform one iteration of <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> for point clouds <code>a</code> and <code>b</code>. </p>
+<p>Perform one iteration of <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> for point clouds <code>a</code> and <code>b</code>. </p>
 
 </div>
 </div>
@@ -362,9 +440,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Registers a new <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> method that can be created with <code>constructor</code>, returning <code>false</code> if <code>name</code> has already been registered. </p>
+<p>Registers a new <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method that can be created with <code>constructor</code>, returning <code>false</code> if <code>name</code> has already been registered. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00042">42</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00047">47</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,28 +469,38 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a current list of the names of currently registered <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> methods. </p>
+<p>Returns a current list of the names of currently registered <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> methods. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00051">51</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00055">55</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6dbd349c3de95529ff6a0d393f785290" name="a6dbd349c3de95529ff6a0d393f785290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dbd349c3de95529ff6a0d393f785290">&#9670;&#160;</a></span>set_initial()</h2>
+<a id="a1d2580a07542e078fdcc3b8d017a2b37" name="a1d2580a07542e078fdcc3b8d017a2b37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d2580a07542e078fdcc3b8d017a2b37">&#9670;&#160;</a></span>setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void icp::ICP::set_initial </td>
+          <td class="memname">void icp::ICP::setup </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structicp_1_1_transform.html">Transform</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structicp_1_1_point.html">icp::Point</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Sets an initial guess for the transform. </p>
 
 <p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00013">13</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
@@ -433,13 +521,13 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The current optimal transform. </p>
+<p>The current transform. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00032">32</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00037">37</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Field Documentation</h2>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8187f14a280850840917e85240d5e222" name="a8187f14a280850840917e85240d5e222"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8187f14a280850840917e85240d5e222">&#9670;&#160;</a></span>current_cost</h2>
 
@@ -462,7 +550,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The sum-of-squares cost of <code>dist</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00056">56</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00051">51</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -488,7 +576,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The distance metric of each point in <code>a</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00062">62</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00057">57</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -514,7 +602,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The pairing of each point in <code>a</code> to its closest in <code>b</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00059">59</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00054">54</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -541,7 +629,7 @@ Protected Attributes</h2></td></tr>
 <p>Keeps track of the previous cost to ensure that progress is being made. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a8187f14a280850840917e85240d5e222" title="The sum-of-squares cost of dist.">ICP::current_cost</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00053">53</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00048">48</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -567,7 +655,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The rate at which optimization is done. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00046">46</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00041">41</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -593,7 +681,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The current point cloud transformation that is being optimized. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00049">49</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00044">44</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>

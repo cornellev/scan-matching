@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['register_5fmethod_0',['register_method',['../classicp_1_1_i_c_p.html#a8d76d8c5517c1fdd2f52c96b4eba3dc8',1,'icp::ICP']]],
-  ['registered_5fmethods_1',['registered_methods',['../classicp_1_1_i_c_p.html#a9933256313a70fedacd7d3d7c8fa63c3',1,'icp::ICP']]]
+  ['point_0',['Point',['../structicp_1_1_point.html#a5f8d0514cbe9351bb3077e744f7982df',1,'icp::Point::Point()'],['../structicp_1_1_point.html#aecefdd6e3eda3d1cba7bc1ac2a8d2f47',1,'icp::Point::Point(double x, double y)']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../namespacesim__config.html#a70304b8d79516586108719943cfe2eed',1,'sim_config']]]
+  ['macos_20linux_0',['Unix-like (MacOS, Linux)',['../index.html#install_unix_subsec',1,'']]],
+  ['main_2emd_1',['main.md',['../main_8md.html',1,'']]],
+  ['methods_2',['Methods',['../structicp_1_1_methods.html',1,'icp']]]
 ];

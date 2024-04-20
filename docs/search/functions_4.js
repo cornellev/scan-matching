@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['icp_0',['ICP',['../classicp_1_1_i_c_p.html#ab922f9b107994c6e258bf93b874e51be',1,'icp::ICP']]],
-  ['iterate_1',['iterate',['../classicp_1_1_i_c_p.html#aeef96cd0c9a6b182f571cbe71fcdffb5',1,'icp::ICP']]]
+  ['get_5fcenter_5fof_5fmass_0',['get_center_of_mass',['../namespaceicp.html#ae00102335ae7d578767d641dfa860555',1,'icp']]],
+  ['get_5fdest_1',['get_dest',['../class_lidar_view.html#afce9618015ba3ba744e39b63270d21a1',1,'LidarView']]],
+  ['get_5fsource_2',['get_source',['../class_lidar_view.html#a8a3355c4f42d29cfb2134e2dd509ed8d',1,'LidarView']]]
 ];
