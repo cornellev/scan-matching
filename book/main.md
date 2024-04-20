@@ -72,7 +72,7 @@ Now, run
 git clone https://github.com/cornellev/scan-matching.git
 cd scan-matching
 make
-./main --gui
+./main -S ex_data/scan1.conf -D ex_data/scan2.conf
 ```
 Instructions are printed to standard output.
 
