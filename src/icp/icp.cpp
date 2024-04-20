@@ -6,14 +6,19 @@
 namespace icp {
     static Methods* global;
 
-    ICP::ICP(size_t n, double rate): rate(rate), pair(n), dist(n) {
-        set_initial(Transform());
-    }
+    ICP::ICP(size_t n, double rate): rate(rate), pair(n), dist(n) {}
 
-    void ICP::set_initial(Transform t) {
+    ICP::ICP(double rate): rate(rate) {}
+
+    void ICP::setup(const std::vector<icp::Point>& a,
+        const std::vector<icp::Point>& b) {}
+
+    void ICP::begin(const std::vector<icp::Point>& a,
+        const std::vector<icp::Point>& b, Transform t) {
         this->t = t;
         previous_cost = std::numeric_limits<double>::infinity();
         current_cost = std::numeric_limits<double>::infinity();
+        setup(a, b);
     }
 
     void ICP::converge(const std::vector<icp::Point>& a,
@@ -42,7 +47,6 @@ namespace icp {
     bool ICP::register_method(std::string name,
         std::function<std::unique_ptr<ICP>(size_t, double)> constructor) {
         ensure_methods_exists();
-        // Log << "<ICP> register_method '" << name << "'\n";
         global->registered_method_constructors.push_back(constructor);
         global->registered_method_names.push_back(name);
         return true;

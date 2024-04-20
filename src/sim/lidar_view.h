@@ -22,10 +22,10 @@ public:
     /** Consructs a new lidar view visualizing ICP on a random instance. */
     LidarView();
 
-    /** Constructs a new lidar view visualizing ICP on the given instance
-     * (`source` and `destination`). */
+    /** Constructs a new lidar view visualizing ICP (by method `method`) on the
+     * given instance (`source` and `destination`). */
     LidarView(std::vector<icp::Point> source,
-        std::vector<icp::Point> destination);
+        std::vector<icp::Point> destination, const std::string method);
 
     ~LidarView() noexcept override;
 

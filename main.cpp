@@ -132,7 +132,7 @@ void run_benchmark(const char* method, bool with_gui) {
     std::chrono::nanoseconds elapsed_ns = std::chrono::nanoseconds::zero();
     for (int i = 0; i < invocation_count; i++) {
         view->construct_instance();
-        icp->set_initial(icp::Transform());
+        icp->begin(view->get_source(), view->get_dest(), icp::Transform());
 
         auto start = Clock::now();
         icp->converge(view->get_source(), view->get_dest(), 10);
@@ -211,7 +211,8 @@ int main(int argc, const char** argv) {
         LidarScan source, destination;
         parse_config(f_src, parse_lidar_scan, &source);
         parse_config(f_dst, parse_lidar_scan, &destination);
-        LidarView* view = new LidarView(source.points, destination.points);
+        LidarView* view = new LidarView(source.points, destination.points,
+            "vanilla");
         launch_gui(view,
             std::string(f_src) + std::string(" and ") + std::string(f_dst));
     } else {

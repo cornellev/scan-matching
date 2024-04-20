@@ -1,6 +1,7 @@
 # scan-matching
 
-[cornellev.github.io/scan-matching/](https://cornellev.github.io/scan-matching/).
+> [!NOTE]
+> Please read [cornellev.github.io/scan-matching/](https://cornellev.github.io/scan-matching/) for the most up-to-date documentation.
 
 ## Introduction
 
@@ -21,6 +22,7 @@ First, download and install the dependencies.
 - My [SDL wrapper](https://github.com/cornellev/sdl-wrapper)
 - [libcmdapp2](https://ethanuppal.com/libcmdapp2/)
 - [libconfig](https://github.com/ethanuppal/config)
+- [eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 
 It is likely that you already have SDL installed.
 If not, follow the instructions at the link provided (which goes to the SDL website).

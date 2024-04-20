@@ -15,13 +15,15 @@ LidarView::LidarView()
     : source(sim_config::n), wall(sim_config::n), keyboard(false) {
     icp = icp::ICP::from_method("point_to_point", sim_config::n * 3 / 4, 0.01);
     construct_instance();
+    icp->begin(source, destination, icp::Transform());
     // icp->converge(source, destination, 1);
 }
 
 LidarView::LidarView(std::vector<icp::Point> source,
-    std::vector<icp::Point> destination)
+    std::vector<icp::Point> destination, const std::string method)
     : source(source), destination(destination), keyboard(false) {
-    icp = icp::ICP::from_method("point_to_point", source.size(), 0.01);
+    icp = icp::ICP::from_method(method, source.size(), 0.01);
+    icp->begin(source, destination, icp::Transform());
 }
 
 LidarView::~LidarView() noexcept {
@@ -64,14 +66,8 @@ void LidarView::construct_instance() {
     double dest_move_y = sim_config::window_height / 2
                          + sim_config::y_displace / 2 - y_unshift;
 
-    // TODO: make less scuffed way to do this
-    icp->iterate(source, source);
-    double cx = icp->transform().cx;
-    double cy = icp->transform().cy;
-    icp->set_initial(icp::Transform());
     icp::Transform com_rot(0, 0, sim_config::angle_displace);
-    com_rot.cx = cx;
-    com_rot.cy = cy;
+    com_rot.cm = icp::get_center_of_mass(source);
     for (icp::Point& point: source) {
         double new_x = com_rot.transform_x(point.x, point.y);
         double new_y = com_rot.transform_y(point.x, point.y);

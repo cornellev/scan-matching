@@ -7,39 +7,34 @@
 #include <memory>
 #include <string>
 #include <functional>
+#include "geo.h"
 
 namespace icp {
-    struct Point final {
-        double x;
-        double y;
-
-        Point() {}
-        Point(double x, double y): x(x), y(y) {}
-    };
-
-    struct Transform final {
-        double dx;
-        double dy;
-        double theta;  ///< currently only around CoM, need to make more
-                       ///< complicated later
-        double cx;
-        double cy;
-
-    public:
-        Transform(): dx(0), dy(0), theta(0), cx(0), cy(0) {}
-        Transform(double dx, double dy, double theta)
-            : dx(dx), dy(dy), theta(theta) {}
-
-        double transform_x(double x, double y) const {
-            return std::cos(theta) * (x - cx) - std::sin(theta) * (y - cy) + cx
-                   + dx;
-        }
-        double transform_y(double x, double y) const {
-            return std::sin(theta) * (x - cx) + std::cos(theta) * (y - cy) + cy
-                   + dy;
-        }
-    };
-
+    /**
+     * Interface for iterative closest points; please read the Detailed
+     * Description for usage information.
+     *
+     * \par Example
+     * @code
+     * // Construct a new vanilla ICP instance.
+     * std::unique_ptr<icp::ICP> icp = icp::ICP::from_method("vanilla");
+     * @endcode
+     *
+     * \par Usage
+     * Let `a` and `b` be two point clouds of type `std::vector<icp::Point>`.
+     * Then, given an ICP instance `icp` of type `std::unique_ptr<icp::ICP>`,
+     * perform the following steps.
+     *
+     * 1. Call `icp->begin(a, b, initial_guess)`.
+     * 2. Call either `icp->converge(a, b, convergence_threshold)` or repeatedly
+     * `icp->iterate(a, b)`.
+     *
+     * If these steps are not followed as described here, the behavior is
+     * undefined.
+     *
+     * At any point in the process, you may query `icp->cost()` and
+     * `icp->transform()`.
+     */
     class ICP {
     protected:
         /** The rate at which optimization is done. */
@@ -65,25 +60,32 @@ namespace icp {
          * of `rate`. @deprecated `n` is ignored. */
         ICP(size_t n = 0, double rate = 0.01);
 
+        ICP(double rate = 0.01);
+
+        virtual void setup(const std::vector<icp::Point>& a,
+            const std::vector<icp::Point>& b);
+
     public:
         virtual ~ICP() = default;
 
-        /** Sets an initial guess for the transform. */
-        void set_initial(Transform t);
+        /** Begins the ICP process for point clouds `a` and `b` with an initial
+         * guess for the transform `t`. */
+        void begin(const std::vector<icp::Point>& a,
+            const std::vector<icp::Point>& b, Transform t);
 
         /** Perform one iteration of ICP for point clouds `a` and `b`. */
         virtual void iterate(const std::vector<icp::Point>& a,
             const std::vector<icp::Point>& b) = 0;
 
-        /** Perform ICP for point clouds `b` and `b` until the cost is below
+        /** Perform ICP for point clouds `a` and `b` until the cost is below
          * `convergence_threshold` or until no progress is being made. */
         void converge(const std::vector<icp::Point>& a,
             const std::vector<icp::Point>& b, double convergence_threshold);
 
-        /** The current optimal cost. */
+        /** The current cost. */
         double cost() const;
 
-        /** The current optimal transform. */
+        /** The current transform. */
         const Transform& transform() const;
 
         /** Registers a new ICP method that can be created with `constructor`,

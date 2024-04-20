@@ -13,7 +13,9 @@ TARGET		:= main
 LDFLAGS		:= /usr/local/lib/libcmdapp.a \
 			   /usr/local/lib/libsdlwrapper.a \
 			   /usr/local/lib/libconfig.a
-CFLAGS		+= -I/usr/local/include -I/usr/local/include/sdlwrapper
+CFLAGS		+= -I/usr/local/include \
+			   -I/usr/local/include/sdlwrapper \
+			   -I /usr/local/include/eigen3
 
 # CFLAGS 		+= $(CRELEASE)
 CFLAGS 		+= $(CDEBUG)
