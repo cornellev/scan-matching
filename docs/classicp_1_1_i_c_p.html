@@ -176,7 +176,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Interface for iterative closest points; please read the Detailed Description for usage information. </p>
 <dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Construct a new vanilla ICP instance.</span></div>
 <div class="line">std::unique_ptr&lt;icp::ICP&gt; <a class="code hl_namespace" href="namespaceicp.html">icp</a> = <a class="code hl_function" href="#ad8075cc05cb50c4eb6cd69cd90f6b639">icp::ICP::from_method</a>(<span class="stringliteral">&quot;vanilla&quot;</span>);</div>
-<div class="ttc" id="aclassicp_1_1_i_c_p_html_ad8075cc05cb50c4eb6cd69cd90f6b639"><div class="ttname"><a href="#ad8075cc05cb50c4eb6cd69cd90f6b639">icp::ICP::from_method</a></div><div class="ttdeci">static std::unique_ptr&lt; ICP &gt; from_method(std::string name)</div><div class="ttdoc">Factory constructor for the ICP method name.</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00113">icp.cpp:113</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_html_ad8075cc05cb50c4eb6cd69cd90f6b639"><div class="ttname"><a href="#ad8075cc05cb50c4eb6cd69cd90f6b639">icp::ICP::from_method</a></div><div class="ttdeci">static std::unique_ptr&lt; ICP &gt; from_method(std::string name)</div><div class="ttdoc">Factory constructor for the ICP method name.</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00112">icp.cpp:112</a></div></div>
 <div class="ttc" id="anamespaceicp_html"><div class="ttname"><a href="namespaceicp.html">icp</a></div><div class="ttdef"><b>Definition</b> <a href="geo_8cpp_source.html#l00009">geo.cpp:9</a></div></div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Usage</dt><dd>Let <code>a</code> and <code>b</code> be two point clouds of type <code>std::vector&lt;Vector&gt;</code>. Then, given an <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> instance <code>icp</code> of type <code>std::unique_ptr&lt;<a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a>&gt;</code>, perform the following steps.</dd></dl>
@@ -212,7 +212,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00013">13</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00012">12</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +268,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Begins the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> process for point clouds <code>a</code> and <code>b</code> with an initial guess for the transform <code>t</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00017">17</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00016">16</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +289,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Computes the cost of the current transformation. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00051">51</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00050">50</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -316,7 +316,7 @@ Protected Attributes</h2></td></tr>
 <p>At least <code>burn_in</code> iterations will be performed.</p>
 <dl class="section return"><dt>Returns</dt><dd>Information about the convergence. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00059">59</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00058">58</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +337,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The current transform. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00090">90</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00089">89</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,7 +367,7 @@ Protected Attributes</h2></td></tr>
 <p>Factory constructor for the <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method <code>name</code>. </p>
 <dl class="section pre"><dt>Precondition</dt><dd><code>name</code> is a valid registered method. See <a class="el" href="#aff3398f6b1cc6651d0c085ced4cb8db1" title="Whether name is a registered ICP method.">ICP::is_registered_method</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00113">113</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00112">112</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +396,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether <code>name</code> is a registered <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00121">121</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00120">120</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +456,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Registers a new <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> method that can be created with <code>constructor</code>, returning <code>false</code> if <code>name</code> has already been registered. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00100">100</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00099">99</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +485,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns a current list of the names of currently registered <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">ICP</a> methods. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00108">108</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00107">107</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00015">15</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00014">14</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
 </div>
 </div>

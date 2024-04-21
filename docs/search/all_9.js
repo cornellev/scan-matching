@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['lidar_5fview_2ecpp_0',['lidar_view.cpp',['../lidar__view_8cpp.html',1,'']]],
-  ['lidar_5fview_2ed_1',['lidar_view.d',['../lidar__view_8d.html',1,'']]],
-  ['lidar_5fview_2eh_2',['lidar_view.h',['../lidar__view_8h.html',1,'']]],
-  ['lidarview_3',['LidarView',['../class_lidar_view.html',1,'LidarView'],['../class_lidar_view.html#afefd516221a746567a02cc7f2a0cc4ee',1,'LidarView::LidarView()']]],
-  ['like_20macos_20linux_4',['Unix-like (MacOS, Linux)',['../index.html#install_unix_subsec',1,'']]],
-  ['linux_5',['Unix-like (MacOS, Linux)',['../index.html#install_unix_subsec',1,'']]]
+  ['main_2emd_0',['main.md',['../main_8md.html',1,'']]],
+  ['matrix_1',['Matrix',['../namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a',1,'icp']]],
+  ['methods_2',['Methods',['../structicp_1_1_methods.html',1,'icp']]]
 ];

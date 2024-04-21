@@ -90,7 +90,7 @@ Overview</h1>
 <td style="text-align:left; vertical-align:top"><b>Contents</b> </td><td style="text-align:left; vertical-align:top"><a class="el" href="#overview_sec">Overview</a> <br  />
  <a class="el" href="#feature_sec">Features</a> <br  />
  <a class="el" href="#install_sec">Usage</a> <br  />
- <a class="el" href="#example_sec">Example</a>   </td></tr>
+ example_sec   </td></tr>
 </table>
 <h1><a class="anchor" id="feature_sec"></a>
 Features</h1>
@@ -103,18 +103,24 @@ Features</h1>
 </ul>
 <h1><a class="anchor" id="install_sec"></a>
 Usage</h1>
-<h2><a class="anchor" id="install_unix_subsec"></a>
-Unix-like (MacOS, Linux)</h2>
-<p>First, download and install the dependencies.</p>
-<ul>
-<li><a href="https://www.libsdl.org">SDL</a></li>
-<li>My <a href="https://github.com/cornellev/sdl-wrapper">SDL wrapper</a></li>
-<li><a href="https://ethanuppal.com/libcmdapp2/">libcmdapp2</a></li>
-<li><a href="https://github.com/ethanuppal/config">libconfig</a></li>
-<li><a href="http://eigen.tuxfamily.org/index.php?title=Main_Page">eigen3</a></li>
-</ul>
-<p>There is also a dependency on <a href="https://github.com/ethanuppal/simple-test">simple-test</a> if you want to run the tests (<code>make test</code>).</p>
-<p>It is likely that you already have SDL installed. If not, follow the instructions at the link provided (which goes to the SDL website). Then, to download and install the remaining dependencies, run</p>
+<dl class="section warning"><dt>Warning</dt><dd>This section applies only to Unix-like operating systems, such as MacOS and Linux.</dd></dl>
+<p>First, download and install the dependencies. <b>Only eigen3 is necessary for the library. If you only wish to build the library, install eigen3 only. The remaining dependencies are only for the visualization tool.</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Dependency   </th><th class="markdownTableHeadNone">Library Location (at which)   </th><th class="markdownTableHeadNone">Header Location (under which)    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a href="http://eigen.tuxfamily.org/index.php?title=Main_Page">eigen3</a>   </td><td class="markdownTableBodyNone">N/A   </td><td class="markdownTableBodyNone"><code>/usr/local/include/eigen3/</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a href="https://www.libsdl.org">SDL2</a>   </td><td class="markdownTableBodyNone"><code>$(sdl2-config --cflags)</code>   </td><td class="markdownTableBodyNone"><code>$(sdl2-config --libs)</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">My <a href="https://github.com/cornellev/sdl-wrapper">SDL2 wrapper</a>   </td><td class="markdownTableBodyNone"><code>/usr/local/lib/libsdlwrapper.a</code>   </td><td class="markdownTableBodyNone"><code>/usr/local/include/sdlwrapper/</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a href="https://ethanuppal.com/libcmdapp2/">libcmdapp2</a>   </td><td class="markdownTableBodyNone"><code>/usr/local/lib/libcmdapp.a</code>   </td><td class="markdownTableBodyNone"><code>/usr/local/include/</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a href="https://github.com/ethanuppal/config">libconfig</a>   </td><td class="markdownTableBodyNone"><code>/usr/local/lib/libconfig.a</code>   </td><td class="markdownTableBodyNone"><code>/usr/local/include/</code>   </td></tr>
+</table>
+<p>There is also a dependency on <a href="https://github.com/ethanuppal/simple-test">simple-test</a> if you want to run the tests (<code>make test</code>). Please follow the installation instructions there.</p>
+<p>It is likely that you already have SDL installed. If not, follow the instructions at the link provided (which goes to the SDL website). Do the same for eigen3. Then, to download and install the remaining dependencies, run</p>
 <div class="fragment"><div class="line"># install libcmdapp</div>
 <div class="line">git clone https://github.com/ethanuppal/libcmdapp2.git</div>
 <div class="line">cd libcmdapp2</div>
@@ -126,17 +132,23 @@ Unix-like (MacOS, Linux)</h2>
 <div class="line">cd config</div>
 <div class="line">sudo make install</div>
 <div class="line">cd ..</div>
-</div><!-- fragment --><p>Now, run </p><div class="fragment"><div class="line">git clone https://github.com/cornellev/scan-matching.git</div>
+</div><!-- fragment --><p>Then, a simple clone should suffice. </p><div class="fragment"><div class="line">git clone https://github.com/cornellev/scan-matching.git</div>
 <div class="line">cd scan-matching</div>
-<div class="line">make</div>
-<div class="line">./main -S ex_data/scan1.conf -D ex_data/scan2.conf</div>
+</div><!-- fragment --><h2><a class="anchor" id="library_sec"></a>
+Library</h2>
+<p>To use the library, read the <a href="https://github.com/cornellev/scan-matching/blob/main/INSTALL.md">INSTALL.md</a> document in the repository.</p>
+<h2><a class="anchor" id="vis_tool_sec"></a>
+Visualization &amp; Benchmarking Tool</h2>
+<div class="fragment"><div class="line">make</div>
+<div class="line">./main \</div>
+<div class="line">    -S ex_data/scan1/first.conf \</div>
+<div class="line">    -D ex_data/scan1/second.conf \</div>
+<div class="line">    --method vanilla \</div>
+<div class="line">    --gui</div>
 </div><!-- fragment --><p> Instructions are printed to standard output.</p>
 <p>The program itself can be built with </p><div class="fragment"><div class="line">make</div>
 </div><!-- fragment --><p> which will create an executable named <code>main</code> in the working directory.</p>
-<h2><a class="anchor" id="install_windows_subsec"></a>
-Windows</h2>
-<h1><a class="anchor" id="example_sec"></a>
-Example</h1>
+<p>You can benchmark with <code>make bench</code>. </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"/>
 </div><!-- contents -->

@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['kdtree_0',['KDTree',['../class_k_d_tree.html',1,'KDTree&lt; K, Node &gt;'],['../class_k_d_tree.html#a2bc529fae0f1208e46275911dc96f5ab',1,'KDTree::KDTree()']]],
-  ['kdtree_2ecpp_1',['kdtree.cpp',['../kdtree_8cpp.html',1,'']]],
-  ['kdtree_2ed_2',['kdtree.d',['../kdtree_8d.html',1,'']]],
-  ['kdtree_2eh_3',['kdtree.h',['../kdtree_8h.html',1,'']]]
+  ['library_0',['Library',['../index.html#library_sec',1,'']]],
+  ['lidar_5fview_2ecpp_1',['lidar_view.cpp',['../lidar__view_8cpp.html',1,'']]],
+  ['lidar_5fview_2ed_2',['lidar_view.d',['../lidar__view_8d.html',1,'']]],
+  ['lidar_5fview_2eh_3',['lidar_view.h',['../lidar__view_8h.html',1,'']]],
+  ['lidarview_4',['LidarView',['../class_lidar_view.html',1,'LidarView'],['../class_lidar_view.html#afefd516221a746567a02cc7f2a0cc4ee',1,'LidarView::LidarView()']]]
 ];
