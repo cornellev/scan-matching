@@ -3,7 +3,7 @@
 LIB		:= /usr/local/lib
 HEADER	:= /usr/local/include
 NAME	:= cev_icp
-LIBNAME	:= libcevicp
+LIBNAME	:= libcevicp.a
 
 .PHONY: install
 install:

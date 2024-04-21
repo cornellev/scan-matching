@@ -9,7 +9,7 @@ CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
 CRELEASE	:= -O3 -DRELEASE_BUILD #-fno-fast-math
 TARGET		:= main
-LIBNAME		:= libcevicp
+LIBNAME		:= libcevicp.a
 
 # follow instructions in README to install in /usr/local
 LDFLAGS		:= $(shell sdl2-config --libs) \
@@ -24,9 +24,14 @@ CFLAGS		+= $(shell sdl2-config --cflags) \
 CFLAGS 		+= $(CRELEASE)
 # CFLAGS 		+= $(CDEBUG)
 
-SRC			:= $(shell find $(SRCDIR) -name "*.cpp" -type f -not -path "$(SRCDIR)/sdl-wrapper/*" -not -path "$(SRCDIR)/icp/old/*")
+SRC			:= $(shell find $(SRCDIR) -name "*.cpp")
 OBJ			:= $(SRC:.cpp=.o)
 DEPS 		:= $(OBJS:.o=.d) 
+
+
+LIBSRC		:= $(shell find $(SRCDIR)/icp -name "*.cpp" -type f) \
+			   $(shell find $(SRCDIR)/algo -name "*.cpp" -type f)
+LIBOBJ		:= $(LIBSRC:.cpp=.o)
 
 -include $(DEPS)
 
@@ -87,5 +92,5 @@ AR 		:= ar
 AR_OPT 	:= rcs $@ $^
 endif
 
-$(LIBNAME): $(OBJ)
+$(LIBNAME): $(LIBOBJ)
 	$(AR) $(AR_OPT) $^ -o $@

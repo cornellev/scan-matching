@@ -6,7 +6,6 @@
 #include <cassert>
 #include <cstdlib>
 #include "icp.h"
-#include "util/logger.h"
 #include <Eigen/Core>
 #include <Eigen/SVD>
 

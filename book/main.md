@@ -39,20 +39,25 @@ This project is [Ethan](https://ethanuppal.com)'s implementation of algorithms f
 
 \section install_sec Usage
 
-\subsection install_unix_subsec Unix-like (MacOS, Linux)
+\warning This section applies only to Unix-like operating systems, such as MacOS and Linux.
 
 First, download and install the dependencies.
+**Only eigen3 is necessary for the library. If you only wish to build the library, install eigen3 only. The remaining dependencies are only for the visualization tool.**
 
-- [SDL](https://www.libsdl.org)
-- My [SDL wrapper](https://github.com/cornellev/sdl-wrapper)
-- [libcmdapp2](https://ethanuppal.com/libcmdapp2/)
-- [libconfig](https://github.com/ethanuppal/config)
-- [eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
+| Dependency | Library Location (at which) | Header Location (under which) |
+| --- | --- | --- |
+| [eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | N/A | `/usr/local/include/eigen3/` |
+| [SDL2](https://www.libsdl.org) | `$(sdl2-config --cflags)` | `$(sdl2-config --libs)` |
+| My [SDL2 wrapper](https://github.com/cornellev/sdl-wrapper) | `/usr/local/lib/libsdlwrapper.a` | `/usr/local/include/sdlwrapper/` |
+| [libcmdapp2](https://ethanuppal.com/libcmdapp2/) | `/usr/local/lib/libcmdapp.a` | `/usr/local/include/` |
+| [libconfig](https://github.com/ethanuppal/config) | `/usr/local/lib/libconfig.a` | `/usr/local/include/` |
 
 There is also a dependency on [simple-test](https://github.com/ethanuppal/simple-test) if you want to run the tests (`make test`).
+Please follow the installation instructions there.
 
 It is likely that you already have SDL installed.
 If not, follow the instructions at the link provided (which goes to the SDL website).
+Do the same for eigen3.
 Then, to download and install the remaining dependencies, run
 
 ```shell
@@ -69,12 +74,26 @@ sudo make install
 cd ..
 ```
 
-Now, run
+Then, a simple clone should suffice.
 ```shell
 git clone https://github.com/cornellev/scan-matching.git
 cd scan-matching
+```
+
+\subsection library_sec Library
+
+To use the library, read the [INSTALL.md](https://github.com/cornellev/scan-matching/blob/main/INSTALL.md
+) document in the repository.
+
+\subsection vis_tool_sec Visualization & Benchmarking Tool
+
+```shell
 make
-./main -S ex_data/scan1.conf -D ex_data/scan2.conf
+./main \
+    -S ex_data/scan1/first.conf \
+    -D ex_data/scan1/second.conf \
+    --method vanilla \
+    --gui
 ```
 Instructions are printed to standard output.
 
@@ -84,6 +103,4 @@ make
 ```
 which will create an executable named `main` in the working directory.
 
-\subsection install_windows_subsec Windows
-
-\section example_sec Example
+You can benchmark with `make bench`.

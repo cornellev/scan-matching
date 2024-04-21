@@ -5,7 +5,6 @@
 
 #include <numeric>
 #include "icp.h"
-#include "util/logger.h"
 
 namespace icp {
     static Methods* global;
