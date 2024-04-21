@@ -34,8 +34,7 @@ namespace icp {
                 dist[i] = std::numeric_limits<double>::infinity();
                 for (size_t j = 0; j < m; j++) {
                     // Point-to-point matching
-                    double dist_ij = std::hypot(b[i][0] - a[i][0],
-                        b[i][1] - a[i][1]);
+                    double dist_ij = (b[j] - a[i]).norm();
 
                     if (dist_ij < dist[i]) {
                         dist[i] = dist_ij;
