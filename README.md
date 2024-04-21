@@ -3,7 +3,8 @@
 <!-- EDIT README.md.build INSTEAD. -->
 # scan-matching
 
-> Last updated 2024-04-21 01:48:05.106446
+> Last updated 2024-04-21 01:58:34.131346
+> Made by [Ethan Uppal](https://www.ethanuppal.com).
 
 ## Introduction
 

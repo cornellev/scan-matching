@@ -17,6 +17,7 @@ if __name__ == "__main__":
 
         put("DATE", str(dt.now()))
         put("VERSION", VERSION_TAG)
+        put("AUTHOR", "[Ethan Uppal](https://www.ethanuppal.com)")
 
         with open(f"{VERSION_MD_PATH}/{VERSION_MAJOR}.md", "r") as md:
             put("VERSIONMD", md.read())
