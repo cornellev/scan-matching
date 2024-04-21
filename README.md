@@ -3,7 +3,7 @@
 <!-- EDIT README.md.build INSTEAD. -->
 # scan-matching
 
-> Last updated 2024-04-20 23:47:14.647137
+> Last updated 2024-04-21 00:20:31.773084
 
 ## Introduction
 
@@ -11,10 +11,17 @@ This repository hosts Ethan's (my) implementation of Iterative Closest Points (I
 It is a first step in my attempt to implement Simultaneous Localization and Mapping (SLAM).
 Eventually, I will factor this out into its own library as a submodule for the SLAM library I will build.
 
+## Install
+
+You can view installation instructions at [INSTALL.md](INSTALL.md).
+
 ## Usage and Documentation
 
 I host the usage information and documentation at [cornellev.github.io/scan-matching/](https://cornellev.github.io/scan-matching/).
 Please see there for information on how to download and how to use the library.
+
+You can build the documentation yourself locally with `make docs`.
+The main page will be located at `docs/index.html` relative to the project root.
 
 ## v1.1.1 
 

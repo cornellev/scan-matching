@@ -9,6 +9,7 @@ CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
 CRELEASE	:= -O3 -DRELEASE_BUILD #-fno-fast-math
 TARGET		:= main
+LIBNAME		:= libcevicp
 
 # follow instructions in README to install in /usr/local
 LDFLAGS		:= $(shell sdl2-config --libs) \
@@ -75,3 +76,16 @@ cloc:
 .PHONY: readme
 readme:
 	cd script; $(PY) readme.py `curl https://api.github.com/repos/cornellev/scan-matching/releases/latest | jq .name`
+
+.PHONY: static
+
+ifeq ($(shell uname), Darwin)
+AR 		:= /usr/bin/libtool
+AR_OPT 	:= -static
+else
+AR 		:= ar
+AR_OPT 	:= rcs $@ $^
+endif
+
+$(LIBNAME): $(OBJ)
+	$(AR) $(AR_OPT) $^ -o $@
