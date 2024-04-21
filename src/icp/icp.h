@@ -40,9 +40,6 @@ namespace icp {
      */
     class ICP {
     protected:
-        /** The rate at which optimization is done. */
-        const double rate;
-
         /** The current point cloud transformation that is being optimized. */
         RBTransform transform;
 
@@ -62,7 +59,7 @@ namespace icp {
          * made. @see ICP::current_cost. */
         double previous_cost;
 
-        /** The sum-of-squares cost of `dist`. */
+        /** The RMS (root mean square) cost of the current transformation. */
         double current_cost;
 
         /** The pairing of each point in `a` to its closest in `b`. */
@@ -71,15 +68,16 @@ namespace icp {
         /** The distance metric of each point in `a`. */
         std::vector<double> dist;
 
-        /** A new ICP instance for `n`-point matching and an optimization rate
-         * of `rate`. @deprecated `n` is ignored. */
-        ICP(size_t n = 0, double rate = 0.01);
-
-        ICP(double rate = 0.01);
+        ICP();
 
         virtual void setup();
 
     public:
+        struct ConvergenceReport {
+            double final_cost;
+            size_t iteration_count;
+        };
+
         virtual ~ICP() = default;
 
         /** Begins the ICP process for point clouds `a` and `b` with an initial
@@ -91,13 +89,18 @@ namespace icp {
          * provided with ICP::begin. */
         virtual void iterate() = 0;
 
-        /** Perform ICP for point clouds `a` and `b` provided with ICP::begin
-         * until the cost is below `convergence_threshold` or until no progress
-         * is being made. */
-        void converge(double convergence_threshold);
+        /** Computes the cost of the current transformation. */
+        double calculate_cost() const;
 
-        /** The current cost. */
-        double cost() const;
+        /**
+         * Perform ICP for the point clouds `a` and `b` provided with ICP::begin
+         * until the cost is below `convergence_threshold` or until no progress
+         * is being made. At least `burn_in` iterations will be performed.
+         *
+         * @returns Information about the convergence.
+         */
+        ConvergenceReport converge(size_t burn_in,
+            double convergence_threshold);
 
         /** The current transform. */
         const RBTransform& current_transform() const;
@@ -105,26 +108,27 @@ namespace icp {
         /** Registers a new ICP method that can be created with `constructor`,
          * returning `false` if `name` has already been registered. */
         static bool register_method(std::string name,
-            std::function<std::unique_ptr<ICP>(size_t n, double rate)>
-                constructor);
+            std::function<std::unique_ptr<ICP>(void)> constructor);
 
         /** Returns a current list of the names of currently registered ICP
          * methods. */
         static const std::vector<std::string>& registered_methods();
 
         /**
-         * Factory constructor for the ICP method `name`. @pre `name` is a
-         * valid registered method.
+         * Factory constructor for the ICP method `name`.
          *
-         * @deprecated `n` is ignored.
+         * @pre `name` is a valid registered method. See
+         * ICP::is_registered_method.
          */
-        static std::unique_ptr<ICP> from_method(std::string name, size_t n = 0,
-            double rate = 0.01);
+        static std::unique_ptr<ICP> from_method(std::string name);
+
+        /** Whether `name` is a registered ICP method. */
+        static bool is_registered_method(std::string name);
     };
 
     struct Methods {
         std::vector<std::string> registered_method_names;
-        std::vector<std::function<std::unique_ptr<ICP>(size_t n, double rate)>>
+        std::vector<std::function<std::unique_ptr<ICP>(void)>>
             registered_method_constructors;
     };
 }

@@ -3,17 +3,15 @@
  * @copyright Copyright (C) 2024 Ethan Uppal. All rights reserved.
  */
 
+#include <numeric>
 #include "geo.h"
 
 namespace icp {
     Vector get_centroid(const std::vector<Vector>& points) {
-        Vector center_of_mass{};
+        Vector sum = Vector::Zero();
         for (const Vector& point: points) {
-            center_of_mass[0] += point[0];
-            center_of_mass[1] += point[1];
+            sum += point;
         }
-        center_of_mass[0] /= points.size();
-        center_of_mass[1] /= points.size();
-        return center_of_mass;
+        return sum / points.size();
     }
 }

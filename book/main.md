@@ -33,7 +33,7 @@ This project is [Ethan](https://ethanuppal.com)'s implementation of algorithms f
 
 \section feature_sec Features
 
-- Interactive (graphical) visualization on point clouds
+- Interactive (graphical) visualization of point clouds
     - You can supply custom point clouds in a config file using fields from [`sensor_msgs::LaserScan`](http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html).
 - ICP library for external usage
 

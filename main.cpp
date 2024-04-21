@@ -7,6 +7,8 @@ extern "C" {
 #include <config/config.h>
 }
 #include <chrono>
+#include <numeric>
+#include <algorithm>
 #include "gui/window.h"
 #include "sim/sim_config.h"
 #include "sim/lidar_view.h"
@@ -100,66 +102,73 @@ void launch_gui(LidarView* view, std::string visualized = "LiDAR scans") {
     std::cout << "=======================================\n";
     std::cout << "* Visualizing: " << visualized << '\n';
     std::cout << "* Press the red <X> on the window to exit\n";
+    std::cout << "* Press SPACE to toggle the simulation\n";
+    std::cout << "* Press D to display the current transform\n";
 
     window.present();
 }
 
-void run_benchmark(const char* method, bool with_gui) {
-    if (std::find(icp::ICP::registered_methods().begin(),
-            icp::ICP::registered_methods().end(), method)
-        == icp::ICP::registered_methods().end()) {
-        std::cerr << "error: unknown ICP method '" << method
-                  << "'. expected one of:\n";
-        for (const std::string& registered_method:
-            icp::ICP::registered_methods()) {
-            std::cerr << "* " << registered_method << '\n';
-        }
-        std::exit(1);
+void run_benchmark(const char* method, const LidarScan& source,
+    const LidarScan& destination) {
+    std::cout << "ICP ALGORITHM BENCHMARKING\n";
+    std::cout << "=======================================\n";
+    std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method);
+
+    constexpr size_t N = 50;
+    constexpr size_t burn_in = 20;
+    constexpr double convergence_threshold = 20.0;
+
+    std::cout << "* Number of trials: " << N << '\n';
+    std::cout << "* Burn-in period: " << burn_in << '\n';
+    std::cout << "* Ideal convergence threshold: " << convergence_threshold
+              << '\n';
+
+    std::vector<double> final_costs;
+    std::vector<size_t> iteration_counts;
+
+    const auto start = std::chrono::high_resolution_clock::now();
+
+    for (size_t i = 0; i < N; i++) {
+        icp->begin(source.points, destination.points, icp::RBTransform());
+        icp::ICP::ConvergenceReport result = icp->converge(burn_in,
+            convergence_threshold);
+        final_costs.push_back(result.final_cost);
+        iteration_counts.push_back(result.iteration_count);
     }
-    std::cerr << "Not implemented anymore -- will fix\n";
-    std::exit(1);
+    const auto end = std::chrono::high_resolution_clock::now();
 
-    // std::cout << "ICP ALGORITHM BENCHMARKING\n";
-    // std::cout << "=======================================\n";
+    const std::chrono::duration<double> diff = end - start;
 
-    // // very scuffed
-    // LidarView* view = new LidarView();
-    // std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method, 1000,
-    // 0.01);
+    double min_cost = final_costs.front();
+    double max_cost = final_costs.back();
+    double median_cost = final_costs[final_costs.size() / 2];
+    double mean_cost = std::accumulate(final_costs.begin(), final_costs.end(),
+                           0.0)
+                       / final_costs.size();
 
-    // std::cout << "running...\r";
-    // std::cout.flush();
-    // int invocation_count = 100;
-    // std::vector<double> final_costs;
-    // using Clock = std::chrono::high_resolution_clock;
-    // std::chrono::nanoseconds elapsed_ns = std::chrono::nanoseconds::zero();
-    // for (int i = 0; i < invocation_count; i++) {
-    //     view->construct_instance();
-    //     icp->begin(view->get_source(), view->get_dest(), icp::RBTransform());
+    std::sort(iteration_counts.begin(), iteration_counts.end());
 
-    //     auto start = Clock::now();
-    //     icp->converge(view->get_source(), view->get_dest(), 10);
-    //     final_costs.push_back(icp->cost());
-    //     auto end = Clock::now();
+    size_t min_iterations = iteration_counts.front();
+    size_t max_iterations = iteration_counts.back();
+    size_t median_iterations = iteration_counts[iteration_counts.size() / 2];
+    double mean_iterations = std::accumulate(iteration_counts.begin(),
+                                 iteration_counts.end(), 0.0)
+                             / iteration_counts.size();
 
-    //     elapsed_ns +=
-    //         std::chrono::duration_cast<std::chrono::nanoseconds>(end -
-    //         start);
-    // }
-    // double elapsed = (double)elapsed_ns.count() / 1000000000.0;
-    // std::cout << "* Using method '" << method << "'\n";
-    // std::cout << "* Matching two clouds of n = " << (sim_config::n * 3 / 4)
-    //           << " points\n";
-    // std::cout << "* " << invocation_count << " invocations, " << elapsed
-    //           << "s in total, " << (elapsed / invocation_count)
-    //           << " per invocation\n";
-    // std::cout << "* Greatest final cost was "
-    //           << (*std::max_element(final_costs.begin(), final_costs.end()))
-    //           << '\n';
-    // std::cout << "* Least final cost was "
-    //           << (*std::min_element(final_costs.begin(), final_costs.end()))
-    //           << '\n';
-    // delete view;
+    std::cout << "* Min cost: " << min_cost << "\n"
+              << "* Max cost: " << max_cost << "\n"
+              << "* Median cost: " << median_cost << "\n"
+              << "* Mean cost: " << mean_cost << "\n";
+    std::cout << "* Min iterations: " << min_iterations
+              << " (real: " << (min_iterations - burn_in) << ")\n"
+              << "* Max iterations: " << max_iterations
+              << " (real: " << (max_iterations - burn_in) << ")\n"
+              << "* Median iterations: " << median_iterations
+              << " (real: " << (median_iterations - burn_in) << ")\n"
+              << "* Mean iterations: " << mean_iterations
+              << " (real: " << (mean_iterations - burn_in) << ")\n";
+    std::cout << "* Average time per invocation: " << (diff.count() / N)
+              << "s\n";
 }
 
 int main(int argc, const char** argv) {
@@ -168,7 +177,7 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
-    ca_description("Driver program for Ethan's scan matching implementation.");
+    ca_description("Driver program for Ethan's scan-matching implementation.");
     ca_author("Ethan Uppal");
     ca_year(2024);
     ca_version(0, 0, 0);
@@ -176,28 +185,28 @@ int main(int argc, const char** argv) {
 
     ca_synopsis("[-h|-v]");
     ca_synopsis("-S FILE -D FILE [-l]");
-    ca_synopsis("[-g|-b METHOD] [-l]");
+    ca_synopsis("-b METHOD [-l]");
 
     bool* use_gui;
     bool* do_bench;
     bool* enable_log;
     bool* read_scan_files;
+    bool* basic_mode;  // for gbody people
     const char* f_src;
     const char* f_dst;
     const char* config_file = "sim.conf";
-    bool* basic_mode;  // for gbody people
+    const char* method = "vanilla";
 
-    const char* bench_method = "point_to_point";
-    assert(use_gui = ca_opt('g', "gui", "<g", NULL,
-               "launch the interactive GUI"));
-    assert(do_bench = ca_opt('b', "bench", ".METHOD !@g", &bench_method,
-               "benchmarks a given icp method"));  // for now disabled with -g
+    assert(do_bench = ca_opt('b', "bench", "&SD", NULL,
+               "benchmarks an ICP method (see -m). must pass -S/-D"));
     assert(read_scan_files = ca_opt('S', "src", ".FILE&D", &f_src,
                "source scan (pass with -D)"));
+    assert(use_gui = ca_opt('g', "gui", "!@b", NULL, "visualizes ICP"));
     assert(ca_opt('D', "dst", ".FILE&S", &f_dst,
         "destination scan (pass with -S)"));
     assert(ca_opt('c', "config", ".FILE", &config_file,
         "selects a configuration file"));
+    assert(ca_opt('m', "method", ".METHOD", &method, "selects an ICP method"));
     assert(basic_mode = ca_long_opt("basic-mode", "", NULL,
                "uses a ligher gui background"));
     assert(enable_log = ca_opt('l', "log", "", NULL, "enables debug logging"));
@@ -217,20 +226,27 @@ int main(int argc, const char** argv) {
         sim_config::use_light_background = true;
     }
 
+    if (!icp::ICP::is_registered_method(method)) {
+        std::cerr << "error: unknown ICP method '" << method
+                  << "'. expected one of:\n";
+        for (const std::string& registered_method:
+            icp::ICP::registered_methods()) {
+            std::cerr << "* " << registered_method << '\n';
+        }
+        std::exit(1);
+    }
+
     if (*read_scan_files) {
         LidarScan source, destination;
         parse_config(f_src, parse_lidar_scan, &source);
         parse_config(f_dst, parse_lidar_scan, &destination);
-        LidarView* view = new LidarView(source.points, destination.points,
-            "vanilla");
-        launch_gui(view,
-            std::string(f_src) + std::string(" and ") + std::string(f_dst));
-    } else {
-        if (*do_bench) {
-            run_benchmark(bench_method, *use_gui);
-        } else if (*use_gui) {
-            LidarView* view = new LidarView();
-            launch_gui(view, "randomly generated point clouds");
+        if (*use_gui) {
+            LidarView* view = new LidarView(source.points, destination.points,
+                method);
+            launch_gui(view,
+                std::string(f_src) + std::string(" and ") + std::string(f_dst));
+        } else if (*do_bench) {
+            run_benchmark(method, source, destination);
         }
     }
 }

@@ -5,6 +5,8 @@
  * This code is based on https://ieeexplore.ieee.org/document/4543181
  */
 
+// TODO: this entire file
+
 #include <cassert>
 #include <cstdlib>
 #include "icp.h"
@@ -16,7 +18,7 @@ namespace icp {
     struct PointToLine final : public ICP {
         std::vector<Vector> rotated_a;
 
-        PointToLine(double rate): ICP(rate) {}
+        PointToLine(): ICP() {}
         ~PointToLine() override {}
 
         void iterate() override {
@@ -72,8 +74,8 @@ namespace icp {
 
     static bool static_initialization = []() {
         assert(ICP::register_method("point_to_line",
-            [](size_t n __unused, double rate) -> std::unique_ptr<ICP> {
-                return std::make_unique<PointToLine>(rate);
+            []() -> std::unique_ptr<ICP> {
+                return std::make_unique<PointToLine>();
             }));
         return true;
     }();

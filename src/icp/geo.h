@@ -7,7 +7,9 @@
 
 #include <vector>
 #include <cmath>
+#include <sstream>
 #include <Eigen/Core>
+#include <iostream>
 
 namespace icp {
     using Vector = Eigen::Vector2d;
@@ -19,7 +21,8 @@ namespace icp {
         Matrix rotation;
 
     public:
-        RBTransform(): translation() {
+        RBTransform() {
+            translation = Vector::Zero();
             rotation = Matrix::Identity();
         }
         RBTransform(Vector translation, Matrix rotation)
@@ -27,6 +30,15 @@ namespace icp {
 
         Vector apply_to(Vector v) const {
             return rotation * v + translation;
+        }
+
+        std::string to_string() const {
+            std::stringstream stream;
+            stream << "RBTransform {\n";
+            stream << "  translation:\n" << translation << '\n';
+            stream << "  rotation:\n" << rotation << '\n';
+            stream << "}";
+            return stream.str();
         }
     };
 

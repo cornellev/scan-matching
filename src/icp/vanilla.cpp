@@ -14,7 +14,7 @@ namespace icp {
     struct Vanilla final : public ICP {
         std::vector<Vector> rotated_a;
 
-        Vanilla(double rate): ICP(rate) {}
+        Vanilla(): ICP() {}
         ~Vanilla() override {}
 
         void iterate() override {
@@ -68,10 +68,9 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        assert(ICP::register_method("vanilla",
-            [](size_t n __unused, double rate) -> std::unique_ptr<ICP> {
-                return std::make_unique<Vanilla>(rate);
-            }));
+        assert(ICP::register_method("vanilla", []() -> std::unique_ptr<ICP> {
+            return std::make_unique<Vanilla>();
+        }));
         return true;
     }();
 }

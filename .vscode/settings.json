@@ -104,6 +104,7 @@
         "memory_resource": "cpp",
         "numeric": "cpp",
         "stop_token": "cpp",
-        "svd": "cpp"
+        "svd": "cpp",
+        "core": "cpp"
     }
 }

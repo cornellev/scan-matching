@@ -14,19 +14,16 @@
 class LidarView final : public View {
     std::vector<icp::Vector> source;
     std::vector<icp::Vector> destination;
-    std::vector<icp::Vector> wall;
     std::unique_ptr<icp::ICP> icp;
     Keyboard keyboard;
     bool is_iterating;
+    size_t iterations;
 
     // void construct_instance();
 
 public:
-    /** Consructs a new lidar view visualizing ICP on a random instance. */
-    LidarView();
-
-    /** Constructs a new lidar view visualizing ICP (by method `method`) on the
-     * given instance (`source` and `destination`). */
+    /** Constructs a new lidar view visualizing ICP (by method `method`) on
+     * the given instance (`source` and `destination`). */
     LidarView(std::vector<icp::Vector> source,
         std::vector<icp::Vector> destination, const std::string method);
 
@@ -35,9 +32,4 @@ public:
     void on_event(const SDL_Event& event) override;
     void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         double dtime) override;
-
-    // TODO: move to `instance.h` etc.
-    void construct_instance();
-    const std::vector<icp::Vector>& get_source() const;
-    const std::vector<icp::Vector>& get_dest() const;
 };
