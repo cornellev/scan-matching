@@ -4,6 +4,7 @@ SRCDIR		:= src
 INCLUDEDIR	:= src
 
 CC			:= $(shell which g++ || which clang)
+PY			:= $(shell which python3 || which python)
 CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
 CRELEASE	:= -O3 -DRELEASE_BUILD #-fno-fast-math
@@ -34,6 +35,7 @@ METHOD	:= vanilla
 
 $(TARGET): main.cpp $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+	@make readme
 
 # .PHONY: run
 # run: $(TARGET)
@@ -69,3 +71,7 @@ docs:
 .PHONY: cloc
 cloc:
 	cloc . --include-lang=c++,"c/c++ header" --by-file
+
+.PHONY: readme
+readme:
+	cd script; $(PY) readme.py `curl https://api.github.com/repos/cornellev/scan-matching/releases/latest | jq .name`
