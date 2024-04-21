@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['methods_0',['Methods',['../structicp_1_1_methods.html',1,'icp']]]
+  ['kdtree_0',['KDTree',['../class_k_d_tree.html',1,'']]]
 ];

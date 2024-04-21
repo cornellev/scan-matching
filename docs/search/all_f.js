@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['scale_0',['scale',['../namespacesim__config.html#a14e40d296a168a2894823fca84043e85',1,'sim_config']]],
-  ['setup_1',['setup',['../classicp_1_1_i_c_p.html#a32996eafad2cbc1ecc1361536abdfe68',1,'icp::ICP']]],
-  ['sim_5fconfig_2',['sim_config',['../namespacesim__config.html',1,'']]],
-  ['sim_5fconfig_2ecpp_3',['sim_config.cpp',['../sim__config_8cpp.html',1,'']]],
-  ['sim_5fconfig_2ed_4',['sim_config.d',['../sim__config_8d.html',1,'']]],
-  ['sim_5fconfig_2eh_5',['sim_config.h',['../sim__config_8h.html',1,'']]],
-  ['slope_6',['slope',['../namespacesim__config.html#a23e9c4888c817bae29e9b8245c0e4e08',1,'sim_config']]]
+  ['rbtransform_0',['RBTransform',['../structicp_1_1_r_b_transform.html',1,'icp::RBTransform'],['../structicp_1_1_r_b_transform.html#a86300e8afdc877efa7d026dc9ebed84e',1,'icp::RBTransform::RBTransform()'],['../structicp_1_1_r_b_transform.html#ae6747e94e2995d4c8978345d69d0f4f3',1,'icp::RBTransform::RBTransform(Vector translation, Matrix rotation)']]],
+  ['register_5fmethod_1',['register_method',['../classicp_1_1_i_c_p.html#a878302998f8be12f56b5ec9dc51f80a1',1,'icp::ICP']]],
+  ['registered_5fmethod_5fconstructors_2',['registered_method_constructors',['../structicp_1_1_methods.html#ae4fc50c0fa6121e1d9fe81db29d3ef00',1,'icp::Methods']]],
+  ['registered_5fmethod_5fnames_3',['registered_method_names',['../structicp_1_1_methods.html#a9b86e25dc92c562e4014a9e70abda5e3',1,'icp::Methods']]],
+  ['registered_5fmethods_4',['registered_methods',['../classicp_1_1_i_c_p.html#a9933256313a70fedacd7d3d7c8fa63c3',1,'icp::ICP']]],
+  ['rotation_5',['rotation',['../structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03',1,'icp::RBTransform']]]
 ];

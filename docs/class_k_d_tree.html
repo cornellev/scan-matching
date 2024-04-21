@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>scan matching: icp::Methods Struct Reference</title>
+<title>scan matching: KDTree&lt; K, Node &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,66 +71,69 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespaceicp.html">icp</a></li><li class="navelem"><a class="el" href="structicp_1_1_methods.html">Methods</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structicp_1_1_methods-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">icp::Methods Struct Reference</div></div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_k_d_tree-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">KDTree&lt; K, Node &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="icp_8h_source.html">icp.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="kdtree_8h_source.html">kdtree.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a9b86e25dc92c562e4014a9e70abda5e3" id="r_a9b86e25dc92c562e4014a9e70abda5e3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b86e25dc92c562e4014a9e70abda5e3">registered_method_names</a></td></tr>
-<tr class="separator:a9b86e25dc92c562e4014a9e70abda5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4fc50c0fa6121e1d9fe81db29d3ef00" id="r_ae4fc50c0fa6121e1d9fe81db29d3ef00"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; std::unique_ptr&lt; <a class="el" href="classicp_1_1_i_c_p.html">ICP</a> &gt;(void)&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4fc50c0fa6121e1d9fe81db29d3ef00">registered_method_constructors</a></td></tr>
-<tr class="separator:ae4fc50c0fa6121e1d9fe81db29d3ef00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2bc529fae0f1208e46275911dc96f5ab" id="r_a2bc529fae0f1208e46275911dc96f5ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bc529fae0f1208e46275911dc96f5ab">KDTree</a> ()</td></tr>
+<tr class="separator:a2bc529fae0f1208e46275911dc96f5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5990303a9e2cfe3b1de958cee1220cd" id="r_af5990303a9e2cfe3b1de958cee1220cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5990303a9e2cfe3b1de958cee1220cd">~KDTree</a> ()</td></tr>
+<tr class="separator:af5990303a9e2cfe3b1de958cee1220cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00129">129</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae4fc50c0fa6121e1d9fe81db29d3ef00" name="ae4fc50c0fa6121e1d9fe81db29d3ef00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4fc50c0fa6121e1d9fe81db29d3ef00">&#9670;&#160;</a></span>registered_method_constructors</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;size_t K, typename Node&gt;<br />
+class KDTree&lt; K, Node &gt;</div>
+<p class="definition">Definition at line <a class="el" href="kdtree_8h_source.html#l00012">12</a> of file <a class="el" href="kdtree_8h_source.html">kdtree.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2bc529fae0f1208e46275911dc96f5ab" name="a2bc529fae0f1208e46275911dc96f5ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bc529fae0f1208e46275911dc96f5ab">&#9670;&#160;</a></span>KDTree()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;size_t K, typename Node &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::function&lt;std::unique_ptr&lt;<a class="el" href="classicp_1_1_i_c_p.html">ICP</a>&gt;(void)&gt; &gt; icp::Methods::registered_method_constructors</td>
+          <td class="memname"><a class="el" href="class_k_d_tree.html">KDTree</a>&lt; K, Node &gt;<a class="el" href="class_k_d_tree.html">::KDTree</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00132">132</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
-
 </div>
 </div>
-<a id="a9b86e25dc92c562e4014a9e70abda5e3" name="a9b86e25dc92c562e4014a9e70abda5e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b86e25dc92c562e4014a9e70abda5e3">&#9670;&#160;</a></span>registered_method_names</h2>
+<a id="af5990303a9e2cfe3b1de958cee1220cd" name="af5990303a9e2cfe3b1de958cee1220cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5990303a9e2cfe3b1de958cee1220cd">&#9670;&#160;</a></span>~KDTree()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;size_t K, typename Node &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::string&gt; icp::Methods::registered_method_names</td>
+          <td class="memname"><a class="el" href="class_k_d_tree.html">KDTree</a>&lt; K, Node &gt;::~<a class="el" href="class_k_d_tree.html">KDTree</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00130">130</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
-
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/icp/<a class="el" href="icp_8h_source.html">icp.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/algo/<a class="el" href="kdtree_8h_source.html">kdtree.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
