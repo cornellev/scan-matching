@@ -1,7 +1,7 @@
 # Installation Instructions
 
 This document assumes you have downloaded the repository and installed the library dependencies.
-If not, please read the instructions at [cornellev.github.io/scan-matching/](https://cornellev.github.io/scan-matching/).
+If not, please read the instructions at [cornellev.github.io/icp/](https://cornellev.github.io/icp/).
 
 ## System Installation (Static)
 

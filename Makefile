@@ -80,7 +80,7 @@ cloc:
 
 .PHONY: readme
 readme:
-	cd script; $(PY) readme.py `curl https://api.github.com/repos/cornellev/scan-matching/releases/latest | jq .name`
+	cd script; $(PY) readme.py `curl https://api.github.com/repos/cornellev/icp/releases/latest | jq .name`
 
 .PHONY: static
 

@@ -17,7 +17,7 @@ This project is [Ethan](https://ethanuppal.com)'s implementation of algorithms f
     <tr>
         <td style="text-align:left; vertical-align:top"><b>Repository</b></td>
         <td style="text-align:left; vertical-align:top">
-            <a href="https://github.com/cornellev/scan-matching">https://github.com/cornellev/scan-matching</a>
+            <a href="https://github.com/cornellev/icp">https://github.com/cornellev/icp</a>
         </td>
     </tr>
     <tr>
@@ -76,13 +76,13 @@ cd ..
 
 Then, a simple clone should suffice.
 ```shell
-git clone https://github.com/cornellev/scan-matching.git
-cd scan-matching
+git clone https://github.com/cornellev/icp.git
+cd icp
 ```
 
 \subsection library_sec Library
 
-To use the library, read the [INSTALL.md](https://github.com/cornellev/scan-matching/blob/main/INSTALL.md
+To use the library, read the [INSTALL.md](https://github.com/cornellev/icp/blob/main/INSTALL.md
 ) document in the repository.
 
 \subsection vis_tool_sec Visualization & Benchmarking Tool

@@ -115,7 +115,7 @@ void run_benchmark(const char* method, const LidarScan& source,
     std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method);
 
     constexpr size_t N = 50;
-    constexpr size_t burn_in = 20;
+    constexpr size_t burn_in = 0;
     constexpr double convergence_threshold = 20.0;
 
     std::cout << "* Number of trials: " << N << '\n';
@@ -177,7 +177,7 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
-    ca_description("Driver program for Ethan's scan-matching implementation.");
+    ca_description("Driver program for Ethan's ICP implementation.");
     ca_author("Ethan Uppal");
     ca_year(2024);
     ca_version(0, 0, 0);

@@ -61,7 +61,7 @@ namespace icp {
 
         // Repeat until convergence
         while (current_cost > convergence_threshold || current_cost == INFINITY
-               || burn_in) {
+               || result.iteration_count <= burn_in) {
             // Store previous iteration results
             previous_cost = current_cost;
             RBTransform previous_transform = transform;
@@ -71,14 +71,14 @@ namespace icp {
             // If cost rose, revert to previous transformation/cost and
             // exit
             current_cost = calculate_cost();
-            if (current_cost >= previous_cost && !burn_in) {
+            if (current_cost >= previous_cost
+                && result.iteration_count > burn_in) {
                 transform = previous_transform;
                 current_cost = previous_cost;
                 break;
             }
 
             result.iteration_count++;
-            burn_in--;
         }
 
         result.final_cost = current_cost;
