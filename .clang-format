@@ -1,6 +1,3 @@
-# ethan's clang format
-# actually codes in my style LOL
-# well somewhat
 ---
 BasedOnStyle: Google
 IndentWidth: 4
