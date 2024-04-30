@@ -28,7 +28,7 @@ namespace icp {
 
         // Set relative to centroid
         a_cm = get_centroid(this->a);
-        b_cm = get_centroid(this->a);
+        b_cm = get_centroid(this->b);
         for (Vector& point: this->a) {
             point -= a_cm;
         }
@@ -65,7 +65,7 @@ namespace icp {
 
         // Repeat until convergence
         while (current_cost > convergence_threshold || current_cost == INFINITY
-               || result.iteration_count <= burn_in) {
+               || result.iteration_count < burn_in) {
             // Store previous iteration results
             previous_cost = current_cost;
             RBTransform previous_transform = transform;

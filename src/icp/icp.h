@@ -98,7 +98,9 @@ namespace icp {
         /**
          * Perform ICP for the point clouds `a` and `b` provided with ICP::begin
          * until the cost is below `convergence_threshold` or until no progress
-         * is being made. At least `burn_in` iterations will be performed.
+         * is being made. At least `burn_in` iterations will be performed. Start
+         * with zero burn-in, and slowly increase if convergence requirements
+         * are not met.
          *
          * @returns Information about the convergence.
          */
