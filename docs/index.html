@@ -136,19 +136,19 @@ Usage</h1>
 <div class="line">cd icp</div>
 </div><!-- fragment --><h2><a class="anchor" id="library_sec"></a>
 Library</h2>
-<p>To use the library, read the <a href="https://github.com/cornellev/icp/blob/main/INSTALL.md">INSTALL.md</a> document in the repository.</p>
+<p>To use the library, read the <a href="https://github.com/cornellev/icp/blob/main/INSTALL.md">INSTALL.md</a> document in the repository. Read <a class="el" href="write_icp_instance.html">Writing an ICP Instance</a> to use your own ICP implementations.</p>
 <h2><a class="anchor" id="vis_tool_sec"></a>
 Visualization &amp; Benchmarking Tool</h2>
+<p>The following command visualizes the two LiDAR scans at the given files. Instructions are printed to standard output.</p>
 <div class="fragment"><div class="line">make</div>
 <div class="line">./main \</div>
 <div class="line">    -S ex_data/scan1/first.conf \</div>
 <div class="line">    -D ex_data/scan1/second.conf \</div>
 <div class="line">    --method vanilla \</div>
 <div class="line">    --gui</div>
-</div><!-- fragment --><p> Instructions are printed to standard output.</p>
+</div><!-- fragment --><p>You can benchmark with <code>make bench</code>; by default, this will pass <code>-mvanilla</code>.</p>
 <p>The program itself can be built with </p><div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p> which will create an executable named <code>main</code> in the working directory.</p>
-<p>You can benchmark with <code>make bench</code>. </p>
+</div><!-- fragment --><p> which will create an executable named <code>main</code> in the working directory. </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"/>
 </div><!-- contents -->
