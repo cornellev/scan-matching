@@ -5,6 +5,8 @@ To write an ICP instance, create a C++ source file with at least the following:
 1. A `final` class that inherits from `public icp::ICP`
 2. A static initialization variable (described below)
 
+\section core_func_sec "Core Functionality"
+
 The class must define the following behavior:
 
 - A constructor that calls the `icp::ICP` constructor
@@ -18,15 +20,15 @@ At the end of `iterate`, the `transform` instance variable should have been upda
 Optionally, the class can override:
 
 - `void setup() override`
-- `void trim(const std::vector<Vector>& a, const std::vector<Vector>& b) override`
 
-`trim` should initialize the instance variables `a` and `b` from the given point clouds `a` and `b`.
-The default behavior is to copy them over directly.
+`setup` is invoked upon the user call to `ICP::begin` after the internals of ICP have been readied.
+
+\section static_init_sec "Static Initialization"
 
 The static initialization is required so that users can instantiate your ICP instance.
 Define
 
-```c++
+```cpp
 static bool static_initialization = []() {
     assert(ICP::register_method("name_of_instance", []() -> std::unique_ptr<ICP> {
         return std::make_unique<NameOfClass>();

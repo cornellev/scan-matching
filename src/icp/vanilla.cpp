@@ -64,9 +64,10 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        assert(ICP::register_method("vanilla", []() -> std::unique_ptr<ICP> {
-            return std::make_unique<Vanilla>();
-        }));
+        assert(ICP::register_method("vanilla",
+            [](const ICP::Config& config __unused) -> std::unique_ptr<ICP> {
+                return std::make_unique<Vanilla>();
+            }));
         return true;
     }();
 }

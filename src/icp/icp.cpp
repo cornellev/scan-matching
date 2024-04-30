@@ -13,18 +13,14 @@ namespace icp {
 
     void ICP::setup() {}
 
-    void ICP::trim(const std::vector<Vector>& a, const std::vector<Vector>& b) {
-        this->a = a;
-        this->b = b;
-    }
-
     void ICP::begin(const std::vector<Vector>& a, const std::vector<Vector>& b,
         RBTransform t) {
         // Initial transform guess
         this->transform = t;
 
         // Copy in point clouds
-        trim(a, b);
+        this->a = a;
+        this->b = b;
 
         // Set relative to centroid
         a_cm = get_centroid(this->a);
@@ -101,7 +97,7 @@ namespace icp {
     }
 
     bool ICP::register_method(std::string name,
-        std::function<std::unique_ptr<ICP>(void)> constructor) {
+        std::function<std::unique_ptr<ICP>(const ICP::Config&)> constructor) {
         ensure_methods_exists();
         global->registered_method_constructors.push_back(constructor);
         global->registered_method_names.push_back(name);
@@ -113,12 +109,13 @@ namespace icp {
         return global->registered_method_names;
     }
 
-    std::unique_ptr<ICP> ICP::from_method(std::string name) {
+    std::unique_ptr<ICP> ICP::from_method(std::string name,
+        const ICP::Config& config) {
         ensure_methods_exists();
         size_t index = std::find(global->registered_method_names.begin(),
                            global->registered_method_names.end(), name)
                        - global->registered_method_names.begin();
-        return global->registered_method_constructors[index]();
+        return global->registered_method_constructors[index](config);
     }
 
     bool ICP::is_registered_method(std::string name) {

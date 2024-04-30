@@ -10,12 +10,14 @@
 #include <memory>
 #include <string>
 #include <functional>
+#include <unordered_map>
 #include "geo.h"
 
 namespace icp {
     /**
-     * Interface for iterative closest points; please read the Detailed
-     * Description for usage information.
+     * Interface for iterative closest points.
+     * You should interact with ICP instances through this API only.
+     * Read \ref write_icp_instance for additional information.
      *
      * \par Example
      * @code
@@ -35,8 +37,9 @@ namespace icp {
      * If these steps are not followed as described here, the behavior is
      * undefined.
      *
-     * At any point in the process, you may query `icp->cost()` and
-     * `icp->transform()`.
+     * At any point in the process, you may query `icp->calculate_cost()` and
+     * `icp->transform()`. Do note, however, that `icp->calculate_cost()` is not
+     * a constant-time operation.
      */
     class ICP {
     protected:
@@ -72,13 +75,42 @@ namespace icp {
 
         virtual void setup();
 
-        virtual void trim(const std::vector<Vector>& a,
-            const std::vector<Vector>& b);
-
     public:
+        /** The result of running `ICP::converge`. */
         struct ConvergenceReport {
+            /** The least cost achieved. */
             double final_cost;
+
+            /** The number of iterations performed, including the burn-in
+             * period. */
             size_t iteration_count;
+        };
+
+        /** Configuration for ICP instances. */
+        class Config {
+            using Param = std::variant<int, double, std::string>;
+            std::unordered_map<std::string, Param> params;
+
+        public:
+            /** Constructs an empty configuration. */
+            Config() {}
+
+            /** Associates `key` with an integer, double, or string `value`. */
+            template<typename T>
+            void set(std::string key, T value) {
+                params[key] = value;
+            }
+
+            /** Retrieves the integer, double, or string value associated with
+             * `key`. */
+            template<typename T>
+            T get(std::string key, T otherwise) const {
+                if (params.find(key) == params.end()) {
+                    return otherwise;
+                } else {
+                    return std::get<T>(params.at(key));
+                }
+            }
         };
 
         virtual ~ICP() = default;
@@ -92,7 +124,12 @@ namespace icp {
          * provided with ICP::begin. */
         virtual void iterate() = 0;
 
-        /** Computes the cost of the current transformation. */
+        /**
+         * Computes the cost of the current transformation.
+         *
+         * \par Efficiency:
+         * `O(a.size())` where `a` is the source point cloud.
+         */
         double calculate_cost() const;
 
         /**
@@ -113,19 +150,21 @@ namespace icp {
         /** Registers a new ICP method that can be created with `constructor`,
          * returning `false` if `name` has already been registered. */
         static bool register_method(std::string name,
-            std::function<std::unique_ptr<ICP>(void)> constructor);
+            std::function<std::unique_ptr<ICP>(const Config&)> constructor);
 
         /** Returns a current list of the names of currently registered ICP
          * methods. */
         static const std::vector<std::string>& registered_methods();
 
         /**
-         * Factory constructor for the ICP method `name`.
+         * Factory constructor for the ICP method `name` with configuration
+         * `config`.
          *
          * @pre `name` is a valid registered method. See
          * ICP::is_registered_method.
          */
-        static std::unique_ptr<ICP> from_method(std::string name);
+        static std::unique_ptr<ICP> from_method(std::string name,
+            const Config& params = Config());
 
         /** Whether `name` is a registered ICP method. */
         static bool is_registered_method(std::string name);
@@ -133,7 +172,7 @@ namespace icp {
 
     struct Methods {
         std::vector<std::string> registered_method_names;
-        std::vector<std::function<std::unique_ptr<ICP>(void)>>
+        std::vector<std::function<std::unique_ptr<ICP>(const ICP::Config&)>>
             registered_method_constructors;
     };
 }

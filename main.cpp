@@ -24,7 +24,8 @@ struct LidarScan {
     std::vector<icp::Vector> points;
 };
 
-void set_config_param(const char* var, const char* data, void* user_data) {
+void set_config_param(const char* var, const char* data,
+    void* user_data __unused) {
     if (strcmp(var, "n") == 0) {
         sim_config::n = std::stoi(data);
     } else if (strcmp(var, "scale") == 0) {

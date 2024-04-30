@@ -1,11 +1,7 @@
 /*
  * @author Ethan Uppal
  * @copyright Copyright (C) 2024 Ethan Uppal. All rights reserved.
- *
- * This code is based on https://ieeexplore.ieee.org/document/4543181
  */
-
-// TODO: this entire file
 
 #include <cassert>
 #include <cstdlib>
@@ -14,11 +10,10 @@
 #include <Eigen/SVD>
 
 namespace icp {
-    struct PointToLine final : public ICP {
-        std::vector<Vector> rotated_a;
-
-        PointToLine(): ICP() {}
-        ~PointToLine() override {}
+    struct TrimmedICP final : public ICP {
+        double overlap_rate;
+        TrimmedICP(double overlap_rate): ICP(), overlap_rate(overlap_rate) {}
+        ~TrimmedICP() override {}
 
         void iterate() override {
             const size_t n = a.size();
@@ -26,20 +21,18 @@ namespace icp {
 
             /* Matching Step: match closest points.
 
-               A point-to-line metric is used.
-
                Sources:
                https://arxiv.org/pdf/2206.06435.pdf
                https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf
                https://en.wikipedia.org/wiki/Iterative_closest_point
                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf
+               -> use k-d tree
              */
             for (size_t i = 0; i < n; i++) {
                 dist[i] = std::numeric_limits<double>::infinity();
                 for (size_t j = 0; j < m; j++) {
-                    // Point-to-plane matching
-                    double dist_ij = std::hypot(b[i][0] - a[i][0],
-                        b[i][1] - a[i][1]);
+                    // Point-to-point matching
+                    double dist_ij = (b[j] - a[i]).norm();
 
                     if (dist_ij < dist[i]) {
                         dist[i] = dist_ij;
@@ -72,9 +65,11 @@ namespace icp {
     };
 
     static bool static_initialization = []() {
-        assert(ICP::register_method("point_to_line",
-            []() -> std::unique_ptr<ICP> {
-                return std::make_unique<PointToLine>();
+        assert(ICP::register_method("trimmed",
+            [](const ICP::Config& config) -> std::unique_ptr<ICP> {
+                double overlap_rate = config.get<double>("overlap_rate", 0.5);
+                assert(overlap_rate >= 0 && overlap_rate <= 1);
+                return std::make_unique<TrimmedICP>(overlap_rate);
             }));
         return true;
     }();

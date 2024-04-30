@@ -8,7 +8,7 @@ extern "C" {
 
 void test_kdtree(void) {}
 
-void test_icp(const char* method) {
+void test_icp(const std::string& method) {
     std::unique_ptr<icp::ICP> icp = icp::ICP::from_method(method);
 
     {
@@ -60,5 +60,7 @@ void test_icp(const char* method) {
 
 void test_main() {
     test_kdtree();
-    test_icp("vanilla");
+    for (const auto& method: icp::ICP::registered_methods()) {
+        test_icp(method);
+    }
 }
