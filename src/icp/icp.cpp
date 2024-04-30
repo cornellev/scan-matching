@@ -13,18 +13,22 @@ namespace icp {
 
     void ICP::setup() {}
 
+    void ICP::trim(const std::vector<Vector>& a, const std::vector<Vector>& b) {
+        this->a = a;
+        this->b = b;
+    }
+
     void ICP::begin(const std::vector<Vector>& a, const std::vector<Vector>& b,
         RBTransform t) {
         // Initial transform guess
         this->transform = t;
 
         // Copy in point clouds
-        this->a = a;
-        this->b = b;
+        trim(a, b);
 
         // Set relative to centroid
-        a_cm = get_centroid(a);
-        b_cm = get_centroid(b);
+        a_cm = get_centroid(this->a);
+        b_cm = get_centroid(this->a);
         for (Vector& point: this->a) {
             point -= a_cm;
         }
@@ -37,7 +41,7 @@ namespace icp {
         current_cost = std::numeric_limits<double>::infinity();
 
         // Ensure arrays are the right size
-        const size_t n = a.size();
+        const size_t n = this->a.size();
         if (pair.size() < n) {
             pair.resize(n);
             dist.resize(n);

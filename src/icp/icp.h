@@ -72,6 +72,9 @@ namespace icp {
 
         virtual void setup();
 
+        virtual void trim(const std::vector<Vector>& a,
+            const std::vector<Vector>& b);
+
     public:
         struct ConvergenceReport {
             double final_cost;

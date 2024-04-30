@@ -11,8 +11,6 @@
 
 namespace icp {
     struct Vanilla final : public ICP {
-        std::vector<Vector> rotated_a;
-
         Vanilla(): ICP() {}
         ~Vanilla() override {}
 
