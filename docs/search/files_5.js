@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['point_5fto_5fline_2ecpp_0',['point_to_line.cpp',['../point__to__line_8cpp.html',1,'']]]
+  ['quickselect_2ecpp_0',['quickselect.cpp',['../quickselect_8cpp.html',1,'']]],
+  ['quickselect_2ed_1',['quickselect.d',['../quickselect_8d.html',1,'']]],
+  ['quickselect_2eh_2',['quickselect.h',['../quickselect_8h.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sim_5fconfig_2ecpp_0',['sim_config.cpp',['../sim__config_8cpp.html',1,'']]],
-  ['sim_5fconfig_2eh_1',['sim_config.h',['../sim__config_8h.html',1,'']]]
+  ['trimmed_2ecpp_0',['trimmed.cpp',['../trimmed_8cpp.html',1,'']]],
+  ['trimmed_2ed_1',['trimmed.d',['../trimmed_8d.html',1,'']]]
 ];

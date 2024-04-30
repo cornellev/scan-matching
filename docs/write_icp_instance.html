@@ -78,12 +78,14 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>To write an ICP instance, create a C++ source file with at least the following:</p>
 <ol type="1">
-<li>A <code>final</code> class that inherits from <code>public <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a></code></li>
+<li>A <code>final</code> class that inherits from <code>public <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points.">icp::ICP</a></code></li>
 <li>A static initialization variable (described below)</li>
 </ol>
+<h1><a class="anchor" id="core_func_sec"></a>
+"Core Functionality"</h1>
 <p>The class must define the following behavior:</p>
 <ul>
-<li>A constructor that calls the <code><a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a></code> constructor</li>
+<li>A constructor that calls the <code><a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points.">icp::ICP</a></code> constructor</li>
 <li>An overridden destructor (which may do nothing)</li>
 <li><code>void iterate() override</code></li>
 </ul>
@@ -91,12 +93,12 @@ $(function() {
 <p>Optionally, the class can override:</p>
 <ul>
 <li><code>void setup() override</code></li>
-<li><code>void trim(const std::vector&lt;Vector&gt;&amp; a, const std::vector&lt;Vector&gt;&amp; b) override</code></li>
 </ul>
-<p><code>trim</code> should initialize the instance variables <code>a</code> and <code>b</code> from the given point clouds <code>a</code> and <code>b</code>. The default behavior is to copy them over directly.</p>
+<p><code>setup</code> is invoked upon the user call to <code>ICP::begin</code> after the internals of ICP have been readied.</p>
+<h1><a class="anchor" id="static_init_sec"></a>
+"Static Initialization"</h1>
 <p>The static initialization is required so that users can instantiate your ICP instance. Define</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
+<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
 <div class="line">    assert(ICP::register_method(<span class="stringliteral">&quot;name_of_instance&quot;</span>, []() -&gt; std::unique_ptr&lt;ICP&gt; {</div>
 <div class="line">        <span class="keywordflow">return</span> std::make_unique&lt;NameOfClass&gt;();</div>
 <div class="line">    }));</div>
