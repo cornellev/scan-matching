@@ -1,4 +1,4 @@
-\page Writing an ICP Instance
+\page write_icp_instance Writing an ICP Instance
 
 To write an ICP instance, create a C++ source file with at least the following:
 

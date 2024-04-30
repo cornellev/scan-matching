@@ -84,8 +84,12 @@ cd icp
 
 To use the library, read the [INSTALL.md](https://github.com/cornellev/icp/blob/main/INSTALL.md
 ) document in the repository.
+Read \ref write_icp_instance to use your own ICP implementations.
 
 \subsection vis_tool_sec Visualization & Benchmarking Tool
+
+The following command visualizes the two LiDAR scans at the given files.
+Instructions are printed to standard output.
 
 ```shell
 make
@@ -95,12 +99,11 @@ make
     --method vanilla \
     --gui
 ```
-Instructions are printed to standard output.
+
+You can benchmark with `make bench`; by default, this will pass `-mvanilla`.
 
 The program itself can be built with
 ```shell
 make
 ```
 which will create an executable named `main` in the working directory.
-
-You can benchmark with `make bench`.
