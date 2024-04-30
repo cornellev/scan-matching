@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>scan matching: an ICP Implementation</title>
+<title>scan matching: an ICP Instance</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,29 +73,37 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">an ICP Implementation</div></div>
+  <div class="headertitle"><div class="title">an ICP Instance</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>An ICP implementation should reside in a single C++ source file, e.g., <code>my_icp.cpp</code>. You should declare a <code>final</code> class named <code>MyICP</code> that inherits <code>public <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a></code> that must provide the following functionality:</p>
+<div class="textblock"><p>To write an ICP instance, create a C++ source file with at least the following:</p>
+<ol type="1">
+<li>A <code>final</code> class that inherits from <code>public <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a></code></li>
+<li>A static initialization variable (described below)</li>
+</ol>
+<p>The class must define the following behavior:</p>
 <ul>
-<li><code>MyICP()</code></li>
-<li><code>~MyICP() override</code></li>
+<li>A constructor that calls the <code><a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points; please read the Detailed Description for usage information.">icp::ICP</a></code> constructor</li>
+<li>An overridden destructor (which may do nothing)</li>
 <li><code>void iterate() override</code></li>
 </ul>
-<p>You may optionally override the following methods:</p>
+<p>In <code>iterate</code>, the point clouds are given by the instance variables <code>a</code> and <code>b</code>. There are also <code>pair</code> and <code>dist</code> instance variables, each allocated to have size <code>a.size()</code>. At the end of <code>iterate</code>, the <code>transform</code> instance variable should have been updated (although the update may be zero).</p>
+<p>Optionally, the class can override:</p>
 <ul>
-<li><code>setup() override</code></li>
-<li><code>const std::vector&lt;Vector&gt;&amp; a, const std::vector&lt;Vector&gt;&amp; b) override</code></li>
+<li><code>void setup() override</code></li>
+<li><code>void trim(const std::vector&lt;Vector&gt;&amp; a, const std::vector&lt;Vector&gt;&amp; b) override</code></li>
 </ul>
-<p>Finally, define the following static variable:</p>
+<p><code>trim</code> should initialize the instance variables <code>a</code> and <code>b</code> from the given point clouds <code>a</code> and <code>b</code>. The default behavior is to copy them over directly.</p>
+<p>The static initialization is required so that users can instantiate your ICP instance. Define</p>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
-<div class="line">    assert(ICP::register_method(<span class="stringliteral">&quot;my_icp&quot;</span>, []() -&gt; std::unique_ptr&lt;ICP&gt; {</div>
-<div class="line">        <span class="keywordflow">return</span> std::make_unique&lt;MyICP&gt;();</div>
+<div class="line">    assert(ICP::register_method(<span class="stringliteral">&quot;name_of_instance&quot;</span>, []() -&gt; std::unique_ptr&lt;ICP&gt; {</div>
+<div class="line">        <span class="keywordflow">return</span> std::make_unique&lt;NameOfClass&gt;();</div>
 <div class="line">    }));</div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}();</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p>where <code>"name_of_instance"</code> is the name of your ICP implementation and <code>NameOfClass</code> is the name of the class. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
