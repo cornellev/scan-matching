@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['rbtransform_0',['RBTransform',['../structicp_1_1_r_b_transform.html',1,'icp::RBTransform'],['../structicp_1_1_r_b_transform.html#a86300e8afdc877efa7d026dc9ebed84e',1,'icp::RBTransform::RBTransform()'],['../structicp_1_1_r_b_transform.html#ae6747e94e2995d4c8978345d69d0f4f3',1,'icp::RBTransform::RBTransform(Vector translation, Matrix rotation)']]],
-  ['register_5fmethod_1',['register_method',['../classicp_1_1_i_c_p.html#a03f61570fc4fc8feef9a851baa166cb9',1,'icp::ICP']]],
-  ['registered_5fmethod_5fconstructors_2',['registered_method_constructors',['../structicp_1_1_methods.html#a3961399b9e8da6238c205a8cc372180a',1,'icp::Methods']]],
-  ['registered_5fmethod_5fnames_3',['registered_method_names',['../structicp_1_1_methods.html#a9b86e25dc92c562e4014a9e70abda5e3',1,'icp::Methods']]],
-  ['registered_5fmethods_4',['registered_methods',['../classicp_1_1_i_c_p.html#a9933256313a70fedacd7d3d7c8fa63c3',1,'icp::ICP']]],
-  ['rotation_5',['rotation',['../structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03',1,'icp::RBTransform']]]
+  ['set_0',['set',['../classicp_1_1_i_c_p_1_1_config.html#ad4b2a3a851e7a6e9711d599d780a715b',1,'icp::ICP::Config']]],
+  ['setup_1',['setup',['../classicp_1_1_i_c_p.html#a32996eafad2cbc1ecc1361536abdfe68',1,'icp::ICP']]],
+  ['sources_2',['ICP Sources',['../md_book_2icp__descr_2extra_2sources.html',1,'']]],
+  ['sources_2emd_3',['sources.md',['../sources_8md.html',1,'']]],
+  ['sq_5fdist_4',['sq_dist',['../structicp_1_1_i_c_p_1_1_match.html#a59d760dd64b75349b74a68427e7e1ba7',1,'icp::ICP::Match']]],
+  ['static_20initialization_5',['&quot;Static Initialization&quot;',['../write_icp_instance.html#static_init_sec',1,'']]],
+  ['step_6',['Trimming Step',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md3',1,'']]],
+  ['step_3a_20determine_20optimal_20transformation_7',['Step: determine optimal transformation',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md4',1,'Transformation Step: determine optimal transformation'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md7',1,'Transformation Step: determine optimal transformation.']]],
+  ['step_3a_20match_20closest_20points_8',['Step: match closest points',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md2',1,'Matching Step: match closest points'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md6',1,'Matching Step: match closest points.']]]
 ];

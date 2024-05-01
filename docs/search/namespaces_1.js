@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sim_5fconfig_0',['sim_config',['../namespacesim__config.html',1,'']]]
+  ['view_5fconfig_0',['view_config',['../namespaceview__config.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['use_5flight_5fbackground_0',['use_light_background',['../namespacesim__config.html#a49e1fa530959862dc7d96a944ef66d94',1,'sim_config']]]
+  ['window_5fheight_0',['window_height',['../namespaceview__config.html#a208c776ac122588e1de7e138f73447c5',1,'view_config']]],
+  ['window_5fwidth_1',['window_width',['../namespaceview__config.html#aa35ba001e8006e8468ac81f2b68e7bb6',1,'view_config']]]
 ];

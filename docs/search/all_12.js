@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['vanilla_20icp_0',['Vanilla ICP',['../md_book_2icp__descr_2icp__vanilla.html',1,'']]],
-  ['vanilla_2ecpp_1',['vanilla.cpp',['../vanilla_8cpp.html',1,'']]],
-  ['vector_2',['Vector',['../namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5',1,'icp']]],
-  ['visualization_20benchmarking_20tool_3',['Visualization &amp; Benchmarking Tool',['../index.html#vis_tool_sec',1,'']]]
+  ['window_5fheight_0',['window_height',['../namespaceview__config.html#a208c776ac122588e1de7e138f73447c5',1,'view_config']]],
+  ['window_5fwidth_1',['window_width',['../namespaceview__config.html#aa35ba001e8006e8468ac81f2b68e7bb6',1,'view_config']]],
+  ['writing_20an_20icp_20instance_2',['Writing an ICP Instance',['../write_icp_instance.html',1,'']]],
+  ['writing_5ficp_2emd_3',['writing_icp.md',['../writing__icp_8md.html',1,'']]]
 ];

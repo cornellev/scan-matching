@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['on_5fevent_0',['on_event',['../class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495',1,'LidarView']]],
-  ['optimal_20transformation_1',['Optimal transformation',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md4',1,'Transformation Step: determine optimal transformation'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md7',1,'Transformation Step: determine optimal transformation.']]],
-  ['overview_2',['Overview',['../index.html#overview_sec',1,'']]]
+  ['pair_0',['pair',['../structicp_1_1_i_c_p_1_1_match.html#a047c42536e6bd3b971f5b631618fe4f7',1,'icp::ICP::Match']]],
+  ['point_1',['point',['../structicp_1_1_i_c_p_1_1_match.html#a7003d232c009098b98b11b10a09b5067',1,'icp::ICP::Match']]],
+  ['points_2',['Points',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md2',1,'Matching Step: match closest points'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md6',1,'Matching Step: match closest points.']]],
+  ['previous_5fcost_3',['previous_cost',['../classicp_1_1_i_c_p.html#a27d1d41afc1f064cc278c13720dca476',1,'icp::ICP']]]
 ];

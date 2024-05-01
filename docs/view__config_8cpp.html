@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>scan matching: src/sim/lidar_view.cpp File Reference</title>
+<title>scan matching: src/sim/view_config.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,43 +78,34 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
-  <div class="headertitle"><div class="title">lidar_view.cpp File Reference</div></div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">view_config.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;random&gt;</code><br />
-<code>#include &quot;util/logger.h&quot;</code><br />
-<code>#include &quot;util/keyboard.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="lidar__view_8h_source.html">lidar_view.h</a>&quot;</code><br />
-<code>#include &quot;geo/midpoint.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
 <code>#include &quot;<a class="el" href="view__config_8h_source.html">view_config.h</a>&quot;</code><br />
 </div>
-<p><a href="lidar__view_8cpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="view__config_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a6b8b23eed4e4f833716ae707e231b19a" id="r_a6b8b23eed4e4f833716ae707e231b19a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:a6b8b23eed4e4f833716ae707e231b19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceview__config" id="r_namespaceview__config"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html">view_config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa35ba001e8006e8468ac81f2b68e7bb6" id="r_aa35ba001e8006e8468ac81f2b68e7bb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html#aa35ba001e8006e8468ac81f2b68e7bb6">view_config::window_width</a> = 700</td></tr>
+<tr class="separator:aa35ba001e8006e8468ac81f2b68e7bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208c776ac122588e1de7e138f73447c5" id="r_a208c776ac122588e1de7e138f73447c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html#a208c776ac122588e1de7e138f73447c5">view_config::window_height</a> = 700</td></tr>
+<tr class="separator:a208c776ac122588e1de7e138f73447c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b80f041e46d84145ac6c6cc7ca0d75" id="r_ae0b80f041e46d84145ac6c6cc7ca0d75"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html#ae0b80f041e46d84145ac6c6cc7ca0d75">view_config::x_displace</a> = 100</td></tr>
+<tr class="separator:ae0b80f041e46d84145ac6c6cc7ca0d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50934da9836d2bf8337dfbca50d35d62" id="r_a50934da9836d2bf8337dfbca50d35d62"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html#a50934da9836d2bf8337dfbca50d35d62">view_config::y_displace</a> = 50</td></tr>
+<tr class="separator:a50934da9836d2bf8337dfbca50d35d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a5a4ba1f038a1cb8ef8332983419366" id="r_a0a5a4ba1f038a1cb8ef8332983419366"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview__config.html#a0a5a4ba1f038a1cb8ef8332983419366">view_config::use_light_background</a> = false</td></tr>
+<tr class="separator:a0a5a4ba1f038a1cb8ef8332983419366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a6b8b23eed4e4f833716ae707e231b19a" name="a6b8b23eed4e4f833716ae707e231b19a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b8b23eed4e4f833716ae707e231b19a">&#9670;&#160;</a></span>CIRCLE_RADIUS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CIRCLE_RADIUS&#160;&#160;&#160;3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00015">15</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
