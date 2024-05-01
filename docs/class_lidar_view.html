@@ -90,9 +90,9 @@ Inheritance diagram for LidarView:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afefd516221a746567a02cc7f2a0cc4ee" id="r_afefd516221a746567a02cc7f2a0cc4ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afefd516221a746567a02cc7f2a0cc4ee">LidarView</a> (std::vector&lt; <a class="el" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> &gt; source, std::vector&lt; <a class="el" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> &gt; destination, const std::string method)</td></tr>
-<tr class="memdesc:afefd516221a746567a02cc7f2a0cc4ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new lidar view visualizing ICP (by method <code>method</code>) on the given instance (<code>source</code> and <code>destination</code>).  <br /></td></tr>
-<tr class="separator:afefd516221a746567a02cc7f2a0cc4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78020bf794dd6ec61dd169e11193f45e" id="r_a78020bf794dd6ec61dd169e11193f45e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78020bf794dd6ec61dd169e11193f45e">LidarView</a> (std::vector&lt; <a class="el" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> &gt; source, std::vector&lt; <a class="el" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> &gt; destination, const std::string method, const <a class="el" href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a> &amp;config=<a class="el" href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a>())</td></tr>
+<tr class="memdesc:a78020bf794dd6ec61dd169e11193f45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new lidar view visualizing ICP (by method <code>method</code>) on the given instance (<code>source</code> and <code>destination</code>).  <br /></td></tr>
+<tr class="separator:a78020bf794dd6ec61dd169e11193f45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaa17fc7431a01c6b934264dc4655f7f" id="r_aaaa17fc7431a01c6b934264dc4655f7f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaa17fc7431a01c6b934264dc4655f7f">~LidarView</a> () noexcept override</td></tr>
 <tr class="separator:aaaa17fc7431a01c6b934264dc4655f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5845bccd63d38d8cc99ec2a213bf8495" id="r_a5845bccd63d38d8cc99ec2a213bf8495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5845bccd63d38d8cc99ec2a213bf8495">on_event</a> (const SDL_Event &amp;event) override</td></tr>
@@ -104,8 +104,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="lidar__view_8h_source.html#l00014">14</a> of file <a class="el" href="lidar__view_8h_source.html">lidar_view.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afefd516221a746567a02cc7f2a0cc4ee" name="afefd516221a746567a02cc7f2a0cc4ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afefd516221a746567a02cc7f2a0cc4ee">&#9670;&#160;</a></span>LidarView()</h2>
+<a id="a78020bf794dd6ec61dd169e11193f45e" name="a78020bf794dd6ec61dd169e11193f45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78020bf794dd6ec61dd169e11193f45e">&#9670;&#160;</a></span>LidarView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +123,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>method</em></span>&#160;)</td>
+          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>method</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a>()</span></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,7 +162,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00024">24</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00025">25</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
 
 </div>
 </div>
@@ -194,7 +199,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00046">46</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00047">47</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +226,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00028">28</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lidar__view_8cpp_source.html#l00029">29</a> of file <a class="el" href="lidar__view_8cpp_source.html">lidar_view.cpp</a>.</p>
 
 </div>
 </div>

@@ -786,3 +786,9 @@ div.details th {
 div.details[open]>summary {
     font-weight: bold
 }
+
+/* MY ADDITIONS */
+
+h1 {
+    line-height: 1;
+}

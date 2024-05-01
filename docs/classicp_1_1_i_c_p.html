@@ -93,7 +93,7 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="icp_8h_source.html">icp.h</a>&gt;</code></p>
 
-<p>Inherited by icp::TrimmedICP, and icp::Vanilla.</p>
+<p>Inherited by icp::Trimmed, and icp::Vanilla.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -102,6 +102,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_i_c_p_1_1_convergence_report.html">ConvergenceReport</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result of running <code><a class="el" href="#a80a0f5b00b3b9bf1403fdafec96705e6" title="Perform ICP for the point clouds a and b provided with ICP::begin until the cost is below convergence...">ICP::converge</a></code>.  <a href="structicp_1_1_i_c_p_1_1_convergence_report.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structicp_1_1_i_c_p_1_1_match.html">Match</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A point-to-point matching between <code>point</code> and <code>pair</code> at a distance of <code>sqrt(sq_dist)</code>.  <a href="structicp_1_1_i_c_p_1_1_match.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -169,12 +172,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a8187f14a280850840917e85240d5e222" id="r_a8187f14a280850840917e85240d5e222"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8187f14a280850840917e85240d5e222">current_cost</a></td></tr>
 <tr class="memdesc:a8187f14a280850840917e85240d5e222"><td class="mdescLeft">&#160;</td><td class="mdescRight">The RMS (root mean square) cost of the current transformation.  <br /></td></tr>
 <tr class="separator:a8187f14a280850840917e85240d5e222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af573c4350a91a821cfa6e6d37cf446a9" id="r_af573c4350a91a821cfa6e6d37cf446a9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af573c4350a91a821cfa6e6d37cf446a9">pair</a></td></tr>
-<tr class="memdesc:af573c4350a91a821cfa6e6d37cf446a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pairing of each point in <code>a</code> to its closest in <code>b</code>.  <br /></td></tr>
-<tr class="separator:af573c4350a91a821cfa6e6d37cf446a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f23e15bf17704f88a0a258a0addc2ad" id="r_a8f23e15bf17704f88a0a258a0addc2ad"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f23e15bf17704f88a0a258a0addc2ad">dist</a></td></tr>
-<tr class="memdesc:a8f23e15bf17704f88a0a258a0addc2ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distance metric of each point in <code>a</code>.  <br /></td></tr>
-<tr class="separator:a8f23e15bf17704f88a0a258a0addc2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed7f20f82df916efaef3d6bbb1446a6" id="r_aaed7f20f82df916efaef3d6bbb1446a6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structicp_1_1_i_c_p_1_1_match.html">Match</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaed7f20f82df916efaef3d6bbb1446a6">matches</a></td></tr>
+<tr class="memdesc:aaed7f20f82df916efaef3d6bbb1446a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pairing of each point in <code>a</code> to its closest in <code>b</code>.  <br /></td></tr>
+<tr class="separator:aaed7f20f82df916efaef3d6bbb1446a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for iterative closest points. </p>
@@ -549,7 +549,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The source point cloud relative to its centroid. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00056">56</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00066">66</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The centroid of the source point cloud. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00050">50</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00060">60</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -601,7 +601,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The destination point cloud relative to its centroid. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00059">59</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00069">69</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -627,7 +627,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The centroid of the destination point cloud. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00053">53</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00063">63</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -653,12 +653,12 @@ Protected Attributes</h2></td></tr>
 
 <p>The RMS (root mean square) cost of the current transformation. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00066">66</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00076">76</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
-<a id="a8f23e15bf17704f88a0a258a0addc2ad" name="a8f23e15bf17704f88a0a258a0addc2ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f23e15bf17704f88a0a258a0addc2ad">&#9670;&#160;</a></span>dist</h2>
+<a id="aaed7f20f82df916efaef3d6bbb1446a6" name="aaed7f20f82df916efaef3d6bbb1446a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaed7f20f82df916efaef3d6bbb1446a6">&#9670;&#160;</a></span>matches</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -667,33 +667,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;double&gt; icp::ICP::dist</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The distance metric of each point in <code>a</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00072">72</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
-
-</div>
-</div>
-<a id="af573c4350a91a821cfa6e6d37cf446a9" name="af573c4350a91a821cfa6e6d37cf446a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af573c4350a91a821cfa6e6d37cf446a9">&#9670;&#160;</a></span>pair</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;size_t&gt; icp::ICP::pair</td>
+          <td class="memname">std::vector&lt;<a class="el" href="structicp_1_1_i_c_p_1_1_match.html">Match</a>&gt; icp::ICP::matches</td>
         </tr>
       </table>
   </td>
@@ -705,7 +679,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The pairing of each point in <code>a</code> to its closest in <code>b</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00069">69</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00079">79</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -732,7 +706,7 @@ Protected Attributes</h2></td></tr>
 <p>Keeps track of the previous cost to ensure that progress is being made. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a8187f14a280850840917e85240d5e222" title="The RMS (root mean square) cost of the current transformation.">ICP::current_cost</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00063">63</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00073">73</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>
@@ -758,7 +732,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The current point cloud transformation that is being optimized. </p>
 
-<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00047">47</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp_8h_source.html#l00057">57</a> of file <a class="el" href="icp_8h_source.html">icp.h</a>.</p>
 
 </div>
 </div>

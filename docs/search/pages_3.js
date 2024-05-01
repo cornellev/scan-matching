@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writing_20an_20icp_20instance_0',['Writing an ICP Instance',['../write_icp_instance.html',1,'']]]
+  ['trimmed_20icp_0',['Trimmed ICP',['../md_book_2icp__descr_2icp__trimmed.html',1,'']]]
 ];

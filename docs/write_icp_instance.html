@@ -89,7 +89,7 @@ $(function() {
 <li>An overridden destructor (which may do nothing)</li>
 <li><code>void iterate() override</code></li>
 </ul>
-<p>In <code>iterate</code>, the point clouds are given by the instance variables <code>a</code> and <code>b</code>. There are also <code>pair</code> and <code>dist</code> instance variables, each allocated to have size <code>a.size()</code>. At the end of <code>iterate</code>, the <code>transform</code> instance variable should have been updated (although the update may be zero).</p>
+<p>In <code>iterate</code>, the point clouds are given by the instance variables <code>a</code> and <code>b</code>. There is also the <code>match</code> instance variable, allocated to have size <code>a.size()</code>, which cannot be assumed to contain any definite values. At the end of <code>iterate</code>, the <code>transform</code> instance variable should have been updated (although the update may be zero).</p>
 <p>Optionally, the class can override:</p>
 <ul>
 <li><code>void setup() override</code></li>

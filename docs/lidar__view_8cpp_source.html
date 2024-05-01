@@ -102,71 +102,73 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">   15</a></span><span class="preprocessor">#define CIRCLE_RADIUS 3</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_lidar_view.html#afefd516221a746567a02cc7f2a0cc4ee">   17</a></span><a class="code hl_function" href="class_lidar_view.html#afefd516221a746567a02cc7f2a0cc4ee">LidarView::LidarView</a>(std::vector&lt;icp::Vector&gt; source,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;icp::Vector&gt; destination, <span class="keyword">const</span> std::string method)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    : source(source), destination(destination), keyboard(false), iterations{} {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a> = <a class="code hl_function" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485">icp::ICP::from_method</a>(method);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;begin(source, destination, <a class="code hl_struct" href="structicp_1_1_r_b_transform.html">icp::RBTransform</a>());</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_lidar_view.html#a78020bf794dd6ec61dd169e11193f45e">   17</a></span><a class="code hl_function" href="class_lidar_view.html#a78020bf794dd6ec61dd169e11193f45e">LidarView::LidarView</a>(std::vector&lt;icp::Vector&gt; source,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;icp::Vector&gt; destination, <span class="keyword">const</span> std::string method,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">const</span> <a class="code hl_class" href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a>&amp; config)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    : source(source), destination(destination), keyboard(false), iterations{} {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a> = <a class="code hl_function" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485">icp::ICP::from_method</a>(method, config);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;begin(source, destination, <a class="code hl_struct" href="structicp_1_1_r_b_transform.html">icp::RBTransform</a>());</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">   24</a></span><a class="code hl_function" href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">LidarView::~LidarView</a>() noexcept {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a>.release();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">   25</a></span><a class="code hl_function" href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">LidarView::~LidarView</a>() noexcept {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_namespace" href="namespaceicp.html">icp</a>.release();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">LidarView::on_event</a>(<span class="keyword">const</span> SDL_Event&amp; event) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> space_before = keyboard.query(SDLK_SPACE);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">bool</span> d_before = keyboard.query(SDLK_d);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    keyboard.update(event);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">bool</span> space_after = keyboard.query(SDLK_SPACE);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">bool</span> d_after = keyboard.query(SDLK_d);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span> (!space_before &amp;&amp; space_after) {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        is_iterating = !is_iterating;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (!d_before &amp;&amp; d_after) {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;DEBUG PRINT:\n&quot;</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        std::cerr &lt;&lt; <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;current_transform().to_string() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        std::cerr &lt;&lt; <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;calculate_cost() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::cerr &lt;&lt; iterations &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">   29</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">LidarView::on_event</a>(<span class="keyword">const</span> SDL_Event&amp; event) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">bool</span> space_before = keyboard.query(SDLK_SPACE);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">bool</span> d_before = keyboard.query(SDLK_d);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    keyboard.update(event);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">bool</span> space_after = keyboard.query(SDLK_SPACE);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> d_after = keyboard.query(SDLK_d);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (!space_before &amp;&amp; space_after) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        is_iterating = !is_iterating;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (!d_before &amp;&amp; d_after) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;DEBUG PRINT:\n&quot;</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        std::cerr &lt;&lt; <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;current_transform().to_string() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::cerr &lt;&lt; <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;calculate_cost() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::cerr &lt;&lt; iterations &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
 </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">LidarView::draw</a>(SDL_Renderer* renderer, <span class="keyword">const</span> SDL_Rect* frame __unused,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">double</span> dtime __unused) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespacesim__config.html#a49e1fa530959862dc7d96a944ef66d94">sim_config::use_light_background</a>) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    SDL_RenderClear(renderer);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a>&amp; point: destination) {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        SDL_DrawCircle(renderer, point[0], point[1], <a class="code hl_define" href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 100);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a>&amp; point: source) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> result = <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;current_transform().apply_to(point);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        SDL_DrawCircle(renderer, result[0], result[1], <a class="code hl_define" href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a>);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span> (is_iterating) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;iterate();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        iterations++;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">   47</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">LidarView::draw</a>(SDL_Renderer* renderer, <span class="keyword">const</span> SDL_Rect* frame __unused,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">double</span> dtime __unused) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespacesim__config.html#a49e1fa530959862dc7d96a944ef66d94">sim_config::use_light_background</a>) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    SDL_RenderClear(renderer);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a>&amp; point: destination) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        SDL_DrawCircle(renderer, point[0], point[1], <a class="code hl_define" href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 100);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a>&amp; point: source) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_typedef" href="namespaceicp.html#aba583ee22f8131f5494d90fb3a611bd5">icp::Vector</a> result = <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;current_transform().apply_to(point);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        SDL_DrawCircle(renderer, result[0], result[1], <a class="code hl_define" href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (is_iterating) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_namespace" href="namespaceicp.html">icp</a>-&gt;iterate();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        iterations++;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 </div>
-<div class="ttc" id="aclass_lidar_view_html_a5845bccd63d38d8cc99ec2a213bf8495"><div class="ttname"><a href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">LidarView::on_event</a></div><div class="ttdeci">void on_event(const SDL_Event &amp;event) override</div><div class="ttdef"><b>Definition</b> <a href="#l00028">lidar_view.cpp:28</a></div></div>
-<div class="ttc" id="aclass_lidar_view_html_aaaa17fc7431a01c6b934264dc4655f7f"><div class="ttname"><a href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">LidarView::~LidarView</a></div><div class="ttdeci">~LidarView() noexcept override</div><div class="ttdef"><b>Definition</b> <a href="#l00024">lidar_view.cpp:24</a></div></div>
-<div class="ttc" id="aclass_lidar_view_html_adc727da2f727ceaf0ee20c5d4019917f"><div class="ttname"><a href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">LidarView::draw</a></div><div class="ttdeci">void draw(SDL_Renderer *renderer, const SDL_Rect *frame, double dtime) override</div><div class="ttdef"><b>Definition</b> <a href="#l00046">lidar_view.cpp:46</a></div></div>
-<div class="ttc" id="aclass_lidar_view_html_afefd516221a746567a02cc7f2a0cc4ee"><div class="ttname"><a href="class_lidar_view.html#afefd516221a746567a02cc7f2a0cc4ee">LidarView::LidarView</a></div><div class="ttdeci">LidarView(std::vector&lt; icp::Vector &gt; source, std::vector&lt; icp::Vector &gt; destination, const std::string method)</div><div class="ttdoc">Constructs a new lidar view visualizing ICP (by method method) on the given instance (source and dest...</div><div class="ttdef"><b>Definition</b> <a href="#l00017">lidar_view.cpp:17</a></div></div>
+<div class="ttc" id="aclass_lidar_view_html_a5845bccd63d38d8cc99ec2a213bf8495"><div class="ttname"><a href="class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495">LidarView::on_event</a></div><div class="ttdeci">void on_event(const SDL_Event &amp;event) override</div><div class="ttdef"><b>Definition</b> <a href="#l00029">lidar_view.cpp:29</a></div></div>
+<div class="ttc" id="aclass_lidar_view_html_a78020bf794dd6ec61dd169e11193f45e"><div class="ttname"><a href="class_lidar_view.html#a78020bf794dd6ec61dd169e11193f45e">LidarView::LidarView</a></div><div class="ttdeci">LidarView(std::vector&lt; icp::Vector &gt; source, std::vector&lt; icp::Vector &gt; destination, const std::string method, const icp::ICP::Config &amp;config=icp::ICP::Config())</div><div class="ttdoc">Constructs a new lidar view visualizing ICP (by method method) on the given instance (source and dest...</div><div class="ttdef"><b>Definition</b> <a href="#l00017">lidar_view.cpp:17</a></div></div>
+<div class="ttc" id="aclass_lidar_view_html_aaaa17fc7431a01c6b934264dc4655f7f"><div class="ttname"><a href="class_lidar_view.html#aaaa17fc7431a01c6b934264dc4655f7f">LidarView::~LidarView</a></div><div class="ttdeci">~LidarView() noexcept override</div><div class="ttdef"><b>Definition</b> <a href="#l00025">lidar_view.cpp:25</a></div></div>
+<div class="ttc" id="aclass_lidar_view_html_adc727da2f727ceaf0ee20c5d4019917f"><div class="ttname"><a href="class_lidar_view.html#adc727da2f727ceaf0ee20c5d4019917f">LidarView::draw</a></div><div class="ttdeci">void draw(SDL_Renderer *renderer, const SDL_Rect *frame, double dtime) override</div><div class="ttdef"><b>Definition</b> <a href="#l00047">lidar_view.cpp:47</a></div></div>
+<div class="ttc" id="aclassicp_1_1_i_c_p_1_1_config_html"><div class="ttname"><a href="classicp_1_1_i_c_p_1_1_config.html">icp::ICP::Config</a></div><div class="ttdoc">Configuration for ICP instances.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00097">icp.h:97</a></div></div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_a4147f2e116fe41bd31f37b6e23829485"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485">icp::ICP::from_method</a></div><div class="ttdeci">static std::unique_ptr&lt; ICP &gt; from_method(std::string name, const Config &amp;params=Config())</div><div class="ttdoc">Factory constructor for the ICP method name with configuration config.</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00112">icp.cpp:112</a></div></div>
 <div class="ttc" id="alidar__view_8cpp_html_a6b8b23eed4e4f833716ae707e231b19a"><div class="ttname"><a href="lidar__view_8cpp.html#a6b8b23eed4e4f833716ae707e231b19a">CIRCLE_RADIUS</a></div><div class="ttdeci">#define CIRCLE_RADIUS</div><div class="ttdef"><b>Definition</b> <a href="#l00015">lidar_view.cpp:15</a></div></div>
 <div class="ttc" id="alidar__view_8h_html"><div class="ttname"><a href="lidar__view_8h.html">lidar_view.h</a></div></div>
