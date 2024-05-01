@@ -10,7 +10,7 @@ extern "C" {
 #include <numeric>
 #include <algorithm>
 #include "gui/window.h"
-#include "sim/sim_config.h"
+#include "sim/view_config.h"
 #include "sim/lidar_view.h"
 
 struct LidarScan {
@@ -26,28 +26,14 @@ struct LidarScan {
 
 void set_config_param(const char* var, const char* data,
     void* user_data __unused) {
-    if (strcmp(var, "n") == 0) {
-        sim_config::n = std::stoi(data);
-    } else if (strcmp(var, "scale") == 0) {
-        sim_config::scale = std::stod(data);
-    } else if (strcmp(var, "slope") == 0) {
-        sim_config::slope = std::stod(data);
-    } else if (strcmp(var, "intercept") == 0) {
-        sim_config::intercept = std::stod(data);
-    } else if (strcmp(var, "perturbation_range") == 0) {
-        sim_config::perturbation_range = std::stod(data);
-    } else if (strcmp(var, "x_displace") == 0) {
-        sim_config::x_displace = std::stod(data);
+    if (strcmp(var, "x_displace") == 0) {
+        view_config::x_displace = std::stod(data);
     } else if (strcmp(var, "y_displace") == 0) {
-        sim_config::y_displace = std::stod(data);
-    } else if (strcmp(var, "angle_displace") == 0) {
-        sim_config::angle_displace = std::stod(data);
+        view_config::y_displace = std::stod(data);
     } else if (strcmp(var, "window_width") == 0) {
-        sim_config::window_width = std::stoi(data);
+        view_config::window_width = std::stoi(data);
     } else if (strcmp(var, "window_height") == 0) {
-        sim_config::window_height = std::stoi(data);
-    } else if (strcmp(var, "x_delta") == 0) {
-        sim_config::x_delta = std::stoi(data);
+        view_config::window_height = std::stoi(data);
     }
 }
 
@@ -70,9 +56,8 @@ void parse_lidar_scan(const char* var, const char* data, void* user_data) {
         double angle = scan->angle_min + index * scan->angle_increment;
         double range = strtod(data, NULL);
         if (range >= scan->range_min && range <= scan->range_max) {
-            scan->points.push_back(icp::Vector(
-                100 * range * std::cos(angle) + sim_config::window_width / 2,
-                100 * range * std::sin(angle) + sim_config::window_height / 2));
+            scan->points.push_back(icp::Vector(100 * range * std::cos(angle),
+                100 * range * std::sin(angle)));
         }
     }
 }
@@ -94,8 +79,8 @@ void parse_config(const char* path, conf_parse_handler_t handler,
 }
 
 void launch_gui(LidarView* view, std::string visualized = "LiDAR scans") {
-    Window window("Scan Matching", sim_config::window_width,
-        sim_config::window_height);
+    Window window("Scan Matching", view_config::window_width,
+        view_config::window_height);
 
     window.attach_view(view);
 
@@ -195,7 +180,7 @@ int main(int argc, const char** argv) {
     bool* basic_mode;  // for gbody people
     const char* f_src;
     const char* f_dst;
-    const char* config_file = "sim.conf";
+    const char* config_file = "view.conf";
     const char* method = "vanilla";
 
     assert(do_bench = ca_opt('b', "bench", "&SD", NULL,
@@ -206,7 +191,7 @@ int main(int argc, const char** argv) {
     assert(ca_opt('D', "dst", ".FILE&S", &f_dst,
         "destination scan (pass with -S)"));
     assert(ca_opt('c', "config", ".FILE", &config_file,
-        "selects a configuration file"));
+        "selects a configuration file (default: view.conf)"));
     assert(ca_opt('m', "method", ".METHOD", &method, "selects an ICP method"));
     assert(basic_mode = ca_long_opt("basic-mode", "", NULL,
                "uses a ligher gui background"));
@@ -224,7 +209,7 @@ int main(int argc, const char** argv) {
     Log.is_enabled = *enable_log;
     parse_config(config_file, set_config_param, NULL);
     if (*basic_mode) {
-        sim_config::use_light_background = true;
+        view_config::use_light_background = true;
     }
 
     if (!icp::ICP::is_registered_method(method)) {
@@ -242,8 +227,11 @@ int main(int argc, const char** argv) {
         parse_config(f_src, parse_lidar_scan, &source);
         parse_config(f_dst, parse_lidar_scan, &destination);
         if (*use_gui) {
+            icp::ICP::Config config;
+            config.set("overlap_rate", 0.9);
             LidarView* view = new LidarView(source.points, destination.points,
-                method);
+                method, config);
+
             launch_gui(view,
                 std::string(f_src) + std::string(" and ") + std::string(f_dst));
         } else if (*do_bench) {

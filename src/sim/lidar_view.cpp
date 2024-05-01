@@ -10,7 +10,7 @@
 #include "util/keyboard.h"
 #include "lidar_view.h"
 #include "geo/midpoint.h"
-#include "sim_config.h"
+#include "view_config.h"
 
 #define CIRCLE_RADIUS 3
 
@@ -38,15 +38,17 @@ void LidarView::on_event(const SDL_Event& event) {
     }
     if (!d_before && d_after) {
         std::cerr << "DEBUG PRINT:\n";
-        std::cerr << icp->current_transform().to_string() << '\n';
-        std::cerr << icp->calculate_cost() << '\n';
-        std::cerr << iterations << '\n';
+        std::cerr << "icp->current_transform() = "
+                  << icp->current_transform().to_string() << '\n';
+        std::cerr << "icp->calculate_cost() = " << icp->calculate_cost()
+                  << '\n';
+        std::cerr << "iterations = " << iterations << '\n';
     }
 }
 
 void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame __unused,
     double dtime __unused) {
-    if (sim_config::use_light_background) {
+    if (view_config::use_light_background) {
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     } else {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -55,13 +57,15 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame __unused,
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
     for (const icp::Vector& point: destination) {
-        SDL_DrawCircle(renderer, point[0], point[1], CIRCLE_RADIUS);
+        SDL_DrawCircle(renderer, point[0] + view_config::x_displace,
+            point[1] + view_config::y_displace, CIRCLE_RADIUS);
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 100);
     for (const icp::Vector& point: source) {
         icp::Vector result = icp->current_transform().apply_to(point);
-        SDL_DrawCircle(renderer, result[0], result[1], CIRCLE_RADIUS);
+        SDL_DrawCircle(renderer, result[0] + view_config::x_displace,
+            result[1] + view_config::y_displace, CIRCLE_RADIUS);
     }
 
     if (is_iterating) {
