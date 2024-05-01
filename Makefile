@@ -54,6 +54,10 @@ test: test.cpp $(OBJ)
 	@./_temp
 	@rm -f ./_temp
 
+.PHONY: aux
+aux: $(TARGET) 
+	./$(TARGET) -mvanilla
+
 .PHONY: view
 view: $(TARGET)
 	./$(TARGET) -S ex_data/scan$(N)/first.conf -D ex_data/scan$(N)/second.conf --method $(METHOD) --gui
@@ -72,6 +76,7 @@ clean:
 
 .PHONY: docs 
 docs:
+	$(PY) script/icp_doc_builder.py
 	doxygen
 
 .PHONY: cloc

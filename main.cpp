@@ -237,12 +237,6 @@ int main(int argc, const char** argv) {
         std::exit(1);
     }
 
-    // std::vector<icp::Vector> a = {icp::Vector(0, 0), icp::Vector(1000,
-    // 1000)}; std::vector<icp::Vector> b = {icp::Vector(0, 1000),
-    // icp::Vector(1000, 0)}; LidarView* view = new LidarView(a, b, method);
-    // launch_gui(view, "test");
-    // return 1;
-
     if (*read_scan_files) {
         LidarScan source, destination;
         parse_config(f_src, parse_lidar_scan, &source);

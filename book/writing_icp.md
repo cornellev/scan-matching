@@ -14,7 +14,7 @@ The class must define the following behavior:
 - `void iterate() override`
 
 In `iterate`, the point clouds are given by the instance variables `a` and `b`.
-There are also `pair` and `dist` instance variables, each allocated to have size `a.size()`.
+There is also the `match` instance variable, allocated to have size `a.size()`, which cannot be assumed to contain any definite values.
 At the end of `iterate`, the `transform` instance variable should have been updated (although the update may be zero).
 
 Optionally, the class can override:

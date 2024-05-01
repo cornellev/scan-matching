@@ -38,9 +38,9 @@ namespace icp {
 
         // Ensure arrays are the right size
         const size_t n = this->a.size();
-        if (pair.size() < n) {
-            pair.resize(n);
-            dist.resize(n);
+        if (matches.size() < n) {
+            matches.resize(n);
+            matches.resize(n);
         }
 
         // Per-instance customization routine
@@ -49,8 +49,8 @@ namespace icp {
 
     double ICP::calculate_cost() const {
         double sum_squares{};
-        for (double value: dist) {
-            sum_squares += value;
+        for (auto& match: matches) {
+            sum_squares += match.sq_dist;
         }
         return std::sqrt(sum_squares / a.size());
     }

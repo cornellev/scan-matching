@@ -43,7 +43,17 @@ namespace icp {
      */
     class ICP {
     protected:
-        /** The current point cloud transformation that is being optimized. */
+        // TODO: make this more general to allow for point-to-line
+        /** A point-to-point matching between `point` and `pair` at a distance
+         * of `sqrt(sq_dist)`.  */
+        struct Match {
+            size_t point;
+            size_t pair;
+            double sq_dist;
+        };
+
+        /** The current point cloud transformation that is being optimized.
+         */
         RBTransform transform;
 
         /** The centroid of the source point cloud. */
@@ -66,10 +76,7 @@ namespace icp {
         double current_cost;
 
         /** The pairing of each point in `a` to its closest in `b`. */
-        std::vector<size_t> pair;
-
-        /** The distance metric of each point in `a`. */
-        std::vector<double> dist;
+        std::vector<Match> matches;
 
         ICP();
 
