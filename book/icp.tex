@@ -22,22 +22,21 @@
 \section{Problem Definitions and Statement}
 
 \begin{defn}
-    A \textbf{point cloud} $A$ over $\R^n$ is a sequence of vectors in $R^n$
+    A \emph{point cloud} $A$ over $\R^n$ is a sequence of $|A| = k \in \N^+$ vectors in $R^n$, that is,
     \[
         A = (a_1, \dots, a_k) \quad \forall i \in [k],\, a_i \in \R^n
     \]
-    and we let $|A| = k$.
 \end{defn}
 
 \begin{defn}
-    The \textbf{centroid} of a point cloud $A$ is defined to be
+    The \emph{centroid} of a point cloud $A$ is defined to be
     \[
         \bar{a} = \frac{1}{|A|} \sum_{a \in A} a
     \]
 \end{defn}
 
 \begin{defn}
-    A \textbf{rigid-body transformation} on a point cloud $A$ is an affine map $T : \R^n \to \R^n$ determined by an rotation matrix $R \in \R^{n \times n}$ and translation $t \in \R^n$ and given by
+    A \emph{rigid-body transformation} on a point cloud $A$ is an affine map $T : \R^n \to \R^n$ determined by an rotation matrix $R \in \R^{n \times n}$ and translation $t \in \R^n$ and given by
     \[
         T : a \mapsto R(a - \bar{a}) + \bar{a} + t
     \]
@@ -52,7 +51,7 @@
 \end{outline}
 
 \begin{defn}
-    The \textbf{point-to-point metric} for two point clouds $A, B$ is given by
+    The \emph{point-to-point metric} for two point clouds $A, B$ is given by
     \begin{equation}
         \phi(T, a) = \mathop{\mrm{argmin}}\limits_{\substack{b \in B}} \| T(a) - b \|^2
     \end{equation}
