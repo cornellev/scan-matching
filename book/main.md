@@ -4,6 +4,7 @@
 
 Scan-matching is a method for localization that uses high-frequency LiDAR data.
 This project is [Ethan](https://ethanuppal.com)'s implementation of algorithms for scan-matching.
+Please read [this document](icp.pdf) to learn more about the math.
 
 <table>
     <tr>
