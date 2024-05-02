@@ -77,7 +77,11 @@ clean:
 .PHONY: docs 
 docs:
 	$(PY) script/icp_doc_builder.py
+	cd book; \
+		pdflatex icp.tex; \
+		rm *.aux *.log *.out
 	doxygen
+	mv book/icp.pdf docs
 
 .PHONY: cloc
 cloc:

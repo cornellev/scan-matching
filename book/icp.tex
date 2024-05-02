@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\usepackage{/Users/ethan/latex/ethan}
+
+\newtheoremstyle{defstyle} % name
+    {3pt} % Space above
+    {3pt} % Space below
+    {\upshape} % Body font
+    {} % Indent amount
+    {\bfseries} % Theorem head font
+    {.} % Punctuation after theorem head
+    {.5em} % Space after theorem head
+    {} % Theorem head spec (can be left empty, meaning ‘normal’)
+\theoremstyle{defstyle}
+\newtheorem{defn}{Definition}
+
+\begin{document}
+
+\begin{generic}
+    Iterative Closest Points \hfill CEV \vbar Ethan Uppal
+\end{generic}
+
+\section{Problem Definitions and Statement}
+
+\begin{defn}
+    A \textbf{point cloud} $A$ over $\R^n$ is a sequence of vectors in $R^n$
+    \[
+        A = (a_1, \dots, a_k) \quad \forall i \in [k],\, a_i \in \R^n
+    \]
+    and we let $|A| = k$.
+\end{defn}
+
+\begin{defn}
+    The \textbf{centroid} of a point cloud $A$ is defined to be
+    \[
+        \bar{a} = \frac{1}{|A|} \sum_{a \in A} a
+    \]
+\end{defn}
+
+\begin{defn}
+    A \textbf{rigid-body transformation} on a point cloud $A$ is an affine map $T : \R^n \to \R^n$ determined by an rotation matrix $R \in \R^{n \times n}$ and translation $t \in \R^n$ and given by
+    \[
+        T : a \mapsto R(a - \bar{a}) + \bar{a} + t
+    \]
+    that is, a rotation around the centroid of followed by a translation.
+\end{defn}
+
+\begin{outline}
+    The \textsc{Point-Cloud Registration Problem} is, given two point clouds $A, B$ and a pairing function $\phi(T, \cdot)$ based on a rigid-body transformation $T$ such that $\forall a \in A,\, \phi(T, a) \in B$, to determine the rigid-body transformation $T$ that optimizes
+    \begin{equation}\label{icp}
+        \min\limits_{\substack{T}} \sum_{a \in A} \| T(a) - \phi(T, a) \|^2
+    \end{equation}
+\end{outline}
+
+\begin{defn}
+    The \textbf{point-to-point metric} for two point clouds $A, B$ is given by
+    \begin{equation}
+        \phi(T, a) = \mathop{\mrm{argmin}}\limits_{\substack{b \in B}} \| T(a) - b \|^2
+    \end{equation}
+\end{defn}
+
+% \begin{align*}
+%      & \min\limits_{\substack{T}} \sum_{a \in A} \| T(a) - \phi(T, a) \|^2                                                  \\
+%      & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + \bar{a} + t - \phi(T, a) \|^2 & \text{(let $a' = a - \bar{a}$)} \\
+%      & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + t - \phi(T, a) \|^2           & \text{($\bar{a}$ is constant)}  \\
+% \end{align*}
+
+\section{Solution}
+
+In general, there is no closed-form solution that minimizes (\ref*{icp}).
+When there is no translation, Horn (1987) derives a closed-form solution; therefore, if an initial odometry estimate is precise enough, this translation can be applied to all the points in the point cloud, producing a problem instance with zero translation.
+
+\end{document}

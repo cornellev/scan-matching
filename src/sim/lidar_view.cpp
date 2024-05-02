@@ -61,12 +61,23 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame __unused,
             point[1] + view_config::y_displace, CIRCLE_RADIUS);
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 100);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
     for (const icp::Vector& point: source) {
         icp::Vector result = icp->current_transform().apply_to(point);
         SDL_DrawCircle(renderer, result[0] + view_config::x_displace,
             result[1] + view_config::y_displace, CIRCLE_RADIUS);
     }
+
+    icp::Vector a_cm =
+        icp->current_transform().apply_to(icp::get_centroid(source));
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 10);
+    SDL_DrawCircle(renderer, a_cm.x() + view_config::x_displace,
+        a_cm.y() + view_config::y_displace, 20);
+
+    icp::Vector b_cm = icp::get_centroid(destination);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 10);
+    SDL_DrawCircle(renderer, b_cm.x() + view_config::x_displace,
+        b_cm.y() + view_config::y_displace, 20);
 
     if (is_iterating) {
         icp->iterate();
