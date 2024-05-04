@@ -56,16 +56,24 @@
         \phi(T, a) = \mathop{\mrm{argmin}}\limits_{\substack{b \in B}} \| T(a) - b \|^2
     \end{equation}
 \end{defn}
-
-% \begin{align*}
-%      & \min\limits_{\substack{T}} \sum_{a \in A} \| T(a) - \phi(T, a) \|^2                                                  \\
-%      & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + \bar{a} + t - \phi(T, a) \|^2 & \text{(let $a' = a - \bar{a}$)} \\
-%      & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + t - \phi(T, a) \|^2           & \text{($\bar{a}$ is constant)}  \\
-% \end{align*}
-
 \section{Solution}
 
 In general, there is no closed-form solution that minimizes (\ref{icp}).
 When there is no translation, Horn (1987) derives a closed-form solution; therefore, if an initial odometry estimate is precise enough, this translation can be applied to all the points in the point cloud, producing a problem instance with zero translation.
+
+Therefore, we must resort to heuristics
+
+\begin{align*}
+     & \min\limits_{\substack{T}} \sum_{a \in A} \| T(a) - \phi(T, a) \|^2                                                  \\
+     & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + \bar{a} + t - \phi(T, a) \|^2 & \text{(let $a' = a - \bar{a}$)} \\
+     & = \min\limits_{\substack{T}} \sum_{a \in A} \| Ra' + t - \phi(T, a) \|^2           & \text{($\bar{a}$ is constant)}  \\
+\end{align*}
+
+
+\begin{gather*}
+    -2b_x + 2t_x + 2({a'}_x)\cos(\theta) - 2({a'}_y)\sin(\theta) \\
+    -2b_y + 2t_y + 2({a'}_x)\sin(\theta) + 2({a'}_y)\cos(\theta) \\
+    (-2({a'}_x)\sin(\theta) - 2({a'}_y)\cos(\theta))(-b_x + t_x + ({a'}_x)\cos(\theta) - ({a'}_y)\sin(\theta)) + (2({a'}_x)\cos(\theta) - 2({a'}_y)\sin(\theta))(-b_y + t_y + ({a'}_x)\sin(\theta) + ({a'}_y)\cos(\theta))
+\end{gather*}
 
 \end{document}

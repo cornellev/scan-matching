@@ -6,3 +6,8 @@ main
 main.out
 docs/
 *.a
+*.aux
+*.fdb_latexmk
+*.out
+*.log
+*.fls

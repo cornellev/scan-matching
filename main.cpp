@@ -58,6 +58,8 @@ void parse_lidar_scan(const char* var, const char* data, void* user_data) {
         if (range >= scan->range_min && range <= scan->range_max) {
             scan->points.push_back(icp::Vector(100 * range * std::cos(angle),
                 100 * range * std::sin(angle)));
+            // auto last = scan->points.back();
+            // std::cerr << last.x() << ',' << last.y() << '\n';
         }
     }
 }
@@ -224,8 +226,14 @@ int main(int argc, const char** argv) {
 
     if (*read_scan_files) {
         LidarScan source, destination;
+        std::cerr << "source\n";
         parse_config(f_src, parse_lidar_scan, &source);
+        std::cerr << "dest\n";
         parse_config(f_dst, parse_lidar_scan, &destination);
+        // std::unique_ptr<icp::ICP> icp = icp::ICP::from_method("vanilla");
+        // icp->begin(source.points, destination.points, icp::RBTransform());
+        // icp->iterate();
+        // return 1;
         if (*use_gui) {
             icp::ICP::Config config;
             config.set("overlap_rate", 0.9);
