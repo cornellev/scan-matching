@@ -82,6 +82,7 @@ docs:
 		rm *.aux *.log *.out
 	doxygen
 	mv book/icp.pdf docs
+	mv book/desmos.txt docs
 
 .PHONY: cloc
 cloc:
