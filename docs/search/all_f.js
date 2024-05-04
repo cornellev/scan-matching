@@ -8,5 +8,6 @@ var searchData=
   ['translation_5',['translation',['../structicp_1_1_r_b_transform.html#ac449288fecc4bb2a94783f45f8a912ac',1,'icp::RBTransform']]],
   ['trimmed_20icp_6',['Trimmed ICP',['../md_book_2icp__descr_2icp__trimmed.html',1,'']]],
   ['trimmed_2ecpp_7',['trimmed.cpp',['../trimmed_8cpp.html',1,'']]],
-  ['trimming_20step_8',['Trimming Step',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md3',1,'']]]
+  ['trimmed_2ed_8',['trimmed.d',['../trimmed_8d.html',1,'']]],
+  ['trimming_20step_9',['Trimming Step',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md3',1,'']]]
 ];
