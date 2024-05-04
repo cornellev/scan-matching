@@ -5,7 +5,7 @@ To write an ICP instance, create a C++ source file with at least the following:
 1. A `final` class that inherits from `public icp::ICP`
 2. A static initialization variable (described below)
 
-\section core_func_sec "Core Functionality"
+\section core_func_sec Core Functionality
 
 The class must define the following behavior:
 
@@ -23,7 +23,7 @@ Optionally, the class can override:
 
 `setup` is invoked upon the user call to `ICP::begin` after the internals of ICP have been readied.
 
-\section static_init_sec "Static Initialization"
+\section static_init_sec Static Initialization
 
 The static initialization is required so that users can instantiate your ICP instance.
 Define

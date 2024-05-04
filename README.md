@@ -3,12 +3,12 @@
 <!-- EDIT README.md.build INSTEAD. -->
 # icp
 
-> Last updated 2024-05-04 18:40:00.546081.  
+> Last updated 2024-05-04 18:55:48.083636.  
 > Made by [Ethan Uppal](https://www.ethanuppal.com).
 
 ## Introduction
 
-This repository hosts Ethan's (my) implementation of Iterative Closest Points (ICP) as applied to scan matching.
+This repository hosts Ethan's implementation of Iterative Closest Points (ICP) as applied to scan matching.
 It is a first step in my project to implement Simultaneous Localization and Mapping (SLAM).
 
 ## Install
