@@ -128,7 +128,9 @@ namespace icp {
             RBTransform t);
 
         /** Perform one iteration of ICP for the point clouds `a` and `b`
-         * provided with ICP::begin. */
+         * provided with ICP::begin.
+         *
+         * @pre ICP::begin must have been invoked. */
         virtual void iterate() = 0;
 
         /**
@@ -147,6 +149,7 @@ namespace icp {
          * are not met.
          *
          * @returns Information about the convergence.
+         * @pre ICP::begin must have been invoked.
          */
         ConvergenceReport converge(size_t burn_in,
             double convergence_threshold);

@@ -5,19 +5,19 @@
 
 #include <cassert>
 #include <cstdlib>
-#include "icp.h"
+#include "../icp.h"
 #include <Eigen/Core>
 #include <Eigen/SVD>
 
 /* #name Trimmed */
 
-/*
-    #desc
-    Trimmed ICP is identical to \ref vanilla_icp with the addition of an overlap
-   rate parameter, which specifies the percentage of points between the two
-   point sets that have correspondences. When the overlap rate is 1, the
-   algorithm reduces to vanilla.
- */
+/* #desc Trimmed ICP is identical to \ref vanilla_icp with the addition of an
+overlap rate parameter, which specifies the percentage of points between the two
+point sets that have correspondences. When the overlap rate is 1, the algorithm
+reduces to vanilla.
+
+You may supply the overlap rate by binding `"overlap_rate"` to a `double`
+between 0 and 1 in the ICP::Config optional parameter. The default is 1. */
 
 namespace icp {
     struct Trimmed final : public ICP {

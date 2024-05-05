@@ -92,7 +92,9 @@ cloc:
 readme:
 	cd script; $(PY) readme.py `curl https://api.github.com/repos/cornellev/icp/releases/latest | jq .name`
 
-.PHONY: static
+.PHONY: math
+math:
+	@cd math; $(PY) ./icp_math.py
 
 ifeq ($(shell uname), Darwin)
 AR 		:= /usr/bin/libtool

@@ -5,17 +5,14 @@
 
 #include <cassert>
 #include <cstdlib>
-#include "icp.h"
+#include "../icp.h"
 #include <Eigen/Core>
 #include <Eigen/SVD>
 
 /* #name Vanilla */
 
-/*
-#desc
-The vanilla algorithm for ICP will match the point-cloud centers exactly and
-then iterate until an optimal rotation has been found.
-*/
+/* #desc The vanilla algorithm for ICP will match the point-cloud centers
+exactly and then iterate until an optimal rotation has been found. */
 
 namespace icp {
     struct Vanilla final : public ICP {

@@ -34,9 +34,9 @@ Please read [this document](icp.pdf) to learn more about the math.
 
 \section feature_sec Features
 
+- ICP library for integration with robotics systems and other use cases 
 - Interactive (graphical) visualization of point clouds
     - You can supply custom point clouds in a config file using fields from [`sensor_msgs::LaserScan`](http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html).
-- ICP library for external usage
 
 \section install_sec Install
 

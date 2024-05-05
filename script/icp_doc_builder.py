@@ -17,6 +17,7 @@ class ICPDocumentationBuilder:
         if not comments:
             return
         md_filename = 'icp_' + change_extension(file, 'md')
+        made_description = False
         with open(self.dir + '/' + md_filename, 'w') as md_file:
             step_cnt = 1
             for (kind, comment) in comments:
@@ -29,6 +30,9 @@ class ICPDocumentationBuilder:
                     md_file.write(f"\page {comment_text.lower()}_icp {comment_text} ICP\n")
                     md_file.write(f'\par Usage\nYou can construct a new instance of {comment_text} ICP with `icp::ICP::from_method("{method_name}")`, with an additional optional parameter for configuration.')
                 elif kind == '#step':
+                    if not made_description:
+                        md_file.write('\n\par Description\n')
+                        made_description = True
                     lines = comment_text.splitlines()
                     first_line_parts = lines[0].split(':', 1)               
                     if len(first_line_parts) == 2:
@@ -45,6 +49,7 @@ class ICPDocumentationBuilder:
                         md_file.write('\n')
                 elif kind == '#desc':
                     md_file.write(f"\n\par Description\n{comment_text}\n")
+                    made_description = True
             md_file.write('\n\nRead \\ref icp_sources for a list of all resources used in this project.')
             md_file.write(f"\nThis page was automatically generated from {file} with {os.path.basename(__file__)}.")
 
