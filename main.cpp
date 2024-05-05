@@ -92,6 +92,7 @@ void launch_gui(LidarView* view, std::string visualized = "LiDAR scans") {
     std::cout << "* Press the red <X> on the window to exit\n";
     std::cout << "* Press SPACE to toggle the simulation\n";
     std::cout << "* Press D to display the current transform\n";
+    std::cout << "* Press I to step forward a single iteration\n";
 
     window.present();
 }
@@ -106,6 +107,7 @@ void run_benchmark(const char* method, const LidarScan& source,
     constexpr size_t burn_in = 0;
     constexpr double convergence_threshold = 20.0;
 
+    std::cout << "* Method name: " << method << '\n';
     std::cout << "* Number of trials: " << N << '\n';
     std::cout << "* Burn-in period: " << burn_in << '\n';
     std::cout << "* Ideal convergence threshold: " << convergence_threshold
@@ -224,6 +226,13 @@ int main(int argc, const char** argv) {
         std::exit(1);
     }
 
+    // std::vector<icp::Vector> a = {icp::Vector(0, 0), icp::Vector(0, 100)};
+    // std::vector<icp::Vector> b = {icp::Vector(100, 0), icp::Vector(100,
+    // 100)}; LidarView* view = new LidarView(a, b, method);
+
+    // launch_gui(view, "test");
+    // return 0;
+
     if (*read_scan_files) {
         LidarScan source, destination;
         std::cerr << "source\n";
@@ -236,7 +245,7 @@ int main(int argc, const char** argv) {
         // return 1;
         if (*use_gui) {
             icp::ICP::Config config;
-            config.set("overlap_rate", 0.5);
+            config.set("overlap_rate", 0.7);
             LidarView* view = new LidarView(source.points, destination.points,
                 method, config);
 

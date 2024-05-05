@@ -28,7 +28,6 @@ void test_icp(const std::string& method) {
         // again, for such a trivial situation, we should have easily achieved
         // the convergence requested
         assert_equal(0, result.final_cost);
-
         assert_true(fabs(icp->current_transform().translation.x() - 100)
                     <= TRANS_EPS);
         assert_true(fabs(icp->current_transform().translation.y() - 0)
@@ -85,6 +84,7 @@ void test_icp(const std::string& method) {
 void test_main() {
     test_kdtree();
     for (const auto& method: icp::ICP::registered_methods()) {
+        std::cout << "testing icp method: " << method << '\n';
         test_icp(method);
     }
 }

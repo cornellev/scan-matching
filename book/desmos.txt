@@ -1,2 +1,10 @@
 scan1 -> https://www.desmos.com/calculator/bgdtvvv5if
 scan2 -> https://www.desmos.com/calculator/5sqw86nifl
+
+! 5/5/25 1:44 AM
+did the first test in test.cpp as https://www.desmos.com/calculator/96yvwk9v7g
+also https://www.desmos.com/calculator/i9qmjsyzwh
+it seems to work here (gets t^*_x = 100) but not in implementation, so there is a bug
+
+! 5/5/25 2:05 AM
+should be fixed now

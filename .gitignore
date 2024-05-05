@@ -11,3 +11,4 @@ docs/
 *.out
 *.log
 *.fls
+_temp

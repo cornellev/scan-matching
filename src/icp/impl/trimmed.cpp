@@ -11,9 +11,6 @@
 
 /* #name Trimmed */
 
-/* #conf "overlap_rate" A `double` between 0 and 1 for the overlap rate. The
- default is 1. */
-
 /* #desc Trimmed ICP is identical to \ref vanilla_icp with the addition of an
 overlap rate parameter, which specifies the percentage of points between the two
 point sets that have correspondences. When the overlap rate is 1, the algorithm
@@ -92,6 +89,8 @@ namespace icp {
     static bool static_initialization = []() {
         assert(ICP::register_method("trimmed",
             [](const ICP::Config& config) -> std::unique_ptr<ICP> {
+                /* #conf "overlap_rate" A `double` between `0.0` and `1.0` for
+                 * the overlap rate. The default is `1.0`. */
                 double overlap_rate = config.get<double>("overlap_rate", 1.0);
                 assert(overlap_rate >= 0 && overlap_rate <= 1);
                 return std::make_unique<Trimmed>(overlap_rate);

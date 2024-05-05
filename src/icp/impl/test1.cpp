@@ -70,8 +70,9 @@ namespace icp {
 
             transform.translation = Vector::Zero();
             for (size_t i = 0; i < n; i++) {
-                transform.translation += b[matches[i].pair]
-                                         - a_rot[matches[i].point];
+                transform.translation += (b[matches[i].pair] + b_cm)
+                                         - transform.rotation
+                                               * (a[matches[i].point] + a_cm);
             }
             transform.translation /= n;
 
@@ -93,8 +94,8 @@ namespace icp {
     static bool static_initialization = []() {
         assert(ICP::register_method("test1",
             [](const ICP::Config& config) -> std::unique_ptr<ICP> {
-                /* #conf "overlap_rate" A `double` between 0 and 1 for the
-                 * overlap rate. The default is 1. */
+                /* #conf "overlap_rate" A `double` between `0.0` and `1.0` for
+                 * the overlap rate. The default is `1.0`. */
                 double overlap_rate = config.get<double>("overlap_rate", 1.0);
                 assert(overlap_rate >= 0 && overlap_rate <= 1);
                 return std::make_unique<Test1>(overlap_rate);

@@ -26,15 +26,25 @@ LidarView::~LidarView() noexcept {
     icp.release();
 }
 
+void LidarView::step() {
+    icp->iterate();
+    iterations++;
+}
+
 void LidarView::on_event(const SDL_Event& event) {
     bool space_before = keyboard.query(SDLK_SPACE);
     bool d_before = keyboard.query(SDLK_d);
+    bool i_before = keyboard.query(SDLK_i);
     keyboard.update(event);
     bool space_after = keyboard.query(SDLK_SPACE);
     bool d_after = keyboard.query(SDLK_d);
+    bool i_after = keyboard.query(SDLK_i);
 
     if (!space_before && space_after) {
         is_iterating = !is_iterating;
+    }
+    if (!i_before && i_after) {
+        step();
     }
     if (!d_before && d_after) {
         std::cerr << "DEBUG PRINT:\n";
@@ -80,7 +90,6 @@ void LidarView::draw(SDL_Renderer* renderer, const SDL_Rect* frame __unused,
         b_cm.y() + view_config::y_displace, 20);
 
     if (is_iterating) {
-        icp->iterate();
-        iterations++;
+        step();
     }
 }

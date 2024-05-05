@@ -3,7 +3,7 @@
 <!-- EDIT README.md.build INSTEAD. -->
 # icp
 
-> Last updated 2024-05-05 01:09:17.393145.  
+> Last updated 2024-05-05 02:05:04.868544.  
 > Made by [Ethan Uppal](https://www.ethanuppal.com).
 
 ## Introduction
@@ -23,7 +23,7 @@ Please see there for information on how to download and how to use the library.
 You can build the documentation yourself locally with `make docs`.
 The main page will be located at `docs/index.html` relative to the project root.
 
-## v1.1.1 
+## v1.2.0 
 
 The algorithm runs extremely fast now.
 We only need it to run at 6hz with our current LiDAR.

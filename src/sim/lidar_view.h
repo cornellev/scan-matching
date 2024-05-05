@@ -19,7 +19,7 @@ class LidarView final : public View {
     bool is_iterating;
     size_t iterations;
 
-    // void construct_instance();
+    void step();
 
 public:
     /** Constructs a new lidar view visualizing ICP (by method `method`) on
@@ -29,7 +29,6 @@ public:
         const icp::ICP::Config& config = icp::ICP::Config());
 
     ~LidarView() noexcept override;
-
     void on_event(const SDL_Event& event) override;
     void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
         double dtime) override;
