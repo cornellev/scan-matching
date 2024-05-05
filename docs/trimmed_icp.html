@@ -76,7 +76,8 @@ $(function() {
   <div class="headertitle"><div class="title">Trimmed ICP</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Trimmed ICP is identical to <a class="el" href="vanilla_icp.html">Vanilla ICP</a> with the addition of an overlap rate parameter, which specifies the percentage of points between the two point sets that have correspondences. When the overlap rate is 1, the algorithm reduces to vanilla.</p>
+<div class="textblock"><dl class="section user"><dt>Usage</dt><dd>You can construct a new instance of Trimmed ICP with <code><a class="el" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485" title="Factory constructor for the ICP method name with configuration config.">icp::ICP::from_method</a>("trimmed")</code>, with an additional optional parameter for configuration. </dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Trimmed ICP is identical to <a class="el" href="vanilla_icp.html">Vanilla ICP</a> with the addition of an overlap rate parameter, which specifies the percentage of points between the two point sets that have correspondences. When the overlap rate is 1, the algorithm reduces to vanilla.</dd></dl>
 <ol type="1">
 <li><p class="startli"><b>Matching Step</b>: match closest points</p>
 <p class="startli">Sources: <br  />
