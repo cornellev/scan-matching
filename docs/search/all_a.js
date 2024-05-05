@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['on_5fevent_0',['on_event',['../class_lidar_view.html#a5845bccd63d38d8cc99ec2a213bf8495',1,'LidarView']]],
-  ['optimal_20transformation_1',['Optimal transformation',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md4',1,'Transformation Step: determine optimal transformation'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md7',1,'Transformation Step: determine optimal transformation.']]],
-  ['overview_2',['Overview',['../index.html#overview_sec',1,'']]]
+  ['latexify_0',['latexify',['../namespaceicp__math.html#a101520de3fbacbdc112c2defa1e21ecf',1,'icp_math']]],
+  ['library_1',['Library',['../index.html#library_sec',1,'']]],
+  ['lidar_5fview_2ecpp_2',['lidar_view.cpp',['../lidar__view_8cpp.html',1,'']]],
+  ['lidar_5fview_2eh_3',['lidar_view.h',['../lidar__view_8h.html',1,'']]],
+  ['lidarview_4',['LidarView',['../class_lidar_view.html',1,'LidarView'],['../class_lidar_view.html#a78020bf794dd6ec61dd169e11193f45e',1,'LidarView::LidarView()']]]
 ];

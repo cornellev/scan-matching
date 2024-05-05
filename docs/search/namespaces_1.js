@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view_5fconfig_0',['view_config',['../namespaceview__config.html',1,'']]]
+  ['readme_0',['readme',['../namespacereadme.html',1,'']]]
 ];

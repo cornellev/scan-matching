@@ -26,7 +26,7 @@
   <td id="projectalign">
    <div id="projectname">iterative closest points
    </div>
-   <div id="projectbrief">Cornell Electric Vehicles&#39; ICP algorithm library</div>
+   <div id="projectbrief">CEV ICP algorithm library</div>
   </td>
  </tr>
  </tbody>
@@ -98,100 +98,110 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/* #name Trimmed */</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceicp.html">icp</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">struct </span>Trimmed final : <span class="keyword">public</span> ICP {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">double</span> overlap_rate;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        std::vector&lt;icp::Vector&gt; a_rot;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        Trimmed(<span class="keywordtype">double</span> overlap_rate): <a class="code hl_function" href="classicp_1_1_i_c_p.html#a6ee9bfb8de098c6d7e6041626e49b05a">ICP</a>(), overlap_rate(overlap_rate) {}</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        ~Trimmed()<span class="keyword"> override </span>{}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    #desc</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    Trimmed ICP is identical to \ref vanilla_icp with the addition of an overlap</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">   rate parameter, which specifies the percentage of points between the two</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">   point sets that have correspondences. When the overlap rate is 1, the</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">   algorithm reduces to vanilla.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">void</span> setup()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <span class="keywordflow">if</span> (a_rot.size() &lt; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size()) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                a_rot.resize(<a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size());</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        }</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordtype">void</span> iterate()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordtype">size_t</span> n = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> m = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>.size();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                a_rot[i] = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>[i];</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceicp.html">icp</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">struct </span>Trimmed final : <span class="keyword">public</span> ICP {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordtype">double</span> overlap_rate;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::vector&lt;icp::Vector&gt; a_rot;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        Trimmed(<span class="keywordtype">double</span> overlap_rate): <a class="code hl_function" href="classicp_1_1_i_c_p.html#a6ee9bfb8de098c6d7e6041626e49b05a">ICP</a>(), overlap_rate(overlap_rate) {}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        ~Trimmed()<span class="keyword"> override </span>{}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordtype">void</span> setup()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (a_rot.size() &lt; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size()) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                a_rot.resize(<a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size());</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        }</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="comment">/*</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">                #step</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">                Matching Step: match closest points</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">                Sources:</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">                https://arxiv.org/pdf/2206.06435.pdf</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">                https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">                https://en.wikipedia.org/wiki/Iterative_closest_point</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">                -&gt; use k-d tree</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].point = i;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist = std::numeric_limits&lt;double&gt;::infinity();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; m; j++) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    <span class="comment">// Point-to-point matching</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    <span class="keywordtype">double</span> dist_ij = (<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>[j] - a_rot[i]).squaredNorm();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                    <span class="keywordflow">if</span> (dist_ij &lt; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                        <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist = dist_ij;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                        <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].pair = j;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                    }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="comment">/*</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">                #step</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">                Trimming Step</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">                Sources:</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">                https://ieeexplore.ieee.org/abstract/document/1047997</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">            */</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            std::sort(<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>.begin(), <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>.end(),</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>, <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    return a.sq_dist &lt; b.sq_dist;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                });</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            n = (size_t)(overlap_rate * n);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="comment">/*</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">                #step</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">                Transformation Step: determine optimal transformation</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">                The translation vector is determined by the displacement between</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">                the centroids of both point clouds. The rotation matrix is</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">                calculated via singular value decomposition.</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">                Sources:</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#ac449288fecc4bb2a94783f45f8a912ac">translation</a> = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a679d20d77b2c458c4d4620f143fc72a7">b_cm</a> - <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a7f34fb6c33262204472719180ead46d4">a_cm</a>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> N{};</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                N += <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>[<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].point] * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>[<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].pair].transpose();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keyword">auto</span> svd = N.jacobiSvd(Eigen::ComputeFullU | Eigen::ComputeFullV);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> U = svd.matrixU();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> V = svd.matrixV();</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> = V * U.transpose();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    };</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        assert(<a class="code hl_function" href="classicp_1_1_i_c_p.html#a03f61570fc4fc8feef9a851baa166cb9">ICP::register_method</a>(<span class="stringliteral">&quot;trimmed&quot;</span>,</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            [](<span class="keyword">const</span> ICP::Config&amp; config) -&gt; std::unique_ptr&lt;ICP&gt; {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="keywordtype">double</span> overlap_rate = config.get&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;overlap_rate&quot;</span>, 1.0);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                assert(overlap_rate &gt;= 0 &amp;&amp; overlap_rate &lt;= 1);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keywordflow">return</span> std::make_unique&lt;Trimmed&gt;(overlap_rate);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }));</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">void</span> iterate()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keywordtype">size_t</span> n = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>.size();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span> m = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>.size();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                a_rot[i] = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>[i];</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="comment">/*</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">                #step</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">                Matching Step: match closest points</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">                Sources:</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">                https://arxiv.org/pdf/2206.06435.pdf</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">                https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">                https://en.wikipedia.org/wiki/Iterative_closest_point</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">                -&gt; use k-d tree</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].point = i;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist = std::numeric_limits&lt;double&gt;::infinity();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; m; j++) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    <span class="comment">// Point-to-point matching</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    <span class="keywordtype">double</span> dist_ij = (<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>[j] - a_rot[i]).squaredNorm();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    <span class="keywordflow">if</span> (dist_ij &lt; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                        <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].sq_dist = dist_ij;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                        <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].pair = j;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="comment">/*</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">                #step</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">                Trimming Step</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">                Matches are considered in increasing order of distance.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">                Sources:</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">                https://ieeexplore.ieee.org/abstract/document/1047997</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">            */</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            std::sort(<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>.begin(), <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>.end(),</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>, <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    return a.sq_dist &lt; b.sq_dist;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                });</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            n = (size_t)(overlap_rate * n);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="comment">/*</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">                #step</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">                Transformation Step: determine optimal transformation.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">                The translation vector is determined by the displacement between</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">                the centroids of both point clouds. The rotation matrix is</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">                calculated via singular value decomposition.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment"></span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">                Sources:</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">                https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#ac449288fecc4bb2a94783f45f8a912ac">translation</a> = <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a679d20d77b2c458c4d4620f143fc72a7">b_cm</a> - <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a7f34fb6c33262204472719180ead46d4">a_cm</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> N{};</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                N += <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a8fa6d4d0a46ee621097c821afe7e5985">a</a>[<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].point] * <a class="code hl_variable" href="classicp_1_1_i_c_p.html#aa2742888e6e4f43752c1ec834a39d06e">b</a>[<a class="code hl_variable" href="classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6">matches</a>[i].pair].transpose();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keyword">auto</span> svd = N.jacobiSvd(Eigen::ComputeFullU | Eigen::ComputeFullV);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> U = svd.matrixU();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a">Matrix</a> V = svd.matrixV();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <a class="code hl_variable" href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">transform</a>.<a class="code hl_variable" href="structicp_1_1_r_b_transform.html#a5f7d02e75e61e58dfe025f5ecffcbe03">rotation</a> = V * U.transpose();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    };</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> static_initialization = []() {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        assert(<a class="code hl_function" href="classicp_1_1_i_c_p.html#a03f61570fc4fc8feef9a851baa166cb9">ICP::register_method</a>(<span class="stringliteral">&quot;trimmed&quot;</span>,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            [](<span class="keyword">const</span> ICP::Config&amp; config) -&gt; std::unique_ptr&lt;ICP&gt; {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <span class="keywordtype">double</span> overlap_rate = config.get&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;overlap_rate&quot;</span>, 1.0);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                assert(overlap_rate &gt;= 0 &amp;&amp; overlap_rate &lt;= 1);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="keywordflow">return</span> std::make_unique&lt;Trimmed&gt;(overlap_rate);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            }));</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_a03f61570fc4fc8feef9a851baa166cb9"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a03f61570fc4fc8feef9a851baa166cb9">icp::ICP::register_method</a></div><div class="ttdeci">static bool register_method(std::string name, std::function&lt; std::unique_ptr&lt; ICP &gt;(const Config &amp;)&gt; constructor)</div><div class="ttdoc">Registers a new ICP method that can be created with constructor, returning false if name has already ...</div><div class="ttdef"><b>Definition</b> <a href="icp_8cpp_source.html#l00099">icp.cpp:99</a></div></div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_a47adf7aba7ca4afbdd308abaa4613bb1"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1">icp::ICP::transform</a></div><div class="ttdeci">RBTransform transform</div><div class="ttdoc">The current point cloud transformation that is being optimized.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00057">icp.h:57</a></div></div>
 <div class="ttc" id="aclassicp_1_1_i_c_p_html_a679d20d77b2c458c4d4620f143fc72a7"><div class="ttname"><a href="classicp_1_1_i_c_p.html#a679d20d77b2c458c4d4620f143fc72a7">icp::ICP::b_cm</a></div><div class="ttdeci">Vector b_cm</div><div class="ttdoc">The centroid of the destination point cloud.</div><div class="ttdef"><b>Definition</b> <a href="icp_8h_source.html#l00063">icp.h:63</a></div></div>

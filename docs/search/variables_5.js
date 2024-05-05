@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matches_0',['matches',['../classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6',1,'icp::ICP']]]
+  ['iteration_5fcount_0',['iteration_count',['../structicp_1_1_i_c_p_1_1_convergence_report.html#a08a37dca5f4e8e97476302a8b56b47c0',1,'icp::ICP::ConvergenceReport']]]
 ];

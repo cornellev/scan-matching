@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['pair_0',['pair',['../structicp_1_1_i_c_p_1_1_match.html#a047c42536e6bd3b971f5b631618fe4f7',1,'icp::ICP::Match']]],
-  ['point_1',['point',['../structicp_1_1_i_c_p_1_1_match.html#a7003d232c009098b98b11b10a09b5067',1,'icp::ICP::Match']]],
-  ['points_2',['Points',['../md_book_2icp__descr_2icp__trimmed.html#autotoc_md2',1,'Matching Step: match closest points'],['../md_book_2icp__descr_2icp__vanilla.html#autotoc_md6',1,'Matching Step: match closest points.']]],
-  ['previous_5fcost_3',['previous_cost',['../classicp_1_1_i_c_p.html#a27d1d41afc1f064cc278c13720dca476',1,'icp::ICP']]]
+  ['main_2emd_0',['main.md',['../main_8md.html',1,'']]],
+  ['make_5fcentroid_1',['make_centroid',['../namespaceicp__math.html#a694ac7a992bc24b34466fb8f31c4dd73',1,'icp_math']]],
+  ['match_2',['Match',['../structicp_1_1_i_c_p_1_1_match.html',1,'icp::ICP::Match'],['../classicp__math_1_1_match.html',1,'icp_math.Match']]],
+  ['matches_3',['matches',['../classicp_1_1_i_c_p.html#aaed7f20f82df916efaef3d6bbb1446a6',1,'icp::ICP']]],
+  ['matrix_4',['Matrix',['../namespaceicp.html#ad64f80c712843c58fb2ab305a2cd1d4a',1,'icp::Matrix'],['../namespaceicp__math.html#a7416b4fe2cb1cdbcd307330a1095c777',1,'icp_math.Matrix']]],
+  ['methods_5',['Methods',['../structicp_1_1_methods.html',1,'icp']]]
 ];

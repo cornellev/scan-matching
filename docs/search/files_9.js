@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['writing_5ficp_2emd_0',['writing_icp.md',['../writing__icp_8md.html',1,'']]]
+  ['vanilla_2ecpp_0',['vanilla.cpp',['../vanilla_8cpp.html',1,'']]],
+  ['view_5fconfig_2ecpp_1',['view_config.cpp',['../view__config_8cpp.html',1,'']]],
+  ['view_5fconfig_2eh_2',['view_config.h',['../view__config_8h.html',1,'']]]
 ];

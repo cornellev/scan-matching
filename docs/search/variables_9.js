@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['transform_0',['transform',['../classicp_1_1_i_c_p.html#a47adf7aba7ca4afbdd308abaa4613bb1',1,'icp::ICP']]],
-  ['translation_1',['translation',['../structicp_1_1_r_b_transform.html#ac449288fecc4bb2a94783f45f8a912ac',1,'icp::RBTransform']]]
+  ['sq_5fdist_0',['sq_dist',['../structicp_1_1_i_c_p_1_1_match.html#a59d760dd64b75349b74a68427e7e1ba7',1,'icp::ICP::Match']]]
 ];
