@@ -67,7 +67,7 @@ When there is no translation, Horn (1987) derives a closed-form solution; theref
 \subsection{Approximation for $\R^2$}
 
 Consider the situation where the point clouds $A$ and $B$ (with $n$ and $m$ points respectively) are over $\R^2$.
-First, let us simplify the cost function $\mc{L}$.
+First, let us write the cost function $\mc{L}$.
 \begin{alignat*}{2}
     \mc{L} = & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| T(\vv{a}) - \varphi(T, \vv{a}) \|^2                                                                              \\
     \implies & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| R\vv{a'} + \bar{\vv{a}} + \vv{t} - \varphi(T, \vv{a}) \|^2 & \qquad \text{let $\vv{a'} = \vv{a} - \bar{\vv{a}}$} \\
@@ -98,5 +98,11 @@ or
 \[
     \vv{t}^* = \frac{1}{n} \sum_{\vv{a} \in A} \vv{b} - R \vv{a'}
 \]
+
+ISSUE: THIS MATH MUST BE WRONG
+\[
+    \vv{t}^* = \frac{1}{n} \sum_{\vv{a} \in A} \phi(T, \vv{a}) - R \vv{a}
+\]
+is what I think have working
 
 \end{document}
