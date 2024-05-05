@@ -1,5 +1,7 @@
 \page vanilla_icp Vanilla ICP
-
+\par Usage
+You can construct a new instance of Vanilla ICP with `icp::ICP::from_method("vanilla")`, with an additional optional parameter for configuration.
+\par Description
 The vanilla algorithm for ICP will match the point-cloud centers exactly and
 then iterate until an optimal rotation has been found.
 

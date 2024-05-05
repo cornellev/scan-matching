@@ -1,5 +1,7 @@
 \page trimmed_icp Trimmed ICP
-
+\par Usage
+You can construct a new instance of Trimmed ICP with `icp::ICP::from_method("trimmed")`, with an additional optional parameter for configuration.
+\par Description
 Trimmed ICP is identical to \ref vanilla_icp with the addition of an overlap
 rate parameter, which specifies the percentage of points between the two
 point sets that have correspondences. When the overlap rate is 1, the

@@ -25,7 +25,9 @@ class ICPDocumentationBuilder:
                 sources = re.findall(r'https?://[^\s]+', comment_parts[1]) if len(comment_parts) > 1 else []
                 self.all_sources.update(sources)
                 if kind == '#name':
+                    method_name = re.findall(r'register_method\("([^"]*)', contents)[0]
                     md_file.write(f"\page {comment_text.lower()}_icp {comment_text} ICP\n")
+                    md_file.write(f'\par Usage\nYou can construct a new instance of {comment_text} ICP with `icp::ICP::from_method("{method_name}")`, with an additional optional parameter for configuration.')
                 elif kind == '#step':
                     lines = comment_text.splitlines()
                     first_line_parts = lines[0].split(':', 1)               
@@ -42,7 +44,7 @@ class ICPDocumentationBuilder:
                             md_file.write(f"    - {source}\n")
                         md_file.write('\n')
                 elif kind == '#desc':
-                    md_file.write(f"\n{comment_text}\n")
+                    md_file.write(f"\n\par Description\n{comment_text}\n")
             md_file.write('\n\nRead \\ref icp_sources for a list of all resources used in this project.')
             md_file.write(f"\nThis page was automatically generated from {file} with {os.path.basename(__file__)}.")
 
