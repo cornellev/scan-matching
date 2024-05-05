@@ -11,6 +11,14 @@
 
 /* #name Trimmed */
 
+/*
+    #desc
+    Trimmed ICP is identical to \ref vanilla_icp with the addition of an overlap
+   rate parameter, which specifies the percentage of points between the two
+   point sets that have correspondences. When the overlap rate is 1, the
+   algorithm reduces to vanilla.
+ */
+
 namespace icp {
     struct Trimmed final : public ICP {
         double overlap_rate;
@@ -62,6 +70,8 @@ namespace icp {
                 #step
                 Trimming Step
 
+                Matches are considered in increasing order of distance.
+
                 Sources:
                 https://ieeexplore.ieee.org/abstract/document/1047997
             */
@@ -73,7 +83,7 @@ namespace icp {
 
             /*
                 #step
-                Transformation Step: determine optimal transformation
+                Transformation Step: determine optimal transformation.
 
                 The translation vector is determined by the displacement between
                 the centroids of both point clouds. The rotation matrix is

@@ -11,6 +11,12 @@
 
 /* #name Vanilla */
 
+/*
+#desc
+The vanilla algorithm for ICP will match the point-cloud centers exactly and
+then iterate until an optimal rotation has been found.
+*/
+
 namespace icp {
     struct Vanilla final : public ICP {
         std::vector<icp::Vector> a_rot;

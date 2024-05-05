@@ -1,4 +1,6 @@
-# ICP Sources
+\page icp_sources ICP Sources
+
+This list contains all resources used in implementing ICP for this project in alphabetical order.
 
  - https://arxiv.org/pdf/2206.06435.pdf
  - https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf

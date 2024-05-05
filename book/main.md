@@ -27,7 +27,7 @@ Please read [this document](icp.pdf) to learn more about the math.
             \ref overview_sec <br> 
             \ref feature_sec <br> 
             \ref install_sec <br> 
-            \ref example_sec
+            \ref usage_sec <br>
         </td>
     </tr>
 </table>
@@ -38,7 +38,7 @@ Please read [this document](icp.pdf) to learn more about the math.
     - You can supply custom point clouds in a config file using fields from [`sensor_msgs::LaserScan`](http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html).
 - ICP library for external usage
 
-\section install_sec Usage
+\section install_sec Install
 
 \warning This section applies only to Unix-like operating systems, such as MacOS and Linux.
 
@@ -73,19 +73,35 @@ git clone https://github.com/ethanuppal/config.git
 cd config
 sudo make install
 cd ..
-```
 
-Then, a simple clone should suffice.
+# install sdl-wrapper
+git clone https://github.com/cornellev/sdl-wrapper.git
+cd config
+sudo make install
+cd ..
+```
+If you encounter any errors in this process, please open an issue on the corresponding repositories, and I will try to resolve it as soon as possible.
+
+Finally, you can clone the icp repository.
 ```shell
 git clone https://github.com/cornellev/icp.git
 cd icp
 ```
+You should run `make test` to make sure everything has been setup correctly for the library.
+
+\section usage_sec Usage
 
 \subsection library_sec Library
 
-To use the library, read the [INSTALL.md](https://github.com/cornellev/icp/blob/main/INSTALL.md
-) document in the repository.
-Read \ref write_icp_instance to use your own ICP implementations.
+Follow the instructions in the [INSTALL.md](https://github.com/cornellev/icp/blob/main/INSTALL.md) document to install locally.
+The library contains tested implementations of different ICP algorithms.
+Common to all of them is the icp::ICP interface, the documentation for which describes how to construct and use these implementations.
+Read the documentation of the specific implementations for more information:
+
+- \ref vanilla_icp
+- \ref trimmed_icp
+
+Optionally, read \ref write_icp_instance to use your own ICP implementations.
 
 \subsection vis_tool_sec Visualization & Benchmarking Tool
 
@@ -108,3 +124,4 @@ The program itself can be built with
 make
 ```
 which will create an executable named `main` in the working directory.
+You can query `./main -h` and `./main -v` for usage and versioning information.
