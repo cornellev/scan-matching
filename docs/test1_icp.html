@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>iterative closest points: Vanilla ICP</title>
+<title>iterative closest points: Test1 ICP</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,30 +73,23 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Vanilla ICP</div></div>
+  <div class="headertitle"><div class="title">Test1 ICP</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="section user"><dt>Usage</dt><dd>You can construct a new instance of Vanilla ICP with <code><a class="el" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485" title="Factory constructor for the ICP method name with configuration config.">icp::ICP::from_method</a>("vanilla")</code>. </dd></dl>
-<dl class="section user"><dt>Description</dt><dd>The vanilla algorithm for ICP will match the point-cloud centers exactly and then iterate until an optimal rotation has been found.</dd></dl>
+<div class="textblock"><dl class="section user"><dt>Usage</dt><dd>You can construct a new instance of Test1 ICP with <code><a class="el" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485" title="Factory constructor for the ICP method name with configuration config.">icp::ICP::from_method</a>("test1", config)</code>. Supply the following parameters to <code>config</code> (via <a class="el" href="classicp_1_1_i_c_p_1_1_config.html#ad4b2a3a851e7a6e9711d599d780a715b" title="Associates key with an integer, double, or string value.">icp::ICP::Config::set</a>):</dd></dl>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Key   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>"overlap_rate"</code>   </td><td class="markdownTableBodyNone">A <code>double</code> between 0 and 1 for the * overlap rate. The default is 1.   </td></tr>
+</table>
+<dl class="section user"><dt>Description</dt><dd>This is a WIP.</dd></dl>
 <ol type="1">
-<li><p class="startli"><b>Matching Step</b>: match closest points.</p>
-<p class="startli">Sources: <br  />
-</p><ul>
-<li><a href="https://arxiv.org/pdf/2206.06435.pdf">https://arxiv.org/pdf/2206.06435.pdf</a></li>
-<li><a href="https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf">https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Iterative_closest_point">https://en.wikipedia.org/wiki/Iterative_closest_point</a></li>
-<li><a href="https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf">https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</a></li>
-</ul>
-</li>
-<li><p class="startli"><b>Transformation Step</b>: determine optimal transformation.</p>
-<p class="startli">The translation vector is determined by the displacement between the centroids of both point clouds. The rotation matrix is calculated via singular value decomposition.</p>
-<p class="startli">Sources: <br  />
-</p><ul>
-<li><a href="https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf">https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</a></li>
-</ul>
-</li>
+<li><b>Matching Step</b>: see <a class="el" href="vanilla_icp.html">Vanilla ICP</a> for details.</li>
+<li><b>Trimming Step</b>: see <a class="el" href="trimmed_icp.html">Trimmed ICP</a> for details.</li>
+<li><b>Transformation Step</b></li>
 </ol>
-<p>Read <a class="el" href="icp_sources.html">ICP Sources</a> for a list of all resources used in this project. This page was automatically generated from <a class="el" href="vanilla_8cpp.html">vanilla.cpp</a> with <a class="el" href="icp__doc__builder_8py.html">icp_doc_builder.py</a>. </p>
+<p>Read <a class="el" href="icp_sources.html">ICP Sources</a> for a list of all resources used in this project. This page was automatically generated from <a class="el" href="test1_8cpp.html">test1.cpp</a> with <a class="el" href="icp__doc__builder_8py.html">icp_doc_builder.py</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

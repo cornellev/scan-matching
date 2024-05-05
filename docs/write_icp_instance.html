@@ -76,11 +76,18 @@ $(function() {
   <div class="headertitle"><div class="title">Writing an ICP Instance</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#core_func_sec">Core Functionality</a></li>
+<li class="level1"><a href="#static_init_sec">Static Initialization</a></li>
+<li class="level1"><a href="#icp_dpc_sec">Documentation</a></li>
+</ul>
+</div>
 <div class="textblock"><p>To write an ICP instance, create a C++ source file with at least the following:</p>
 <ol type="1">
 <li>A <code>final</code> class that inherits from <code>public <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points.">icp::ICP</a></code></li>
 <li>A static initialization variable (described below)</li>
 </ol>
+<p>It is highly recommended you also provide documentation for your ICP instance in the format described here.</p>
 <h1><a class="anchor" id="core_func_sec"></a>
 Core Functionality</h1>
 <p>The class must define the following behavior:</p>
@@ -104,7 +111,33 @@ Static Initialization</h1>
 <div class="line">    }));</div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}();</div>
-</div><!-- fragment --><p>where <code>"name_of_instance"</code> is the name of your ICP implementation and <code>NameOfClass</code> is the name of the class. </p>
+</div><!-- fragment --><p>where <code>"name_of_instance"</code> is the name of your ICP implementation and <code>NameOfClass</code> is the name of the class.</p>
+<h1><a class="anchor" id="icp_dpc_sec"></a>
+Documentation</h1>
+<p>The script <a class="el" href="icp__doc__builder_8py.html">icp_doc_builder.py</a> will automatically generate documentation for your ICP instances as markdown files and place them in a desired directory. The invocation format is: </p><div class="fragment"><div class="line">python3 icp_doc_builder.py dir/where/your/icps/are/ dir/where/markdown/should/go/</div>
+</div><!-- fragment --><p> If the file name is <code>foo_bar.cpp</code>, then the Doxygen page reference (from which you can refer to from other pages) will be be <code>foo_bar_icp Foo_bar</code>. Information about the file should be encoded in special block comments of the following format.</p>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment">#command values...</span></div>
+<div class="line"><span class="comment">*/</span></div>
+</div><!-- fragment --><p>Supported commands are described below.</p>
+<ul>
+<li>The name of the instance should be given by <code>/* #name Name of Instance */</code>.</li>
+<li>An overview of the algorithm should be provided by <code>/* #desc Overview of algorithm. */</code>. This description will be rendered as Doxygen source, so you can use markdown and Doxygen commands such as <code>\ref</code>.</li>
+<li>If your instance uses <a class="el" href="classicp_1_1_i_c_p_1_1_config.html" title="Configuration for ICP instances.">icp::ICP::Config</a> parameters, document them as <code>/* #conf "name_of_param" This is a sentence. This is another sentence describing the parameter. */</code>. This description will be rendered as Doxygen source.</li>
+<li>Every major step your instance takes should be documented by <div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment">    #step My Step: brief description</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    Detailed explanation.</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    Sources:</span></div>
+<div class="line"><span class="comment">    https://www.example.com</span></div>
+<div class="line"><span class="comment">    https://www.example.com</span></div>
+<div class="line"><span class="comment">    https://www.example.com</span></div>
+<div class="line"><span class="comment">    https://www.example.com</span></div>
+<div class="line"><span class="comment">*/</span></div>
+</div><!-- fragment --> The <code>: brief description</code> section is optional, as are the detailed explanation and sources sections. These descriptions will be rendered as Doxygen source.</li>
+</ul>
+<p>See the source code of <a class="el" href="vanilla_8cpp.html">vanilla.cpp</a> or <a class="el" href="trimmed_8cpp.html">trimmed.cpp</a> as examples. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

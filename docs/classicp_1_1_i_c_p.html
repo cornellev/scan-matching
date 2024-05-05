@@ -93,7 +93,7 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="icp_8h_source.html">icp.h</a>&gt;</code></p>
 
-<p>Inherited by icp::Trimmed, and icp::Vanilla.</p>
+<p>Inherited by icp::Test1, icp::Trimmed, and icp::Vanilla.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -321,6 +321,7 @@ Protected Attributes</h2></td></tr>
 <p>Perform <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points.">ICP</a> for the point clouds <code>a</code> and <code>b</code> provided with <a class="el" href="#ab5a0481925dfd8d0ba2ea9b5f4b7fb79" title="Begins the ICP process for point clouds a and b with an initial guess for the transform t.">ICP::begin</a> until the cost is below <code>convergence_threshold</code> or until no progress is being made. </p>
 <p>At least <code>burn_in</code> iterations will be performed. Start with zero burn-in, and slowly increase if convergence requirements are not met.</p>
 <dl class="section return"><dt>Returns</dt><dd>Information about the convergence. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#ab5a0481925dfd8d0ba2ea9b5f4b7fb79" title="Begins the ICP process for point clouds a and b with an initial guess for the transform t.">ICP::begin</a> must have been invoked. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="icp_8cpp_source.html#l00058">58</a> of file <a class="el" href="icp_8cpp_source.html">icp.cpp</a>.</p>
 
@@ -434,6 +435,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Perform one iteration of <a class="el" href="classicp_1_1_i_c_p.html" title="Interface for iterative closest points.">ICP</a> for the point clouds <code>a</code> and <code>b</code> provided with <a class="el" href="#ab5a0481925dfd8d0ba2ea9b5f4b7fb79" title="Begins the ICP process for point clouds a and b with an initial guess for the transform t.">ICP::begin</a>. </p>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#ab5a0481925dfd8d0ba2ea9b5f4b7fb79" title="Begins the ICP process for point clouds a and b with an initial guess for the transform t.">ICP::begin</a> must have been invoked. </dd></dl>
 
 </div>
 </div>

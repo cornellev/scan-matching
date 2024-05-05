@@ -76,6 +76,16 @@ $(function() {
   <div class="headertitle"><div class="title">Introduction </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#overview_sec">Overview</a></li>
+<li class="level1"><a href="#feature_sec">Features</a></li>
+<li class="level1"><a href="#install_sec">Install</a></li>
+<li class="level1"><a href="#usage_sec">Usage</a><ul><li class="level2"><a href="#library_sec">Library</a></li>
+<li class="level2"><a href="#vis_tool_sec">Visualization &amp; Benchmarking Tool</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="textblock"><h1><a class="anchor" id="overview_sec"></a>
 Overview</h1>
 <p>Scan-matching is a method for localization that uses high-frequency LiDAR data. This project is <a href="https://ethanuppal.com">Ethan</a>'s implementation of algorithms for scan-matching. Please read <a href="icp.pdf">this document</a> to learn more about the math.</p>
@@ -96,11 +106,11 @@ Overview</h1>
 <h1><a class="anchor" id="feature_sec"></a>
 Features</h1>
 <ul>
+<li>ICP library for integration with robotics systems and other use cases</li>
 <li>Interactive (graphical) visualization of point clouds<ul>
 <li>You can supply custom point clouds in a config file using fields from <a href="http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html"><code>sensor_msgs::LaserScan</code></a>.</li>
 </ul>
 </li>
-<li>ICP library for external usage</li>
 </ul>
 <h1><a class="anchor" id="install_sec"></a>
 Install</h1>

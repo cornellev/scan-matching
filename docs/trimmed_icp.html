@@ -76,18 +76,16 @@ $(function() {
   <div class="headertitle"><div class="title">Trimmed ICP</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="section user"><dt>Usage</dt><dd>You can construct a new instance of Trimmed ICP with <code><a class="el" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485" title="Factory constructor for the ICP method name with configuration config.">icp::ICP::from_method</a>("trimmed")</code>, with an additional optional parameter for configuration. </dd></dl>
+<div class="textblock"><dl class="section user"><dt>Usage</dt><dd>You can construct a new instance of Trimmed ICP with <code><a class="el" href="classicp_1_1_i_c_p.html#a4147f2e116fe41bd31f37b6e23829485" title="Factory constructor for the ICP method name with configuration config.">icp::ICP::from_method</a>("trimmed", config)</code>. Supply the following parameters to <code>config</code> (via <a class="el" href="classicp_1_1_i_c_p_1_1_config.html#ad4b2a3a851e7a6e9711d599d780a715b" title="Associates key with an integer, double, or string value.">icp::ICP::Config::set</a>):</dd></dl>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Key   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>"overlap_rate"</code>   </td><td class="markdownTableBodyNone">A <code>double</code> between 0 and 1 for the overlap rate. The default is 1.   </td></tr>
+</table>
 <dl class="section user"><dt>Description</dt><dd>Trimmed ICP is identical to <a class="el" href="vanilla_icp.html">Vanilla ICP</a> with the addition of an overlap rate parameter, which specifies the percentage of points between the two point sets that have correspondences. When the overlap rate is 1, the algorithm reduces to vanilla.</dd></dl>
 <ol type="1">
-<li><p class="startli"><b>Matching Step</b>: match closest points</p>
-<p class="startli">Sources: <br  />
-</p><ul>
-<li><a href="https://arxiv.org/pdf/2206.06435.pdf">https://arxiv.org/pdf/2206.06435.pdf</a></li>
-<li><a href="https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf">https://web.archive.org/web/20220615080318/https://www.cs.technion.ac.il/~cs236329/tutorials/ICP.pdf</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Iterative_closest_point">https://en.wikipedia.org/wiki/Iterative_closest_point</a></li>
-<li><a href="https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf">https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</a></li>
-</ul>
-</li>
+<li><b>Matching Step</b>: see <a class="el" href="vanilla_icp.html">Vanilla ICP</a> for details.</li>
 <li><p class="startli"><b>Trimming Step</b></p>
 <p class="startli">Matches are considered in increasing order of distance.</p>
 <p class="startli">Sources: <br  />
@@ -95,13 +93,7 @@ $(function() {
 <li><a href="https://ieeexplore.ieee.org/abstract/document/1047997">https://ieeexplore.ieee.org/abstract/document/1047997</a></li>
 </ul>
 </li>
-<li><p class="startli"><b>Transformation Step</b>: determine optimal transformation.</p>
-<p class="startli">The translation vector is determined by the displacement between the centroids of both point clouds. The rotation matrix is calculated via singular value decomposition.</p>
-<p class="startli">Sources: <br  />
-</p><ul>
-<li><a href="https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf">https://courses.cs.duke.edu/spring07/cps296.2/scribe_notes/lecture24.pdf</a></li>
-</ul>
-</li>
+<li><b>Transformation Step</b>: see <a class="el" href="vanilla_icp.html">Vanilla ICP</a> for details.</li>
 </ol>
 <p>Read <a class="el" href="icp_sources.html">ICP Sources</a> for a list of all resources used in this project. This page was automatically generated from <a class="el" href="trimmed_8cpp.html">trimmed.cpp</a> with <a class="el" href="icp__doc__builder_8py.html">icp_doc_builder.py</a>. </p>
 </div></div><!-- contents -->

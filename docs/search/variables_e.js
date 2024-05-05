@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_5fdisplace_0',['x_displace',['../namespaceview__config.html#ae0b80f041e46d84145ac6c6cc7ca0d75',1,'view_config']]]
+  ['window_5fheight_0',['window_height',['../namespaceview__config.html#a208c776ac122588e1de7e138f73447c5',1,'view_config']]],
+  ['window_5fwidth_1',['window_width',['../namespaceview__config.html#aa35ba001e8006e8468ac81f2b68e7bb6',1,'view_config']]]
 ];

@@ -109,6 +109,12 @@ Variables</h2></td></tr>
 <tr class="separator:afd3bc08563ee3962ef7ddf6a729f895a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90f237ff5b05e0d720975beeb4562bbb" id="r_a90f237ff5b05e0d720975beeb4562bbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a> = pair.cost_with(<a class="el" href="#a00e2b819953a4c4af4b2a3e9b901a1d7">rbt</a>, <a class="el" href="#afd3bc08563ee3962ef7ddf6a729f895a">pivot</a>)</td></tr>
 <tr class="separator:a90f237ff5b05e0d720975beeb4562bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59010524867fa479091367da18411287" id="r_a59010524867fa479091367da18411287"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59010524867fa479091367da18411287">dLdt_x</a> = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.translation[0])</td></tr>
+<tr class="separator:a59010524867fa479091367da18411287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a9bcda153e2aff9712c961553b8aa8" id="r_a09a9bcda153e2aff9712c961553b8aa8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09a9bcda153e2aff9712c961553b8aa8">dLdt_y</a> = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.translation[1])</td></tr>
+<tr class="separator:a09a9bcda153e2aff9712c961553b8aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af524668e21c39757c0ac16a90238b435" id="r_af524668e21c39757c0ac16a90238b435"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af524668e21c39757c0ac16a90238b435">dLdtheta</a> = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.theta)</td></tr>
+<tr class="separator:af524668e21c39757c0ac16a90238b435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a101520de3fbacbdc112c2defa1e21ecf" name="a101520de3fbacbdc112c2defa1e21ecf"></a>
@@ -162,7 +168,55 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00046">46</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00048">48</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+
+</div>
+</div>
+<a id="a59010524867fa479091367da18411287" name="a59010524867fa479091367da18411287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59010524867fa479091367da18411287">&#9670;&#160;</a></span>dLdt_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">icp_math.dLdt_x = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.translation[0])</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00055">55</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+
+</div>
+</div>
+<a id="a09a9bcda153e2aff9712c961553b8aa8" name="a09a9bcda153e2aff9712c961553b8aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a9bcda153e2aff9712c961553b8aa8">&#9670;&#160;</a></span>dLdt_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">icp_math.dLdt_y = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.translation[1])</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00066">66</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+
+</div>
+</div>
+<a id="af524668e21c39757c0ac16a90238b435" name="af524668e21c39757c0ac16a90238b435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af524668e21c39757c0ac16a90238b435">&#9670;&#160;</a></span>dLdtheta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">icp_math.dLdtheta = sp.diff(<a class="el" href="#a90f237ff5b05e0d720975beeb4562bbb">cost</a>, rbt.theta)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00077">77</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
 
 </div>
 </div>
@@ -194,7 +248,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00043">43</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00045">45</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
 
 </div>
 </div>
@@ -210,7 +264,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00044">44</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00046">46</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
 
 </div>
 </div>
@@ -242,7 +296,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00042">42</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__math_8py_source.html#l00044">44</a> of file <a class="el" href="icp__math_8py_source.html">icp_math.py</a>.</p>
 
 </div>
 </div>

@@ -87,8 +87,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a955089ea18691fdc19f935f93697e2b6" id="r_a955089ea18691fdc19f935f93697e2b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a955089ea18691fdc19f935f93697e2b6">__init__</a> (self, <a class="el" href="#a7643096c737824b7b0844d483ff5483d">dir</a>)</td></tr>
-<tr class="separator:a955089ea18691fdc19f935f93697e2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ebcd0b21fbf642a28c3c36c9bad901" id="r_ac0ebcd0b21fbf642a28c3c36c9bad901"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ebcd0b21fbf642a28c3c36c9bad901">__init__</a> (self, <a class="el" href="#ac8909befdf4ef96f0946a836be093ec0">search_dir</a>, <a class="el" href="#a1b90e8ddd8559442c33915c6a72992fd">out_dir</a>)</td></tr>
+<tr class="separator:ac0ebcd0b21fbf642a28c3c36c9bad901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af65597aa2bf931ba652aec66a63cedb5" id="r_af65597aa2bf931ba652aec66a63cedb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af65597aa2bf931ba652aec66a63cedb5">extract</a> (self, file, contents)</td></tr>
 <tr class="separator:af65597aa2bf931ba652aec66a63cedb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae788a18651037529af535af074bf26f8" id="r_ae788a18651037529af535af074bf26f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae788a18651037529af535af074bf26f8">build</a> (self)</td></tr>
@@ -96,17 +96,38 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7643096c737824b7b0844d483ff5483d" id="r_a7643096c737824b7b0844d483ff5483d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7643096c737824b7b0844d483ff5483d">dir</a></td></tr>
-<tr class="separator:a7643096c737824b7b0844d483ff5483d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8909befdf4ef96f0946a836be093ec0" id="r_ac8909befdf4ef96f0946a836be093ec0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8909befdf4ef96f0946a836be093ec0">search_dir</a></td></tr>
+<tr class="separator:ac8909befdf4ef96f0946a836be093ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b90e8ddd8559442c33915c6a72992fd" id="r_a1b90e8ddd8559442c33915c6a72992fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b90e8ddd8559442c33915c6a72992fd">out_dir</a></td></tr>
+<tr class="separator:a1b90e8ddd8559442c33915c6a72992fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a212d977e16ac16e2f57e8878641248fa" id="r_a212d977e16ac16e2f57e8878641248fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a212d977e16ac16e2f57e8878641248fa">all_sources</a></td></tr>
 <tr class="separator:a212d977e16ac16e2f57e8878641248fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00009">9</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+<div class="textblock"><pre class="fragment">A class used to build documentation for an ICP implementation.
+
+...
+
+Attributes
+----------
+search_dir : str
+    The directory to search for source files.
+out_dir : str
+    The directory to write the output markdown files.
+all_sources : set
+    A set of all sources found in the source files.
+
+Methods
+-------
+extract(file, contents):
+    Extracts the documentation from the given file contents and writes it to a markdown file.
+build():
+    Searches for source files in the search directory and extracts their documentation.
+</pre> 
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00010">10</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a955089ea18691fdc19f935f93697e2b6" name="a955089ea18691fdc19f935f93697e2b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a955089ea18691fdc19f935f93697e2b6">&#9670;&#160;</a></span>__init__()</h2>
+<a id="ac0ebcd0b21fbf642a28c3c36c9bad901" name="ac0ebcd0b21fbf642a28c3c36c9bad901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ebcd0b21fbf642a28c3c36c9bad901">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,12 +140,25 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>dir</em></span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>search_dir</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>out_dir</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<pre class="fragment">Constructs a new ICPDocumentationBuilder.
 
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00010">10</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+Parameters
+----------
+search_dir : str
+    The directory to search for source files.
+out_dir : str
+    The directory to write the output markdown files.
+</pre> 
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00033">33</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 
 </div>
 </div>
@@ -143,8 +177,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00051">51</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+<pre class="fragment">Searches for source files in the search directory and extracts their documentation.
+</pre> 
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00109">109</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 
 </div>
 </div>
@@ -171,8 +206,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<pre class="fragment">Extracts the documentation from the given file contents and writes it to a markdown file.
 
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00014">14</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+Parameters
+----------
+file : str
+    The name of the file to extract documentation from.
+contents : str
+    The contents of the file.
+</pre> 
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00048">48</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 
 </div>
 </div>
@@ -189,23 +232,39 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00012">12</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00046">46</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 
 </div>
 </div>
-<a id="a7643096c737824b7b0844d483ff5483d" name="a7643096c737824b7b0844d483ff5483d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7643096c737824b7b0844d483ff5483d">&#9670;&#160;</a></span>dir</h2>
+<a id="a1b90e8ddd8559442c33915c6a72992fd" name="a1b90e8ddd8559442c33915c6a72992fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b90e8ddd8559442c33915c6a72992fd">&#9670;&#160;</a></span>out_dir</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">icp_doc_builder.ICPDocumentationBuilder.dir</td>
+          <td class="memname">icp_doc_builder.ICPDocumentationBuilder.out_dir</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00011">11</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00045">45</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
+
+</div>
+</div>
+<a id="ac8909befdf4ef96f0946a836be093ec0" name="ac8909befdf4ef96f0946a836be093ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8909befdf4ef96f0946a836be093ec0">&#9670;&#160;</a></span>search_dir</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">icp_doc_builder.ICPDocumentationBuilder.search_dir</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="icp__doc__builder_8py_source.html#l00044">44</a> of file <a class="el" href="icp__doc__builder_8py_source.html">icp_doc_builder.py</a>.</p>
 
 </div>
 </div>
