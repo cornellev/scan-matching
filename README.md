@@ -3,7 +3,7 @@
 <!-- EDIT README.md.build INSTEAD. -->
 # icp
 
-> Last updated 2024-05-05 02:09:06.741140.  
+> Last updated 2024-05-05 02:13:18.642874.  
 > Made by [Ethan Uppal](https://www.ethanuppal.com).
 
 ## Introduction
@@ -25,7 +25,7 @@ The main page will be located at `docs/index.html` relative to the project root.
 
 ## v1.2.1 
 
-Started work on a new implementation (read [this paper](icp.pdf)).
+Started work on a new implementation (read [this paper](book/icp.pdf)).
 It passes all `make test` tests.
 Here is the performance currently:
 ```
