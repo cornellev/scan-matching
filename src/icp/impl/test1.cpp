@@ -10,6 +10,7 @@
 #include <Eigen/SVD>
 
 /* #name Test1 */
+/* #desc This is a WIP. */
 
 namespace icp {
     struct Test1 final : public ICP {
@@ -33,7 +34,8 @@ namespace icp {
                 a_rot[i] = transform.rotation * a[i];
             }
 
-            /* #step Matching Step: match closest points */
+            /* #step Matching Step: see \ref vanilla_icp
+            for details. */
             for (size_t i = 0; i < n; i++) {
                 matches[i].point = i;
                 matches[i].sq_dist = std::numeric_limits<double>::infinity();
@@ -49,10 +51,7 @@ namespace icp {
             }
 
             /*
-                #step Trimming Step
-
-                Sources:
-                https://ieeexplore.ieee.org/abstract/document/1047997
+                #step Trimming Step: see \ref trimmed_icp for details.
             */
             std::sort(matches.begin(), matches.end(),
                 [](const auto& a, const auto& b) {
@@ -77,6 +76,8 @@ namespace icp {
     static bool static_initialization = []() {
         assert(ICP::register_method("test1",
             [](const ICP::Config& config) -> std::unique_ptr<ICP> {
+                /* #conf "overlap_rate" A `double` between 0 and 1 for the
+                 * overlap rate. The default is 1. */
                 double overlap_rate = config.get<double>("overlap_rate", 1.0);
                 assert(overlap_rate >= 0 && overlap_rate <= 1);
                 return std::make_unique<Test1>(overlap_rate);

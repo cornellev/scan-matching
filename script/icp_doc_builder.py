@@ -1,6 +1,6 @@
 # Copyright (C) 2024 Ethan Uppal. All rights reserved.
 
-import os, re
+import os, re, sys
 
 def change_extension(filename, new_extension):
     name, _ = os.path.splitext(filename)
@@ -22,13 +22,22 @@ class ICPDocumentationBuilder:
             step_cnt = 1
             for (kind, comment) in comments:
                 comment_parts = comment.strip().split('Sources:', 1)
-                comment_text = re.sub(r'\n *', '\n', comment_parts[0])
+                comment_text = re.sub(r'\n *', '\n', comment_parts[0]).replace('\n*', '\n').replace('\n *', '\n')
                 sources = re.findall(r'https?://[^\s]+', comment_parts[1]) if len(comment_parts) > 1 else []
                 self.all_sources.update(sources)
                 if kind == '#name':
                     method_name = re.findall(r'register_method\("([^"]*)', contents)[0]
                     md_file.write(f"\page {comment_text.lower()}_icp {comment_text} ICP\n")
-                    md_file.write(f'\par Usage\nYou can construct a new instance of {comment_text} ICP with `icp::ICP::from_method("{method_name}")`, with an additional optional parameter for configuration.')
+                    conf_pattern = r'/\*\s*#conf\s+"([^"]*)"\s+(.*?)\*/'
+                    confs = re.findall(conf_pattern, contents, re.DOTALL)
+                    if not confs:
+                       md_file.write(f'\par Usage\nYou can construct a new instance of {comment_text} ICP with `icp::ICP::from_method("{method_name}")`.')
+                    else:
+                        md_file.write(f'\par Usage\nYou can construct a new instance of {comment_text} ICP with `icp::ICP::from_method("{method_name}", config)`. Supply the following parameters to `config` (via icp::ICP::Config::set):\n')
+                        md_file.write('\nKey | Description\n--- | ---\n')
+                        for (key, descr) in confs:
+                            descr = descr.replace('\n', ' ')
+                            md_file.write(f'`"{key}"` | {descr}\n')
                 elif kind == '#step':
                     if not made_description:
                         md_file.write('\n\par Description\n')
@@ -54,7 +63,7 @@ class ICPDocumentationBuilder:
             md_file.write(f"\nThis page was automatically generated from {file} with {os.path.basename(__file__)}.")
 
     def build(self):
-        for root, dirs, files in os.walk('src/icp'):
+        for root, dirs, files in os.walk(sys.argv[2]):
             for file in files:
                 if file.endswith('.cpp'):
                     with open(os.path.join(root, file), 'r') as f:
@@ -68,6 +77,8 @@ class ICPDocumentationBuilder:
             
 
 if __name__ == '__main__':
-   doc_builder = ICPDocumentationBuilder('book/icp_descr')
-   doc_builder.build()
-    
+    if len(sys.argv) != 3:
+        print(f'usage: python3 {os.basename(__file__)} search_dir out_dir')
+        sys.exit(1)
+    doc_builder = ICPDocumentationBuilder(sys.argv[1])
+    doc_builder.build()
