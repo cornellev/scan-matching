@@ -44,16 +44,16 @@
 \end{defn}
 
 \begin{outline}
-    The \textsc{Point-Cloud Registration Problem} is, given two point clouds $A, B$ and a pairing function $\phi(T, \cdot)$ based on a rigid-body transformation $T$ such that $\forall \vv{a} \in A,\, \phi(T, \vv{a}) \in B$, to determine the rigid-body transformation $T$ that optimizes
+    The \textsc{Point-Cloud Registration Problem} is, given two point clouds $A, B$ and a pairing function $\varphi(T, \cdot)$ based on a rigid-body transformation $T$ such that $\forall \vv{a} \in A,\, \varphi(T, \vv{a}) \in B$, to determine the rigid-body transformation $T$ that optimizes
     \begin{equation}\label{icp}
-        \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| T(\vv{a}) - \phi(T, \vv{a}) \|^2
+        \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| T(\vv{a}) - \varphi(T, \vv{a}) \|^2
     \end{equation}
 \end{outline}
 
 \begin{defn}
     The \emph{point-to-point metric} for two point clouds $A, B$ is given by
     \begin{equation}
-        \phi(T, \vv{a}) = \mathop{\mrm{argmin}}\limits_{\substack{b \in B}} \| T(\vv{a}) - \vv{b} \|^2
+        \varphi(T, \vv{a}) = \mathop{\mrm{argmin}}\limits_{\substack{b \in B}} \| T(\vv{a}) - \vv{b} \|^2
     \end{equation}
 \end{defn}
 
@@ -61,7 +61,7 @@ From here on, we will use the point-to-point metric unless stated otherwise.
 
 \section{Solution}
 
-In general, there is no closed-form solution that minimizes (\ref{icp}).
+In general, there is no closed-form solution that minimizes (1).
 When there is no translation, Horn (1987) derives a closed-form solution; therefore, if an initial odometry estimate is precise enough, this translation can be applied to all the points in the point cloud, producing a problem instance with zero translation.
 
 \subsection{Approximation for $\R^2$}
@@ -69,9 +69,9 @@ When there is no translation, Horn (1987) derives a closed-form solution; theref
 Consider the situation where the point clouds $A$ and $B$ (with $n$ and $m$ points respectively) are over $\R^2$.
 First, let us simplify the cost function $\mc{L}$.
 \begin{alignat*}{2}
-    \mc{L} = & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| T(\vv{a}) - \phi(T, \vv{a}) \|^2                                                                              \\
-    \implies & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| R\vv{a'} + \bar{\vv{a}} + \vv{t} - \phi(T, \vv{a}) \|^2 & \qquad \text{let $\vv{a'} = \vv{a} - \bar{\vv{a}}$} \\
-    \implies & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| R\vv{a'} + \vv{t} - \phi(T, \vv{a}) \|^2                & \qquad \text{since $\bar{\vv{a}}$ is constant}
+    \mc{L} = & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| T(\vv{a}) - \varphi(T, \vv{a}) \|^2                                                                              \\
+    \implies & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| R\vv{a'} + \bar{\vv{a}} + \vv{t} - \varphi(T, \vv{a}) \|^2 & \qquad \text{let $\vv{a'} = \vv{a} - \bar{\vv{a}}$} \\
+    \implies & \min\limits_{\substack{T}} \sum_{\vv{a} \in A} \| R\vv{a'} + \vv{t} - \varphi(T, \vv{a}) \|^2                & \qquad \text{since $\bar{\vv{a}}$ is constant}
 \end{alignat*}
 In $\R^2$, the rotation matrix $R$ takes the form
 \[
@@ -82,12 +82,12 @@ In $\R^2$, the rotation matrix $R$ takes the form
 \]
 where it is described by a single parameter $\theta$.
 Therefore, the task is to optimize $\mc{L}$ over the parameter space $(\theta, t_x, t_y)$.
-We take $\vv{b}$ to be $\phi(T, \vv{a})$ where context permits.
+We take $\vv{b}$ to be $\varphi(T, \vv{a})$ where context permits.
 \begin{align*}
-    \frac{\partial \mc{L}}{\partial t_x}    & =     \sum_{\vv{a} \in A} 2t_x + 2a'_x\cos(\theta) - 2a'_y\sin(\theta) -2b_x               \\
-    \frac{\partial \mc{L}}{\partial t_y}    & =     \sum_{\vv{a} \in A} 2t_y + 2a'_x\sin(\theta) + 2a'_y\cos(\theta) -2b_y               \\
-    \frac{\partial \mc{L}}{\partial \theta} & = 2(a'_x\sin(\theta) + a'_y\cos(\theta))(b_x - t_x - a'_x\cos(\theta) + a'_y\sin(\theta))  \\
-                                            & + 2(a'_x\cos(\theta) - a'_y \sin(\theta))(t_y + a'_x\sin(\theta) + a'_y\cos(\theta) - b_y)
+    \frac{\partial \mc{L}}{\partial t_x}    & = \sum_{\vv{a} \in A} 2t_x + 2a'_x\cos(\theta) - 2a'_y\sin(\theta) -2b_x                                      \\
+    \frac{\partial \mc{L}}{\partial t_y}    & = \sum_{\vv{a} \in A} 2t_y + 2a'_x\sin(\theta) + 2a'_y\cos(\theta) -2b_y                                      \\
+    \frac{\partial \mc{L}}{\partial \theta} & = \sum_{\vv{a} \in A} 2(a'_x\sin(\theta) + a'_y\cos(\theta))(b_x - t_x - a'_x\cos(\theta) + a'_y\sin(\theta)) \\
+                                            & \quad \quad \quad + 2(a'_x\cos(\theta) - a'_y \sin(\theta))(t_y + a'_x\sin(\theta) + a'_y\cos(\theta) - b_y)
 \end{align*}
 The roots of $\partial \mc{L}/\partial t_x$ and $\partial \mc{L}/\partial t_y$ can easily be solved in closed form;
 \begin{gather*}

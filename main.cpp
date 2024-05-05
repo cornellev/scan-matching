@@ -236,7 +236,7 @@ int main(int argc, const char** argv) {
         // return 1;
         if (*use_gui) {
             icp::ICP::Config config;
-            config.set("overlap_rate", 0.9);
+            config.set("overlap_rate", 0.5);
             LidarView* view = new LidarView(source.points, destination.points,
                 method, config);
 

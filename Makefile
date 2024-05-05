@@ -76,6 +76,7 @@ clean:
 
 .PHONY: docs 
 docs:
+	@make readme
 	$(PY) script/icp_doc_builder.py src/icp/ book/icp_descr/
 	cd book; \
 		pdflatex icp.tex; \

@@ -62,6 +62,10 @@ namespace icp {
             /*
                 #step
                 Transformation Step
+
+                See [this paper](icp.pdf) for information. I copied over the
+               rotation optimization from \ref vanilla_icp, and it is a TODO to
+               see if that is mathematically correct or not.
              */
 
             transform.translation = Vector::Zero();
@@ -70,6 +74,19 @@ namespace icp {
                                          - a_rot[matches[i].point];
             }
             transform.translation /= n;
+
+            // no clue why this might still work
+            // TODO: mathematically see if you can justify it, otherwise scrap
+            // and find new method
+            Matrix N{};
+            for (size_t i = 0; i < n; i++) {
+                N += (a[matches[i].point] + transform.translation)
+                     * b[matches[i].pair].transpose();
+            }
+            auto svd = N.jacobiSvd(Eigen::ComputeFullU | Eigen::ComputeFullV);
+            const Matrix U = svd.matrixU();
+            const Matrix V = svd.matrixV();
+            transform.rotation = V * U.transpose();
         }
     };
 

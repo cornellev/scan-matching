@@ -15,6 +15,10 @@ This is a WIP.
 2.     **Trimming Step**: see \ref trimmed_icp for details.
 
 3.     **Transformation Step**
+    
+    See [this paper](icp.pdf) for information. I copied over the
+    rotation optimization from \ref vanilla_icp, and it is a TODO to
+    see if that is mathematically correct or not.
 
 
 Read \ref icp_sources for a list of all resources used in this project.
