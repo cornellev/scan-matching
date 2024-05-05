@@ -45,7 +45,11 @@ where `"name_of_instance"` is the name of your ICP implementation and `NameOfCla
 
 \section icp_dpc_sec Documentation
 
-The script icp_doc_builder.py will automatically generate documentation for your ICP instances as markdown files and place them in `book/icp_descr`. If the file name is `foo_bar.cpp`, then the Doxygen page reference (from which you can refer to from other pages) will be be `foo_bar_icp Foo_bar`. Information about the file should be encoded in special block comments of the following format.
+The script icp_doc_builder.py will automatically generate documentation for your ICP instances as markdown files and place them in a desired directory. The invocation format is:
+```shell
+python3 icp_doc_builder.py dir/where/your/icps/are/ dir/where/markdown/should/go/
+```
+If the file name is `foo_bar.cpp`, then the Doxygen page reference (from which you can refer to from other pages) will be be `foo_bar_icp Foo_bar`. Information about the file should be encoded in special block comments of the following format.
 
 ```cpp
 /*
@@ -74,3 +78,5 @@ Supported commands are described below.
     ```
     The `: brief description` section is optional, as are the detailed explanation and sources sections.
     These descriptions will be rendered as Doxygen source.
+
+See the source code of vanilla.cpp or trimmed.cpp as examples.

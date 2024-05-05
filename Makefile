@@ -76,7 +76,7 @@ clean:
 
 .PHONY: docs 
 docs:
-	$(PY) script/icp_doc_builder.py
+	$(PY) script/icp_doc_builder.py src/icp/ book/icp_descr/
 	cd book; \
 		pdflatex icp.tex; \
 		rm *.aux *.log *.out

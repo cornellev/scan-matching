@@ -6,19 +6,63 @@ def change_extension(filename, new_extension):
     name, _ = os.path.splitext(filename)
     return f'{name}.{new_extension}'
 
+
 class ICPDocumentationBuilder:
-    def __init__(self, dir):
-        self.dir = dir
+    """
+    A class used to build documentation for an ICP implementation.
+
+    ...
+
+    Attributes
+    ----------
+    search_dir : str
+        The directory to search for source files.
+    out_dir : str
+        The directory to write the output markdown files.
+    all_sources : set
+        A set of all sources found in the source files.
+
+    Methods
+    -------
+    extract(file, contents):
+        Extracts the documentation from the given file contents and writes it to a markdown file.
+    build():
+        Searches for source files in the search directory and extracts their documentation.
+    """
+    
+    def __init__(self, search_dir, out_dir):
+        """
+        Constructs a new ICPDocumentationBuilder.
+
+        Parameters
+        ----------
+        search_dir : str
+            The directory to search for source files.
+        out_dir : str
+            The directory to write the output markdown files.
+        """
+        self.search_dir = search_dir
+        self.out_dir = out_dir
         self.all_sources = set()
     
     def extract(self, file, contents):
+        """
+        Extracts the documentation from the given file contents and writes it to a markdown file.
+
+        Parameters
+        ----------
+        file : str
+            The name of the file to extract documentation from.
+        contents : str
+            The contents of the file.
+        """
         pattern = r'/\*\s*(#step|#name|#desc)(.*?)\*/'
         comments = re.findall(pattern, contents, re.DOTALL)
         if not comments:
             return
         md_filename = 'icp_' + change_extension(file, 'md')
         made_description = False
-        with open(self.dir + '/' + md_filename, 'w') as md_file:
+        with open(self.out_dir + '/' + md_filename, 'w') as md_file:
             step_cnt = 1
             for (kind, comment) in comments:
                 comment_parts = comment.strip().split('Sources:', 1)
@@ -63,13 +107,16 @@ class ICPDocumentationBuilder:
             md_file.write(f"\nThis page was automatically generated from {file} with {os.path.basename(__file__)}.")
 
     def build(self):
-        for root, dirs, files in os.walk(sys.argv[2]):
+        """
+        Searches for source files in the search directory and extracts their documentation.
+        """
+        for root, dirs, files in os.walk(self.search_dir):
             for file in files:
                 if file.endswith('.cpp'):
                     with open(os.path.join(root, file), 'r') as f:
                         self.extract(file, f.read())
-        os.makedirs(self.dir + '/extra', exist_ok=True)
-        with open(self.dir + '/extra/sources.md', 'w') as md_file:
+        os.makedirs(self.out_dir + '/extra', exist_ok=True)
+        with open(self.out_dir + '/extra/sources.md', 'w') as md_file:
             md_file.write('\page icp_sources ICP Sources\n\n')
             md_file.write('This list contains all resources used in implementing ICP for this project in alphabetical order.\n\n')
             for source in sorted(list(self.all_sources)):
@@ -78,7 +125,7 @@ class ICPDocumentationBuilder:
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print(f'usage: python3 {os.basename(__file__)} search_dir out_dir')
+        print(f'usage: python3 {os.path.basename(__file__)} search_dir out_dir')
         sys.exit(1)
-    doc_builder = ICPDocumentationBuilder(sys.argv[1])
+    doc_builder = ICPDocumentationBuilder(sys.argv[1], sys.argv[2])
     doc_builder.build()
